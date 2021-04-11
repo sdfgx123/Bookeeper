@@ -1,5 +1,9 @@
+<%@page import="poly.util.CmmUtil"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%
+	String bookName = CmmUtil.nvl((String)request.getAttribute("bookName"));
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,10 +19,14 @@
 		crossorigin="anonymous"></script>
 	
 	<script>
+		let query = "<%=bookName%>";
+		console.log(query);
+		
+
         $.ajax({
             method: "GET",
             url: "https://dapi.kakao.com/v3/search/book?target=title",
-            data: { query: "이기적 유전자" },
+            data: { "query": query},
             headers: { Authorization: "KakaoAK d6ed1d1cbb3e2caa8769e2c3e233acca" }
         })
             .done(function (msg) {

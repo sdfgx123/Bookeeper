@@ -12,7 +12,7 @@
 	<br>
 	<h2>Kakao Book API test 카카오 API 검색 테스트</h2>
 
-	<form name="searchTest" action="/search/forName" method="get">
+	<form name="searchTest" action="/doForm.do" method="get">
 		<input type="text" id="bookName" name="bookName"
 			placeholder="검색할 책 이름 입력"> <br>
 		<button type="submit">검색</button>
