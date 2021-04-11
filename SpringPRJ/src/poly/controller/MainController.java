@@ -12,9 +12,17 @@ public class MainController {
 	
 	@RequestMapping(value="index")
 	public String Index() {
-		log.info(this.getClass());
+		log.info(this.getClass().getName() + "index start");
 		
 		return "/index";
+	}
+	
+	@RequestMapping(value="form_result")
+	public String form_result() {
+		
+		log.info(this.getClass().getName() + "form_result start");
+		
+		return "/form_result";
 	}
 			
 }
