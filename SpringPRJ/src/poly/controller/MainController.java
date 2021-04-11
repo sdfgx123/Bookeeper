@@ -52,5 +52,11 @@ public class MainController {
 		
 		return "/bootstrap";
 	}
-			
+	
+	@RequestMapping(value="header")
+	public String header() {
+		log.info(this.getClass().getName() + "header start");
+		
+		return "/header";
+	}
 }

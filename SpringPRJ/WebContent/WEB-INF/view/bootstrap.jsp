@@ -97,7 +97,7 @@
                         <div class="col-xl-10 col-lg-10">
                             <!-- Hero Caption -->
                             <div class="hero__caption pt-100">
-                                <h1>Explore Australia</h1>
+                                <h1>메인페이지 확인용</h1>
                                 <p>Let's uncover the best places to eat, drink, and shop nearest to you.</p>
                             </div>
                             <!--Hero form -->
