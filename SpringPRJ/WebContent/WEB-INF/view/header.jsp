@@ -47,8 +47,8 @@
                         <div class="main-menu f-right d-none d-lg-block">
                             <nav>
                                 <ul id="navigation">
-                                    <li><a href="index.html">Home</a></li>
-                                    <li><a href="listing.html">Catagories</a></li> 
+                                    <li><a href="index.html">홈</a></li>
+                                    <li><a href="listing.html">내 서재</a></li> 
                                     <li><a href="#">Pages</a>
                                         <ul class="submenu">
                                             <li><a href="directory_details.html">listing Details</a></li>
@@ -68,7 +68,7 @@
                         </div>          
                         <!-- Header-btn -->
                         <div class="header-btns d-none d-lg-block f-right">
-                            <a href="#" class="mr-40"><i class="ti-user"></i> Log in</a>
+                            <a href="#" class="mr-40"><i class="ti-user"></i> 로그인</a>
                             <a href="#" class="btn">Add Listing</a>
                         </div>
                         <!-- Mobile Menu -->
