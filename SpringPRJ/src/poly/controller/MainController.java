@@ -22,7 +22,7 @@ public class MainController {
 		return "/index";
 	}
 	
-	@RequestMapping(value="doForm")
+	@RequestMapping(value="doForm") 
 	public String doForm(HttpServletRequest request, ModelMap model) {
 		
 		log.info(this.getClass().getName() + " doForm start");
