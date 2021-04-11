@@ -19,10 +19,10 @@
 		crossorigin="anonymous"></script>
 	
 	<script>
+	
 		let query = "<%=bookName%>";
 		console.log(query);
 		
-
         $.ajax({
             method: "GET",
             url: "https://dapi.kakao.com/v3/search/book?target=title",

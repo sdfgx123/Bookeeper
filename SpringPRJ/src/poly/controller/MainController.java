@@ -25,11 +25,11 @@ public class MainController {
 	@RequestMapping(value="doForm")
 	public String doForm(HttpServletRequest request, ModelMap model) {
 		
-		log.info(this.getClass().getName() + "doForm start");
+		log.info(this.getClass().getName() + " doForm start");
 		
 		String query = CmmUtil.nvl(request.getParameter("bookName"));
 		
-		log.info(query);
+		log.info("사용자가 입력한 쿼리 : " + query);
 		
 		model.addAttribute("bookName",query);
 		
