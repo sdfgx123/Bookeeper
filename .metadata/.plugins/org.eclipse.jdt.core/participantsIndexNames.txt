@@ -1,3 +1,0 @@
-INDEX VERSION 1.131
-C:\Bookeeper\Spring-study2\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\3468012615.index
-\SpringPRJ\src
