@@ -1,7 +1,6 @@
 package poly.service.impl;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
@@ -14,8 +13,6 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.springframework.stereotype.Service;
 
-import com.nimbusds.jwt.util.DateUtils;
-
 import poly.dto.MelonDTO;
 import poly.persistance.mongo.IMelonMapper;
 import poly.service.IMelonService;
@@ -24,71 +21,79 @@ import poly.util.DateUtil;
 @Service("MelonService")
 public class MelonService implements IMelonService {
 
-	@Resource(name = "MelonMapper")
-	private IMelonMapper melonMapper; // MongoDB¿¡ ÀúÀåÇÒ Mapper
+    @Resource(name = "MelonMapper")
+    private IMelonMapper melonMapper; // MongoDBì— ì €ì¥í•  Mapper
 
-	private Logger log = Logger.getLogger(this.getClass());
+    // ë¡œê·¸ íŒŒì¼ ìƒì„± ë° ë¡œê·¸ ì¶œë ¥ì„ ìœ„í•œ log4j í”„ë ˆì„ì›Œí¬ì˜ ìë°” ê°ì²´
+    private Logger log = Logger.getLogger(this.getClass());
+
+    @Override
+    public int collectMelonRank() throws Exception {
+
+        // ë¡œê·¸ ì°ê¸°(ì¶”í›„ ì°ì€ ë¡œê·¸ë¥¼ í†µí•´ ì´ í•¨ìˆ˜ì— ì ‘ê·¼í–ˆëŠ”ì§€ íŒŒì•…í•˜ê¸° ìš©ì´í•˜ë‹¤.)
+        log.info(this.getClass().getName() + ".collectMelonRank Start!");
+
+        int res = 0;
+
+        List<MelonDTO> pList = new ArrayList<MelonDTO>();
+
+        // ë©œë¡  Top100 ì¤‘ 50ìœ„ê¹Œì§€ ì •ë³´ ê°€ì ¸ì˜¤ëŠ” í˜ì´ì§€
+        String url = "https://www.melon.com/chart/day/index.htm";
+
+        // JSOUP ë¼ì´ë¸ŒëŸ¬ë¦¬ë¥¼ í†µí•´ ì‚¬ì´íŠ¸ ì ‘ì†ë˜ë©´, ê·¸ ì‚¬ì´íŠ¸ì˜ ì „ì²´ HTMLì†ŒìŠ¤ ì €ì¥í•  ë³€ìˆ˜
+        Document doc = null; //
+
+        doc = Jsoup.connect(url).get();
+
+        // <div class="service_list_song"> ì´ íƒœê·¸ ë‚´ì—ì„œ ìˆëŠ” HTMLì†ŒìŠ¤ë§Œ elementì— ì €ì¥ë¨
+        Elements element = doc.select("div.service_list_song");
+
+        // Iteratorì„ ì‚¬ìš©í•˜ì—¬ ë©œë¡  Top100ì˜ 50ìœ„ê¹Œì§€ ìˆœìœ„ ì •ë³´ë¥¼ ê°€ì ¸ì˜¤ê¸°
+        Iterator<Element> rank50List = element.select("tr.lst50").iterator(); // ë©œë¡  50ìœ„ê¹Œì§€ ì°¨í¬
+
+        // ìˆœìœ„ëŠ” 1ìœ„ë¶€í„° 50ìœ„ê¹Œì§€ ìˆ˜ì§‘ë˜ê¸° ë•Œë¬¸ì— ë°˜ë³µë¬¸ì„ í†µí•´ ë°ì´í„° ì €ì¥
+        while (rank50List.hasNext()) {
+
+            Element songInfo = rank50List.next();
+
+            // í¬ë¡¤ë§ì„ í†µí•´ ë°ì´í„° ì €ì¥í•˜ê¸°
+            String rank = songInfo.select("span.rank").text(); // ìˆœìœ„
+            String song = songInfo.select("div.ellipsis a").eq(0).text(); // ë…¸ë˜
+            String singer = songInfo.select("div.ellipsis a").eq(1).text(); // ê°€ìˆ˜
+            String album = songInfo.select("div.ellipsis a").eq(3).text(); // ì—˜ë²”
+
+            songInfo = null;
+
+            // MongoDBì— ì €ì¥í•  List í˜•íƒœì˜ ë§ëŠ” DTO ë°ì´í„° ì €ì¥í•˜ê¸°
+            MelonDTO pDTO = new MelonDTO();
+            pDTO.setCollect_time(DateUtil.getDateTime("yyyyMMddhhmmss"));
+            pDTO.setRank(rank);
+            pDTO.setSong(song);
+            pDTO.setSinger(singer);
+            pDTO.setAlbum(album);
+
+            // í•œë²ˆì— ì—¬ëŸ¬ê°œì˜ ë°ì´í„°ë¥¼ MongoDBì— ì €ì¥í•  List í˜•íƒœì˜ ë°ì´í„° ì €ì¥í•˜ê¸°
+            pList.add(pDTO);
+
+        }
+
+        String colNm = "MelonTOP100_" + DateUtil.getDateTime("yyyyMMdd"); // ìƒì„±í•  ì»¬ë ‰ì…˜ëª…
+        // MongoDB Collection ìƒì„±í•˜ê¸°
+        melonMapper.createCollection(colNm);
+
+        // MongoDBì— ë°ì´í„°ì €ì¥í•˜ê¸°
+        melonMapper.insertRank(pList, colNm);
+
+        // ë¡œê·¸ ì°ê¸°(ì¶”í›„ ì°ì€ ë¡œê·¸ë¥¼ í†µí•´ ì´ í•¨ìˆ˜ì— ì ‘ê·¼í–ˆëŠ”ì§€ íŒŒì•…í•˜ê¸° ìš©ì´í•˜ë‹¤.)
+        log.info(this.getClass().getName() + ".collectMelonRank End!");
+
+        return res;
+    }
 
 	@Override
-	public int collectMelonRank() throws Exception {
+	public List<MelonDTO> getRank() {
 
-		log.info(this.getClass().getName() + " .collectMelonRank start");
-
-		int res = 0;
-
-		List<MelonDTO> pList = new ArrayList<MelonDTO>();
-
-		// ¸á·Ğ Top 100 Áß 50À§±îÁö Á¤º¸ °¡Á®¿À´Â ÆäÀÌÁö
-		String url = "https://www.melon.com/chart/day/index.htm";
-
-		// JSOUP ¶óÀÌºê·¯¸®¸¦ ÅëÇØ »çÀÌÆ® Á¢¼ÓµÇ¸é, ±× »çÀÌÆ®ÀÇ ÀüÃ¼ HTML ¼Ò½º¸¦ ÀúÀåÇÒ º¯¼ö
-		Document doc = null;
-
-		doc = Jsoup.connect(url).get();
-
-		// <div class="service_list_song"> ÀÌ ÅÂ±× ³»¿¡ ÀÖ´Â HTML ¼Ò½º¸¸ element¿¡ ÀúÀåµÊ
-		Elements element = doc.select("div.service_list_song");
-
-		// Iterator¸¦ »ç¿ëÇÏ¿© ¸á·Ğ Top100ÀÇ 50À§±îÁö ¼øÀ§ Á¤º¸¸¦ °¡Á®¿À±â
-		Iterator<Element> rank50List = element.select("tr.lst50").iterator(); // ¸á·Ğ 50À§±îÁö
-
-		// ¼øÀ§´Â 1À§ºÎÅÍ 50À§±îÁö ¼öÁıµÇ±â ¶§¹®¿¡ ¹İº¹¹®À» ÅëÇØ µ¥ÀÌÅÍ ÀúÀå
-		while (rank50List.hasNext()) {
-
-			Element songInfo = rank50List.next();
-
-			// Å©·Ñ¸µÀ» ÅëÇØ µ¥ÀÌÅÍ ÀúÀåÇÏ±â
-			String rank = songInfo.select("span.rank").text(); // ¼øÀ§
-			String song = songInfo.select("div.elipsis a").eq(0).text(); // ³ë·¡
-			String singer = songInfo.select("div.elipsis a").eq(1).text(); // °¡¼ö
-			String album = songInfo.select("div.elipsis a").eq(3).text(); // ¾Ù¹ü
-
-			songInfo = null;
-
-			// MongoDB¿¡ ÀúÀåÇÒ List ÇüÅÂ¿¡ ¸Â´Â DTO µ¥ÀÌÅÍ ÀúÀåÇÏ±â
-			MelonDTO pDTO = new MelonDTO();
-			pDTO.setCollect_time(DateUtil.getDateTime("yyyyMMddhhmmss"));
-			pDTO.setRank(rank);
-			pDTO.setSong(song);
-			pDTO.setSinger(singer);
-			pDTO.setAlbum(album);
-
-			// ÇÑ¹ø¿¡ ¿©·¯°³ÀÇ µ¥ÀÌÅÍ¸¦ MongoDB¿¡ ÀúÀåÇÒ List ÇüÅÂÀÇ µ¥ÀÌÅÍ ÀúÀåÇÏ±â
-			pList.add(pDTO);
-		}
-		
-		String colNm = "MelonTOP100_" + DateUtil.getDateTime("yyyyMMdd"); // »ı¼ºÇÒ ÄÃ·º¼Ç¸í
-
-		// MongoDB Collection »ı¼ºÇÏ±â
-		melonMapper.createCollection(colNm);
-
-		// MongoDB¿¡ µ¥ÀÌÅÍ ÀúÀåÇÏ±â
-		melonMapper.insertRank(pList, colNm);
-
-		// ·Î±× Âï±â(ÃßÈÄ ÂïÀº ·Î±×¸¦ ÅëÇØ ÀÌ ÇÔ¼ö¿¡ Á¢±ÙÇß´ÂÁö ÆÄ¾ÇÇÏ±â ¿ëÀÌÇÏ´Ù)
-		log.info(this.getClass().getName() + " .collectMelonRank end");
-
-		return res;
+		return null;
 	}
 
 }

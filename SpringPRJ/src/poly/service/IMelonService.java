@@ -1,10 +1,17 @@
 package poly.service;
 
+import java.util.List;
+
+import poly.dto.MelonDTO;
+
 public interface IMelonService {
 
 	/**
-	 * ¸á·Ð Top 100 ¼øÀ§ ¼öÁýÇÏ±â
+	 * ï¿½ï¿½ï¿½ Top 100 ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï±ï¿½
 	 */
 	
 	public int collectMelonRank() throws Exception;
+
+	public List<MelonDTO> getRank();
+	
 }

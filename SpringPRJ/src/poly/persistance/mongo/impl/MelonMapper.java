@@ -10,9 +10,12 @@ import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.stereotype.Component;
 
 import com.mongodb.BasicDBObject;
+import com.mongodb.DBCollection;
+import com.mongodb.DBObject;
 
 import poly.dto.MelonDTO;
 import poly.persistance.mongo.IMelonMapper;
+import poly.util.CmmUtil;
 
 @Component("MelonMapper")
 public class MelonMapper implements IMelonMapper {
@@ -29,13 +32,13 @@ public class MelonMapper implements IMelonMapper {
 		
 		boolean res = false;
 		
-		//±âÁ¸¿¡ µî·ÏµÈ ÄÃ·º¼Ç ÀÌ¸§ÀÌ Á¸ÀçÇÏ´ÂÁö Ã¼Å©ÇÏ°í, Á¸ÀçÇÏ¸é ±âÁ¸  ÄÃ·º¼Ç »èÁ¦ÇÔ
+		//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ïµï¿½ ï¿½Ã·ï¿½ï¿½ï¿½ ï¿½Ì¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ï¿½ï¿½ Ã¼Å©ï¿½Ï°ï¿½, ï¿½ï¿½ï¿½ï¿½ï¿½Ï¸ï¿½ ï¿½ï¿½ï¿½ï¿½  ï¿½Ã·ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		if(mongodb.collectionExists(colNm)) {
 			mongodb.dropCollection(colNm);
 		}
 		
-		//ÄÃ·º¼Ç »ý¼º ¹× ÀÎµ¦½º »ý¼º, MongoDB¿¡¼­ µ¥ÀÌÅÍ °¡Á®¿À´Â ¹æ½Ä¿¡ ¸Â°Ô ÀÎµ¦½º´Â ¹Ýµå½Ã »ý¼ºÇÏÀÚ!
-		//µ¥ÀÌÅÍ ¾çÀÌ ¸¹Áö ¾ÊÀ¸¸é ¹®Á¦µÇÁö ¾ÊÀ¸³ª, ÃÖ¼Ò 10¸¸°Ç ÀÌ»ó µ¥ÀÌÅÍ ÀúÀå½Ã ¼Óµµ Â÷ÀÌ°¡ ¾à 10¹è ÀÌ»ó ¹ß»ýÇÔ
+		//ï¿½Ã·ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Îµï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½, MongoDBï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ä¿ï¿½ ï¿½Â°ï¿½ ï¿½Îµï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ýµï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½!
+		//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½, ï¿½Ö¼ï¿½ 10ï¿½ï¿½ï¿½ï¿½ ï¿½Ì»ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Óµï¿½ ï¿½ï¿½ï¿½Ì°ï¿½ ï¿½ï¿½ 10ï¿½ï¿½ ï¿½Ì»ï¿½ ï¿½ß»ï¿½ï¿½ï¿½
 		mongodb.createCollection(colNm).createIndex(new BasicDBObject("collect_time", 1).append("rank", 1), "rankIdx");
 		
 		res = true;
@@ -76,9 +79,60 @@ public class MelonMapper implements IMelonMapper {
 		
 		res = 1;
 		
-		log.info(this.getClass().getName() + " .insertRank start");
+		log.info(this.getClass().getName() + " .insertRank end");
 		
 		return res;
+		
+	}
+
+	@Override
+	public List<MelonDTO> getRank(String colNm) throws Exception {
+
+		log.info(this.getClass().getName() + " .getRank start");
+		
+		//ï¿½ï¿½ï¿½ï¿½ï¿½Í¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ã·ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+		DBCollection rCol = mongodb.getCollection(colNm);
+		
+		//ï¿½Ã·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Îºï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+		Iterator<DBObject> cursor = rCol.find();
+		
+		//ï¿½Ã·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Îºï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ List ï¿½ï¿½ï¿½Â·ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï±ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+		List<MelonDTO> rList = new ArrayList<MelonDTO>();
+		
+		MelonDTO rDTO = null;
+		
+		while(cursor.hasNext()) {
+			
+			rDTO = new MelonDTO();
+			
+			final DBObject current = cursor.next();
+			
+			String collect_time = CmmUtil.nvl((String) current.get("collect_time")); //ï¿½ï¿½ï¿½ï¿½ï¿½Ã°ï¿½
+			String rank = CmmUtil.nvl((String) current.get("rank")); //ï¿½ï¿½ï¿½ï¿½
+			String song = CmmUtil.nvl((String) current.get("song")); //ï¿½ë·¡ï¿½ï¿½ï¿½ï¿½
+			String singer = CmmUtil.nvl((String) current.get("singer")); //ï¿½ï¿½ï¿½ï¿½
+			String album = CmmUtil.nvl((String) current.get("album")); //ï¿½Ù¹ï¿½
+			
+			log.info("song:"+song);
+			log.info("singer:"+singer);
+			log.info("album:"+album);
+			
+			
+			rDTO.setCollect_time(collect_time);
+			rDTO.setRank(rank);
+			rDTO.setSong(song);
+			rDTO.setSinger(singer);
+			rDTO.setAlbum(album);
+			
+			rList.add(rDTO); //Listï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+			
+			rDTO = null;
+			
+		}
+		
+		log.info(this.getClass().getName() + " .getRank end");
+		
+		return rList;
 	}
 
 }
