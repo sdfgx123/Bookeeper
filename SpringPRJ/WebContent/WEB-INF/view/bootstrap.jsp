@@ -97,35 +97,20 @@
                         <div class="col-xl-10 col-lg-10">
                             <!-- Hero Caption -->
                             <div class="hero__caption pt-100">
-                                <h1>메인페이지 확인용</h1>
-                                <p>Let's uncover the best places to eat, drink, and shop nearest to you.</p>
+                                <h1>Zookeeper</h1>
+                                <p>책 검색을 통해 나만의 서재를 만들어 보세요!</p>
                             </div>
                             <!--Hero form -->
                             <form action="#" class="search-box mb-100">
                                 <div class="input-form">
-                                    <input type="text" placeholder="What are you finding?">
+                                    <input type="text" placeholder="검색할 책 제목 입력">
                                 </div>
-                                <div class="select-form">
-                                    <div class="select-itms">
-                                        <select name="select" id="select1">
-                                            <option value="">In where?</option>
-                                            <option value="">Catagories One</option>
-                                            <option value="">Catagories Two</option>
-                                            <option value="">Catagories Three</option>
-                                            <option value="">Catagories Four</option>
-                                        </select>
-                                    </div>
-                                </div>
+                                
                                 <div class="search-form">
-                                    <a href="#"><i class="ti-search"></i> Search</a>
+                                    <a href="#"><i class="ti-search"></i> 검색</a>
                                 </div>	
                             </form>	
-                            <!-- hero category1 img -->
-                            <div class="category-img text-center">
-                                <a href="listing.html"> <img src="assets/img/gallery/hero_category1.png" alt=""></a>
-                                <a href="listing.html"> <img src="assets/img/gallery/hero_category2.png" alt=""></a>
-                                <a href="listing.html"> <img src="assets/img/gallery/hero_category3.png" alt=""></a>
-                            </div>
+                            
                         </div>
                     </div>
                 </div>
@@ -139,8 +124,8 @@
                     <div class="col-lg-12">
                         <!-- Section Tittle -->
                         <div class="section-tittle text-center mb-80">
-                            <h2>Explore top cities</h2>
-                            <p>Let's uncover the best places to eat, drink, and shop nearest to you.</p>
+                            <h2>워드클라우드 영역</h2>
+                            <p>교보문고에서 검색한 최신 단행본 몇권의 워드클라우를 확인해 보세요!</p>
                         </div>
                     </div>
                 </div>
