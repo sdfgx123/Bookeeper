@@ -56,7 +56,7 @@
                                 <ul id="navigation">
                                     <li><a href="index.html">내 서재</a></li>
                                     <li><a href="/user/userLogin.do">로그인</a></li> 
-                                    <li><a href="listing.html">공지사항</a></li> 
+                                    <li><a href="/notice/noticeList.do">공지사항</a></li> 
                                 </ul>
                             </nav>
                         </div>          
