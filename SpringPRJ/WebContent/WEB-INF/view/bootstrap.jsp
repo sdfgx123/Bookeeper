@@ -48,14 +48,14 @@
                     <div class="menu-wrapper d-flex align-items-center justify-content-between">
                         <!-- Logo -->
                         <div class="logo">
-                            <a href="index.html"><img src="assets/img/logo/logo.png" alt=""></a>
+                            <a href="/bootstrap.do"><img src="assets/img/logo/logo.png" alt=""></a>
                         </div>
                         <!-- Main-menu -->
                         <div class="main-menu f-right d-none d-lg-block">
                             <nav>
                                 <ul id="navigation">
                                     <li><a href="index.html">내 서재</a></li>
-                                    <li><a href="listing.html">로그인</a></li> 
+                                    <li><a href="/user/userLogin.do">로그인</a></li> 
                                     <li><a href="listing.html">공지사항</a></li> 
                                 </ul>
                             </nav>
@@ -230,16 +230,11 @@
                             <div class="wantToWork-caption wantToWork-caption2">
                                 <img src="assets/img/logo/logo2_footer.png" alt="" class="mb-20">
                                 <p>Zookeeper를 통해 책을 검색하고 내 서재를 만들어 그 책들을 관리해 보세요!</p>
+                                <br>
+                                <p style="font-size: 12px">서울특별시 강서구 우장산로 10길 112 한국폴리텍 강서캠퍼스 데이터분석과</p>
                             </div>
                         </div>
-                        <div class="col-xl-4 col-lg-4 col-md-5">
-                            <div class="footer-social f-right sm-left">
-                                <a href="#"><i class="fab fa-twitter"></i></a>
-                                <a href="https://bit.ly/sai4ull"><i class="fab fa-facebook-f"></i></a>
-                                <a href="#"><i class="fab fa-pinterest-p"></i></a>
-                                <a href="#"><i class="fab fa-instagram"></i></a>
-                            </div>
-                        </div>
+                       
                     </div>
                 </div>
             </div>
@@ -250,24 +245,8 @@
             <div class="container">
                 <div class="wants-wrapper">
                     <div class="row align-items-center justify-content-between">
-                        <div class="col-xl-7 col-lg-9 col-md-8">
-                            <div class="wantToWork-caption wantToWork-caption2">
-                                <div class="main-menu2">
-                                    <nav>
-                                        <ul>
-                                            <li><a href="bootstrap.do">Home</a></li>
-                                            <li><a href="explore.html">Explore</a></li> 
-                                            <li><a href="pages.html">Pages</a></li>
-                                            <li><a href="blog.html">Blog</a></li>
-                                            <li><a href="contact.html">Contact</a></li>
-                                        </ul>
-                                    </nav>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-2 col-lg-3 col-md-4">
-                            <a href="#" class="btn f-right sm-left">Add Listing</a>
-                        </div>
+                       
+                        
                     </div>
                 </div>
             </div>
