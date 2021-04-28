@@ -75,7 +75,7 @@ margin: auto;
                                 </form>
                                 <br>
                                 <a href="#" id="login_small" class="genric-btn primary radius">아이디 찾기</a>
-                                <a href="#" id="login_small" class="genric-btn primary radius">돌아가기</a>
+                                <a href="/bootstrap.do" id="login_small" class="genric-btn primary radius">돌아가기</a>
                                 <br><br>
                                 <a href="#" id="login" class="genric-btn primary radius">회원이 아니신가요? 회원가입 하기</a>
                             </div>
