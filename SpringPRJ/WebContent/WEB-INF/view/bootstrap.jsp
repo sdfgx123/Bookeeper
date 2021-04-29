@@ -90,7 +90,7 @@
                                 </div>
                                 
                                 <div class="search-form">
-                                    <a href="#"><i class="ti-search"></i> 검색</a>
+                                    <a href="#" onclick="submit()"><i class="ti-search"></i> 검색</a>
                                 </div>	
                             </form>	
                             
