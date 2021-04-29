@@ -3,6 +3,8 @@ package poly.persistance.mongo;
 import java.util.List;
 
 import poly.dto.MelonDTO;
+import poly.dto.MelonSingerDTO;
+import poly.dto.MelonSongDTO;
 
 public interface IMelonMapper {
 
@@ -11,9 +13,20 @@ public interface IMelonMapper {
 	public int insertRank(List<MelonDTO> pList, String colNm) throws Exception;
 	
 	/**
-	 * MongoDB ¸á·Ğ µ¥ÀÌÅÍ °¡Á®¿À±â
+	 * MongoDB ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	 * 
-	 * @param colNm °¡Á®¿Ã ÄÃ·º¼Ç ÀÌ¸§
+	 * @param colNm ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ã·ï¿½ï¿½ï¿½ ï¿½Ì¸ï¿½
 	 */
 	public List<MelonDTO> getRank(String colNm) throws Exception;
+	
+	/**
+	 * MongoDB ê°€ìˆ˜ì˜ ë…¸ë˜ ë°ì´í„° ê°€ì ¸ì˜¤ê¸°
+	 * 
+	 * @param colNm ê°€ì ¸ì˜¬ ì»¬ë ‰ì…˜ ì´ë¦„
+	 * @param singer ê°€ìˆ˜ ì´ë¦„
+	 */
+	public List<MelonSongDTO> getSongForSinger(String colNm, String singer) throws Exception;
+	
+	// MongoDB ê°€ìˆ˜ë³„ ë©œë¡  ë­í‚¹ì— ë§ì´ ë“±ë¡ëœ ìˆœì„œëŒ€ë¡œ ê°€ì ¸ì˜¤ê¸°
+	public List<MelonSingerDTO> getRankForSinger(String colNm) throws Exception;
 }

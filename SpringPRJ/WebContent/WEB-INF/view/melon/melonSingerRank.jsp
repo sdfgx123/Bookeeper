@@ -1,20 +1,21 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-	pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
-<script src="/js/jquery-3.6.0.min.js"></script>
+<meta charset="UTF-8">
+<script src="../../js/jquery-3.6.0.min.js"></script>
 <script type="text/javascript">
 	$(window).on("load", function() {
 
-		//ÆäÀÌÁö ·Îµù ¿Ï·á ÈÄ, ¸á·Ğ ¼øÀ§ °¡Á®¿À±â ÇÔ¼ö ½ÇÇàÇÔ
+		//í˜ì´ì§€ ë¡œë”© ì™„ë£Œ í›„, ë©œë¡  ìˆœìœ„ ê°€ì ¸ì˜¤ê¸° í•¨ìˆ˜ ì‹¤í–‰í•¨
 		getRank();
 	});
 
-	//¸á·Ğ ¼øÀ§ °¡Á®¿À±â
+	//ë©œë¡  ìˆœìœ„ ê°€ì ¸ì˜¤ê¸°
 	function getRank() {
 
-		//Ajax È£Ãâ
+		//Ajax í˜¸ì¶œ
 		$.ajax({
 			url : "/melon/getRank.do",
 			type : "post",
@@ -25,23 +26,22 @@
 				var melon_rank = "";
 
 				for (var i = 0; i < json.length; i++) {
-					melon_rank += (json[i].rank + "À§ | ");
+					melon_rank += (json[i].rank + "ìœ„ | ");
 					melon_rank += (json[i].song + " | ");
 					melon_rank += (json[i].singer + " | ");
 					melon_rank += (json[i].album + "<br>");
 				}
 
-				$('#melon_rank').html(melon_rank);
+				$('#melon_rank').html(melon_rank);  
 			}
 		})
 
 	}
 </script>
-<meta charset="EUC-KR">
 <title>Insert title here</title>
 </head>
 <body>
-	<h1>¸á·Ğ ¼øÀ§</h1>
+	<h1>ë©œë¡  ê°€ìˆ˜ë³„ ë…¸ë˜ ë­í¬ê°€ ë§ì´ ëœ ìˆœìœ„</h1>
 	<hr />
 	<div id="melon_rank"></div>
 	<br />
