@@ -26,6 +26,14 @@
 	<link rel="stylesheet" href="assets/css/slick.css">
 	<link rel="stylesheet" href="assets/css/nice-select.css">
 	<link rel="stylesheet" href="assets/css/style.css">
+	
+	<style>
+	
+	#search_bar {
+	width: 78%;
+	}
+	
+	</style>
 </head>
 <body>
     <!-- ? Preloader Start -->
@@ -80,12 +88,12 @@
                         <div class="col-xl-10 col-lg-10">
                             <!-- Hero Caption -->
                             <div class="hero__caption pt-100">
-                                <h1>Zookeeper</h1>
+                                <h1>Bookeeper</h1>
                                 <p>책 검색을 통해 나만의 서재를 만들어 보세요!</p>
                             </div>
                             <!--Hero form -->
                             <form action="/doForm.do" class="search-box mb-100">
-                                <div class="input-form">
+                                <div id="search_bar" class="input-form">
                                     <input type="text" id="bookName" name="bookName" placeholder="검색할 책 제목 입력">
                                 </div>
                                 
