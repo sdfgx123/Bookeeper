@@ -20,7 +20,7 @@ public class UserController {
 	
 	// 영역 : 로그인 관련
 	
-	//로그인 화면
+	// 로그인
 	@RequestMapping(value = "userLogin")
 	public String UserLogin(HttpServletRequest request, HttpServletResponse response, ModelMap model) throws Exception {
 		
@@ -37,5 +37,12 @@ public class UserController {
 		log.info(this.getClass());
 		
 		return "/user/userLogin";
+	}
+	
+	// 유저 회원가입
+	@RequestMapping(value = "userRegister")
+	public String UserRegister() throws Exception {
+		
+		return "/user/userRegister";
 	}
 }
