@@ -33,6 +33,10 @@
 	width: 78%;
 	}
 	
+	#mainButton {
+	background-color: #B367FF;
+	}
+	
 	</style>
 </head>
 <body>
@@ -96,10 +100,13 @@
                                 <div id="search_bar" class="input-form">
                                     <input type="text" id="bookName" name="bookName" placeholder="검색할 책 제목 입력">
                                 </div>
-                                
+                                <br>
+                                <button type="submit" id="mainButton" class="search-form"><i class="ti-search"></i> 검색</button>
+                                <!--
                                 <div class="search-form">
                                     <a href="#" onclick="submit()"><i class="ti-search"></i> 검색</a>
                                 </div>	
+                                -->
                             </form>	
                             
                         </div>

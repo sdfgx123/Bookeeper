@@ -7,21 +7,22 @@
 <title>유저 로그인</title>
 <style>
 #login {
-width: 50%;
-margin: auto;
+	width: 50%;
+	margin: auto;
 }
 
 #login_small {
-width: 25%;
-margin: auto;
+	width: 25%;
+	margin: auto;
 }
 </style>
 <!-- header 영역  -->
 <%@ include file="../header.jsp"%>
 </head>
 <body>
+
+	<!-- 메인메뉴 영역 시작 -->
 	<header>
-	
 		<div class="header-area header-transparent">
 			<div class="main-header header-sticky">
 				<div class="container-fluid">
@@ -30,8 +31,8 @@ margin: auto;
 
 						<!-- Logo -->
 						<div class="logo">
-							<a href="/bootstrap.do"><img src="../assets/img/logo/logo.png"
-								alt=""></a>
+							<a href="/bootstrap.do"><img
+								src="../assets/img/logo/logo.png" alt=""></a>
 						</div>
 
 						<!-- Main-menu -->
@@ -55,36 +56,39 @@ margin: auto;
 			</div>
 		</div>
 	</header>
-	
-	 <!--? Hero Area Start-->
-        <div class="slider-area hero-bg1 hero-overly">
-            <div class="single-slider hero-overly  slider-height1 d-flex align-items-center">
-                <div class="container">
-                    <div class="row justify-content-center">
-                        <div class="col-xl-10 col-lg-10">
-                            <!-- Hero Caption -->
-                            <div class="hero__caption pt-100">
-                                <h1>Bookeeper 로그인</h1>
-                                <br>
-                                <form name="userLogin" action="#">
-                                <input type="text" name="id" id="login" placeholder="아이디 입력" class="single-input">
-                                <br>
-                                <input type="text" name="password" id="login" placeholder="비밀번호 입력" class="single-input">
-                                <br>
-                                <a href="#" id="login" class="genric-btn primary radius" >로그인</a>
-                                </form>
-                                <br>
-                                <a href="#" id="login_small" class="genric-btn primary radius">아이디 찾기</a>
-                                <a href="/bootstrap.do" id="login_small" class="genric-btn primary radius">돌아가기</a>
-                                <br><br>
-                                <a href="#" id="login" class="genric-btn primary radius">회원이 아니신가요? 회원가입 하기</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!--Hero Area End-->
+	<!-- 메인메뉴 영역 끝 -->
+
+	<!-- 히어로 영역 : 대형 시작 -->
+	<div class="slider-area hero-bg1 hero-overly">
+		<div
+			class="single-slider hero-overly  slider-height1 d-flex align-items-center">
+			<div class="container">
+				<div class="row justify-content-center">
+					<div class="col-xl-10 col-lg-10">
+						<!-- Hero Caption -->
+						<div class="hero__caption pt-100">
+							<h1>Bookeeper 로그인</h1>
+							<br>
+							<form name="userLogin" action="#">
+								<input type="text" name="id" id="login" placeholder="아이디 입력"
+									class="single-input"> <br> <input type="text"
+									name="password" id="login" placeholder="비밀번호 입력"
+									class="single-input"> <br> <a href="#" id="login"
+									class="genric-btn primary radius">로그인</a>
+							</form>
+							<br> <a href="#" id="login_small"
+								class="genric-btn primary radius">아이디 찾기</a> <a
+								href="/bootstrap.do" id="login_small"
+								class="genric-btn primary radius">돌아가기</a> <br> <br> <a
+								href="/user/userRegister.do" id="login" class="genric-btn primary radius">회원이
+								아니신가요? 회원가입 하기</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- 히어로 영역 : 대형 끝 -->
 </body>
 <!-- footer 영역 -->
 <%@ include file="../footer.jsp"%>

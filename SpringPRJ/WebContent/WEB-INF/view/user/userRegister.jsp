@@ -64,18 +64,34 @@
 							<h1>Bookeeper 회원가입</h1>
 							<br>
 							<form name="userLogin" action="#">
-								<input type="text" name="id" id="login" placeholder="아이디 입력"
-									class="single-input"> <br> <input type="text"
-									name="password" id="login" placeholder="비밀번호 입력"
-									class="single-input"> <br> <a href="#" id="login"
-									class="genric-btn primary radius">로그인</a>
+								<input type="text" name="id" id="login" placeholder="이름 입력"
+									class="single-input">
+								<br>
+								<input type="text"
+									name="password" id="login" placeholder="아이디 입력"
+									class="single-input">
+								<br>
+								<input type="text"
+									name="password" id="login" placeholder="이메일 입력"
+									class="single-input">
+								<br>
+								<input type="text"
+									name="password" id="login" placeholder="전화번호 입력"
+									class="single-input">
+								<br>
+								<input type="text"
+									name="password" id="login" placeholder="암호 입력"
+									class="single-input">
+								<br>
+								<input type="text"
+									name="password" id="login" placeholder="암호 확인"
+									class="single-input">
+								<br>
+								<button type="submit" id="login" class="genric-btn primary radius">가입 신청</button>
 							</form>
-							<br> <a href="#" id="login_small"
-								class="genric-btn primary radius">아이디 찾기</a> <a
-								href="/bootstrap.do" id="login_small"
-								class="genric-btn primary radius">돌아가기</a> <br>
-							<br> <a href="#" id="login"
-								class="genric-btn primary radius">회원이 아니신가요? 회원가입 하기</a>
+							<br>
+							<a href="/user/userLogin.do" id="login"
+								class="genric-btn primary radius">돌아가기</a>
 						</div>
 					</div>
 				</div>
