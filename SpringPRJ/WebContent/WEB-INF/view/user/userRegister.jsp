@@ -65,12 +65,9 @@
 							<br>
 							<!-- 유저 회원가입 폼 시작 -->
 							<form name="userLogin" action="/user/UserRegProc.do" method="post">
-								<input type="text" pattern="^[가-힣]{1,}$" name="user_name" id="wm" placeholder="이름 입력 : 한글만 입력 하십시오." required data-pattern-error="한글만 입력"
-									class="single-input">
+								<input type="text" pattern="^[가-힣]{1,}$" required data-pattern-error="한글만 입력" name="user_name" class="single-input" id="wm" maxlength="7" placeholder="이름 입력 : 한글만 입력 하십시오"  >
 								<br>
-								<input type="text" pattern="^[_A-z0-9]{4,}$" maxlength="20" data-pattern-error="영문 4글자 이상으로 입력 하십시오." data-remote="/user/DupCheck.do" 
-									name="id" id="wm" placeholder="아이디 입력"
-									class="single-input" data-remote-error="이미 사용중인 아이디입니다" required>
+								<input type="text" pattern="^[_A-z0-9]{4,}$" name="id" class="single-input" maxlength="20" data-pattern-error="영문 4글자 이상으로 입력 하십시오." id="wm" placeholder="아이디 입력" data-remote="/user/DupCheck.do" data-remote-error="이미 사용중인 아이디입니다" required>
 								<br>
 								<input type="text"
 									name="password" id="wm" placeholder="이메일 입력"
