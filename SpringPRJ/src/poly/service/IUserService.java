@@ -4,7 +4,8 @@ import poly.dto.UserDTO;
 
 public interface IUserService {
 
-	UserDTO getLoginInfo(UserDTO uDTO);
+	UserDTO checkID(String id) throws Exception;
 	
+	UserDTO checkEmail(String email) throws Exception;
 	
 }

@@ -2,14 +2,14 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="poly.persistance.mapper.IUserMapper">
 
-	<!-- 아이디 비밀번호  -->
-<select id="getLoginInfo" resultType="UserDTO">
-SELECT 
-NO, 
-ID, 
-PWD, 
-NAME 
-FROM USER_INFO
-WHERE ID=#{id} AND PWD=#{pwd}
+<!-- ID 중복확인 -->
+<select id="checkID" parameterType="String" resultType="UserDTO">
+SELECT DISTINCT(ID) FROM USER_INFO WHERE ID = #{value}
 </select>
+
+<!-- 이메일 중복확인 -->
+<select id="checkEmail" parameterType="String" resultType="UserDTO">
+SELECT DISTINCT(EMAIL) FROM USER_INFO WHERE EMAIL = #{value} 
+</select>
+
 </mapper>

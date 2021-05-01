@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <title>Bookeeper 회원가입</title>
 <style>
-#login {
+#wm {
 	width: 50%;
 	margin: auto;
 }
@@ -63,32 +63,34 @@
 						<div class="hero__caption pt-100">
 							<h1>Bookeeper 회원가입</h1>
 							<br>
-							<form name="userLogin" action="#">
-								<input type="text" name="id" id="login" placeholder="이름 입력"
+							<!-- 유저 회원가입 폼 시작 -->
+							<form name="userLogin" action="/user/UserRegProc.do" method="post">
+								<input type="text" pattern="^[가-힣]{1,}$" name="user_name" id="wm" placeholder="이름 입력 : 한글만 입력 하십시오." required data-pattern-error="한글만 입력"
+									class="single-input">
+								<br>
+								<input type="text" pattern="^[_A-z0-9]{4,}$" maxlength="20" data-pattern-error="영문 4글자 이상으로 입력 하십시오." data-remote="/user/DupCheck.do" 
+									name="id" id="wm" placeholder="아이디 입력"
+									class="single-input" data-remote-error="이미 사용중인 아이디입니다" required>
+								<br>
+								<input type="text"
+									name="password" id="wm" placeholder="이메일 입력"
 									class="single-input">
 								<br>
 								<input type="text"
-									name="password" id="login" placeholder="아이디 입력"
+									name="password" id="wm" placeholder="전화번호 입력"
 									class="single-input">
 								<br>
 								<input type="text"
-									name="password" id="login" placeholder="이메일 입력"
+									name="password" id="wm" placeholder="암호 입력"
 									class="single-input">
 								<br>
 								<input type="text"
-									name="password" id="login" placeholder="전화번호 입력"
+									name="password" id="wm" placeholder="암호 확인"
 									class="single-input">
 								<br>
-								<input type="text"
-									name="password" id="login" placeholder="암호 입력"
-									class="single-input">
-								<br>
-								<input type="text"
-									name="password" id="login" placeholder="암호 확인"
-									class="single-input">
-								<br>
-								<button type="submit" id="login" class="genric-btn primary radius">가입 신청</button>
+								<button type="submit" id="wm" class="genric-btn primary radius">가입 신청</button>
 							</form>
+							<!-- 유저 회원가입 폼 끝 -->
 							<br>
 							<a href="/user/userLogin.do" id="login"
 								class="genric-btn primary radius">돌아가기</a>
