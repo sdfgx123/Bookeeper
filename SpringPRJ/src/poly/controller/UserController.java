@@ -3,6 +3,7 @@ package poly.controller;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
@@ -121,7 +122,7 @@ public class UserController {
 			mDTO.setToMail(uDTO.getEmail());
 			StringBuilder content = new StringBuilder();
 			content.append("아래 링크를 클릭하시면 이메일 인증이 완료됩니다.\n");
-			content.append("http://localhost:8080/user/verifyEmail.do?code=");
+			content.append("http://localhost:8080/user/VerifyEmail.do?code=");
 			String id = uDTO.getId();
 			String code = EncryptUtil.encAES128CBC(id + ",1");
 			content.append(code);
@@ -137,6 +138,45 @@ public class UserController {
 		model.addAttribute("msg", msg);
 		model.addAttribute("url", url);
 		
+		return "/redirect";
+	}
+	
+	@RequestMapping(value = "VerifyEmail")
+	public String VerifyEmail(HttpServletRequest request, HttpServletResponse response, HttpSession session, ModelMap model) throws Exception {
+		
+		log.info(this.getClass().getName() + " .VerifyEmail start");
+		
+		String[] decoded;
+		
+		try {
+			String code = request.getParameter("code").replaceAll(" ", "+");
+			decoded = EncryptUtil.decAES128CBC(code).split(",");
+		} catch (Exception e) {
+			model.addAttribute("msg", "잘못된 URL 입니다.");
+			model.addAttribute("url", "/user/userLogin.do");
+			return "/redirect";
+		}
+		
+		int res = 0;
+		
+		try {
+			res = userService.verifyEmail(decoded[0], decoded[1]);
+		} catch (Exception e) {
+			log.info(e.toString());
+			model.addAttribute("msg", "잘못된 접근 입니다.");
+			model.addAttribute("url", "/user/userLogin.do");
+			return "/redirect";
+		}
+		
+		if (res>0) {
+			model.addAttribute("msg", "이메일 인증에 성공 하였습니다.");
+			model.addAttribute("url", "/user/userLogin.do");
+		} else {
+			model.addAttribute("msg", "이메일 인증에 실패 하였습니다. 잠시 후 다시 시도 하십시오.");
+			model.addAttribute("url", "/user/userLogin.do");
+		}
+		
+		log.info(this.getClass().getName() + " .VerifyEmail end");
 		return "/redirect";
 	}
 	

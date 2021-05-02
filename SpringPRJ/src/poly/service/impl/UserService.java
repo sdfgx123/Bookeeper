@@ -38,5 +38,12 @@ public class UserService implements IUserService{
 		uDTO.setPassword(password);
 		return userMapper.regUser(uDTO);
 	}
+
+	@Override
+	public int verifyEmail(String id, String state) throws Exception {
+		
+		
+		return userMapper.verifyEmail(id, state);
+	}
 	
 }

@@ -33,4 +33,10 @@ SELECT DISTINCT(EMAIL) FROM USER_INFO WHERE EMAIL = #{value}
 	#{user_tel}
 	)
 </insert>
+
+<update id="verifyEmail" parameterType="String">
+UPDATE USER_INFO
+SET USER_STATE=#{1}
+WHERE ID=#{0} AND USER_STATE=0
+</update>
 </mapper>
