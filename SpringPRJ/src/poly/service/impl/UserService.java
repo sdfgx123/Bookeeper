@@ -45,5 +45,15 @@ public class UserService implements IUserService{
 		
 		return userMapper.verifyEmail(id, state);
 	}
+
+	@Override
+	public UserDTO loginProc(UserDTO uDTO) throws Exception {
+		
+		String password = uDTO.getPassword();
+		password = EncryptUtil.encHashSHA256(password);
+		uDTO.setPassword(password);
+		
+		return userMapper.loginProc(uDTO);
+	}
 	
 }

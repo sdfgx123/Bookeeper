@@ -46,13 +46,6 @@ public class MainController {
 		return "/form_result";
 	}
 	
-	@RequestMapping(value="bootstrap")
-	public String bootstrap() {
-		log.info(this.getClass().getName() + "bootstrap start");
-		
-		return "/bootstrap";
-	}
-	
 	@RequestMapping(value="header")
 	public String header() {
 		log.info(this.getClass().getName() + "header start");

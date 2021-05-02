@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import poly.dto.MailDTO;
@@ -178,6 +179,32 @@ public class UserController {
 		
 		log.info(this.getClass().getName() + " .VerifyEmail end");
 		return "/redirect";
+	}
+	
+	//로그인 처리 : 아이디, 비밀번호 검증
+	@ResponseBody
+	@RequestMapping(value = "loginTest", method = RequestMethod.POST, produces = "application/text; charset=UTF8")
+	public String loginTest(HttpServletRequest request, HttpServletResponse response, ModelMap model, HttpSession session, @ModelAttribute UserDTO uDTO) throws Exception {
+		
+		log.info(this.getClass().getName() + " .loginTest start");
+		
+		uDTO = userService.loginProc(uDTO);
+		
+		// 아이디, 암호 불일치
+		if (uDTO == null) {
+			return "1";
+		}
+		
+		// 이메일 미인증
+		if (uDTO.getUser_state() == 0) {
+			return "2";
+		}
+		
+		session.setAttribute("user_seq", uDTO.getUser_seq());
+		session.setAttribute("user_type", uDTO.getUser_type());
+		session.setAttribute("user_state", uDTO.getUser_state());
+		
+		return "0";
 	}
 	
 }

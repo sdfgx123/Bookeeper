@@ -25,7 +25,7 @@
 
 						<!-- Logo -->
 						<div class="logo">
-							<a href="/bootstrap.do"><img
+							<a href="/index.do"><img
 								src="../assets/img/logo/logo.png" alt=""></a>
 						</div>
 
@@ -81,7 +81,7 @@
 							</form>
 							<!-- 유저 회원가입 폼 끝 -->
 							<br>
-							<a href="/user/userLogin.do" id="login"
+							<a href="/user/userLogin.do" id="wm"
 								class="genric-btn primary radius">돌아가기</a>
 						</div>
 					</div>

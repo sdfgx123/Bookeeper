@@ -29,7 +29,7 @@
 
 						<!-- Logo -->
 						<div class="logo">
-							<a href="/bootstrap.do"><img
+							<a href="/index.do"><img
 								src="../assets/img/logo/logo.png" alt=""></a>
 						</div>
 
