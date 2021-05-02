@@ -9,4 +9,6 @@ public interface IUserMapper {
 	UserDTO checkID(String id) throws Exception;
 	
 	UserDTO checkEmail(String email) throws Exception;
+	
+	int regUser(UserDTO uDTO) throws Exception;
 }

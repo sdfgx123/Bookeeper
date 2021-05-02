@@ -73,9 +73,9 @@
 								<br>
 								<input type="text" name="user_tel" class="single-input" id="wm" placeholder="전화번호 입력" pattern="[^1-9][0-9]{1,2}-[0-9]{3,4}-[0-9]{4}" data-pattern-error="올바른 전화번호가 아닙니다." >
 								<br>
-								<input type="text" name="password" id="wm" placeholder="암호 입력" class="single-input">
+								<input type="password" name="password" id="wm" placeholder="암호 입력" class="single-input" required data-error="필수 입력사항 입니다. 암호를 입력해 주십시오.">
 								<br>
-								<input type="text" name="password" id="wm" placeholder="암호 확인" class="single-input">
+								<input type="password" name="password" id="wm" placeholder="암호 재입력" data-match="#password" data-match-error="암호가 일치하지 않습니다." class="single-input" data-error=" " required>
 								<br>
 								<button type="submit" id="wm" class="genric-btn primary radius">가입 신청</button>
 							</form>

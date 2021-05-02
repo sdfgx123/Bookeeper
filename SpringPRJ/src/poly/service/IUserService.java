@@ -8,4 +8,6 @@ public interface IUserService {
 	
 	UserDTO checkEmail(String email) throws Exception;
 	
+	int regUser(UserDTO uDTO) throws Exception;
+	
 }

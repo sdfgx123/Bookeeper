@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import poly.dto.UserDTO;
 import poly.persistance.mapper.IUserMapper;
 import poly.service.IUserService;
+import poly.util.EncryptUtil;
 
 @Service("UserService")
 public class UserService implements IUserService{
@@ -27,6 +28,15 @@ public class UserService implements IUserService{
 	public UserDTO checkEmail(String email) throws Exception {
 		
 		return userMapper.checkEmail(email);
+	}
+
+	@Override
+	public int regUser(UserDTO uDTO) throws Exception {
+		
+		String password = uDTO.getPassword();
+		password = EncryptUtil.encHashSHA256(password);
+		uDTO.setPassword(password);
+		return userMapper.regUser(uDTO);
 	}
 	
 }

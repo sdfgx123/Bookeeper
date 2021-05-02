@@ -7,12 +7,17 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import poly.dto.MailDTO;
 import poly.dto.UserDTO;
+import poly.service.IMailService;
 import poly.service.IUserService;
+import poly.service.impl.MailService;
 import poly.util.CmmUtil;
+import poly.util.EncryptUtil;
 
 @Controller
 @RequestMapping(value = "user/")
@@ -23,6 +28,9 @@ public class UserController {
 	// 영역 : Resource
 	@Resource(name = "UserService")
 	private IUserService userService;
+	
+	@Resource(name = "MailService")
+	private IMailService mailService;
 	
 	// 영역 : 로그인 관련
 	
@@ -59,7 +67,7 @@ public class UserController {
 	@RequestMapping(value = "DupCheck")
 	public String DupCheck(HttpServletRequest request) throws Exception {
 		
-		log.info("DupCheck start");
+		log.info(this.getClass().getName() + " .DupCheck start");
 		
 		String id = request.getParameter("id");
 		String email = request.getParameter("email");
@@ -85,4 +93,51 @@ public class UserController {
 		
 		return Integer.toString(result);
 	}
+	
+	// 유저 회원가입 프로세스
+	@RequestMapping(value = "UserRegProc")
+	public String userRegProc(HttpServletRequest request, HttpServletResponse response, ModelMap model, @ModelAttribute UserDTO uDTO) throws Exception {
+		
+		log.info(this.getClass().getName() + " .userRegProc start");
+		
+		uDTO.setUser_type("0");
+		
+		int result = 0;
+		
+		try {
+			result = userService.regUser(uDTO);
+		} catch(Exception e) {
+			log.info(e.toString());
+		}
+		
+		String msg = "";
+		String url = "/user/userLogin.do";
+		
+		if (result == 0) {
+			msg = "가입에 실패 하였습니다.";
+		} else {
+			MailDTO mDTO = new MailDTO();
+			mDTO.setTitle("Bookeeper 이메일 인증 요청");
+			mDTO.setToMail(uDTO.getEmail());
+			StringBuilder content = new StringBuilder();
+			content.append("아래 링크를 클릭하시면 이메일 인증이 완료됩니다.\n");
+			content.append("http://localhost:8080/user/verifyEmail.do?code=");
+			String id = uDTO.getId();
+			String code = EncryptUtil.encAES128CBC(id + ",1");
+			content.append(code);
+			
+			mDTO.setContents(content.toString());
+			mailService.doSendMail(mDTO);
+			
+			msg = "가입 신청이 완료 되었습니다. 이메일 인증 메일을 확인해 주십시오.";
+		}
+		
+		log.info(this.getClass().getName() + " .userRegProc end");
+		
+		model.addAttribute("msg", msg);
+		model.addAttribute("url", url);
+		
+		return "/redirect";
+	}
+	
 }

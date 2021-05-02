@@ -12,4 +12,25 @@ SELECT DISTINCT(ID) FROM USER_INFO WHERE ID = #{value}
 SELECT DISTINCT(EMAIL) FROM USER_INFO WHERE EMAIL = #{value} 
 </select>
 
+<!-- 유저 회원가입 -->
+<insert id="regUser">
+	INSERT INTO USER_INFO
+	(
+	USER_TYPE,
+	ID,
+	EMAIL,
+	PASSWORD,
+	USER_NAME,
+	USER_TEL
+	)
+	VALUES
+	(
+	0,
+	#{id},
+	#{email},
+	#{password},
+	#{user_name},
+	#{user_tel}
+	)
+</insert>
 </mapper>
