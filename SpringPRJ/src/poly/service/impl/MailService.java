@@ -24,7 +24,7 @@ public class MailService implements IMailService {
 	
 	final String host = "smtp.naver.com";
 	final String user = "sdfgx123@naver.com";
-	final String password = "duce%*pp^#76";
+	final String password = "";
 	
 	@Override
 	public int doSendMail(MailDTO pDTO) {
