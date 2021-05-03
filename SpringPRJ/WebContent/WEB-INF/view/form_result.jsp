@@ -67,7 +67,8 @@
 	</div>
 	<!-- 히어로 영역 끝 -->
 	
-	<p></p>
+	<br><br>
+	<p id="res"></p>
 
 	<script src="https://code.jquery.com/jquery-3.6.0.js"
 		integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
@@ -89,8 +90,8 @@
 		}).done(function(msg) {
 			console.log(msg.documents[0].title);
 			console.log(msg.documents[0].thumbnail);
-			$("p").append("<strong>" + msg.documents[0].title + "</strong>");
-			$("p").append("<img src='" + msg.documents[0].thumbnail + "'/>");
+			$("#res").append("<strong>" + msg.documents[0].title + "</strong>");
+			$("#res").append("<img src='" + msg.documents[0].thumbnail + "'/>");
 
 		});
 	</script>

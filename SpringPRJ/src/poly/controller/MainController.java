@@ -22,6 +22,7 @@ public class MainController {
 		return "/index";
 	}
 	
+	// 메인페이지 책 검색 결과 반환
 	@RequestMapping(value="doForm") 
 	public String doForm(HttpServletRequest request, ModelMap model) {
 		
@@ -37,7 +38,7 @@ public class MainController {
 	}
 	
 	
-	
+	// 메인페이지 책 검색 결과 반환 JSP
 	@RequestMapping(value="form_result")
 	public String form_result() {
 		
