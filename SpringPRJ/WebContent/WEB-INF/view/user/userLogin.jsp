@@ -69,9 +69,9 @@
 						<div class="hero__caption pt-100">
 							<h1>Bookeeper 로그인</h1>
 							<br>
-							<form name="loginForm" method="post" action="/user/LoginTest" onsubmit="return validate();">
+							<form name="loginForm" method="post" action="/user/LoginTest.do" onsubmit="return validate();">
 								<input type="text" name="id" id="login" placeholder="아이디 입력"
-									class="single-input"> <br> <input type="text"
+									class="single-input"> <br> <input type="password"
 									name="password" id="login" placeholder="비밀번호 입력"
 									class="single-input">
 									<br>

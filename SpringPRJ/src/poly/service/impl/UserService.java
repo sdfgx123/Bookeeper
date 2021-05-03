@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import poly.dto.UserDTO;
 import poly.persistance.mapper.IUserMapper;
 import poly.service.IUserService;
+import poly.util.CmmUtil;
 import poly.util.EncryptUtil;
 
 @Service("UserService")
@@ -47,13 +48,21 @@ public class UserService implements IUserService{
 	}
 
 	@Override
-	public UserDTO loginProc(UserDTO uDTO) throws Exception {
+	public int loginProc(UserDTO uDTO) throws Exception {
 		
-		String password = uDTO.getPassword();
-		password = EncryptUtil.encHashSHA256(password);
-		uDTO.setPassword(password);
+		int res = 0;
 		
-		return userMapper.loginProc(uDTO);
+		UserDTO rDTO = userMapper.loginProc(uDTO);
+		
+		if (rDTO == null) {
+			rDTO = new UserDTO();
+		}
+		
+		if (CmmUtil.nvl(rDTO.getId()).length() > 0) {
+			res = 1;
+		}
+		
+		return res;
 	}
 	
 }

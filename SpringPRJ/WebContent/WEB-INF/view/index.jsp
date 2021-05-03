@@ -36,7 +36,9 @@
 	<!-- 메인메뉴 영역 첨부 -->
 	<%@ include file="./mainMenu.jsp"%>
 
-	<main> <!--? Hero Area Start-->
+	<main>
+	
+	<!--히어로 영역 시작-->
 	<div class="slider-area hero-bg1 hero-overly">
 		<div
 			class="single-slider hero-overly  slider-height1 d-flex align-items-center">
@@ -58,11 +60,6 @@
 							<button type="submit" id="mainButton" class="search-form">
 								<i class="ti-search"></i> 검색
 							</button>
-							<!--
-                                <div class="search-form">
-                                    <a href="#" onclick="submit()"><i class="ti-search"></i> 검색</a>
-                                </div>	
-                                -->
 						</form>
 
 					</div>
@@ -70,7 +67,9 @@
 			</div>
 		</div>
 	</div>
-	<!--Hero Area End--> <!--? Popular Locations Start 01-->
+	<!--히어로 영역 끝-->
+	
+	<!--? Popular Locations Start 01-->
 	<div class="popular-location border-bottom section-padding40">
 		<div class="container">
 			<div class="row">

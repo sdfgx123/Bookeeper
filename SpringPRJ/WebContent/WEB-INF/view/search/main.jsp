@@ -11,6 +11,15 @@
 <title>Form result</title>
 <!-- header 영역 첨부 -->
 <%@ include file="../header.jsp"%>
+<style>
+	#res {
+		width: 300px;
+		height: 300px;
+		text-align: center;
+		margin: auto;
+		border-style: solid;
+	}
+</style>
 </head>
 <body>
 	<!-- 메인메뉴 영역 첨부 -->
