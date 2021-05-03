@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import poly.dto.MailDTO;
 import poly.dto.UserDTO;
@@ -21,6 +22,7 @@ import poly.service.impl.MailService;
 import poly.util.CmmUtil;
 import poly.util.EncryptUtil;
 
+@EnableWebMvc
 @Controller
 @RequestMapping(value = "user/")
 public class UserController {
@@ -59,7 +61,7 @@ public class UserController {
 	
 	// 유저 회원가입
 	@RequestMapping(value = "userRegister")
-	public String UserRegister() throws Exception {
+	public String UserRegister() {
 		
 		return "/user/userRegister";
 	}
