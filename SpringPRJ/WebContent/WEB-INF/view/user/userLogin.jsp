@@ -6,6 +6,11 @@
 <meta charset="UTF-8">
 <title>유저 로그인</title>
 <style>
+#doLogin {
+	width: 50%;
+	margin: auto;
+}
+
 #id {
 	width: 50%;
 	margin: auto;
@@ -28,45 +33,82 @@
 </style>
 <!-- header 영역  -->
 <%@ include file="../header.jsp"%>
+
+<script>
+	$(document)
+			.ready(
+					function() {
+						
+						$("#doLogin").on("click", function() {
+							var id = $("#login_id").val();
+							var password = $("#login_password").val();
+							if (!id) {
+								alert("아이디를 입력하세요");
+								$("#login_id").focus();
+								return false;
+							}
+							if (!password) {
+								alert("비밀번호를 입력하세요");
+								$("#login_password").focus();
+								return false;
+							}
+							if (id && password) {
+								loginSubmit();
+							}
+						});
+
+						$("#index").on("click", function() {
+							var id = $("#login_id").val();
+							var password = $("#login_password").val();
+							if (!email) {
+								alert("이메일을 입력하세요");
+								$("#login_email").focus();
+								return false;
+							}
+							if (!password) {
+								alert("비밀번호를 입력하세요");
+								$("#login_password").focus();
+								return false;
+							}
+							if (email && password) {
+								loginSubmit();
+							}
+						});
+
+					});
+	
+	function loginSubmit() {
+		var myJSON = JSON.stringify({
+			id : $('#login_id').val(),
+			password : $('#login_password').val()
+		});
+		$.ajax({
+			type : "POST",
+			url : "/user/getUserLoginCheck.do",
+			data : myJSON,
+			contentType : "application/json",
+			dataType : "json",
+			success : function(data) {
+				console.log(data);
+				if (data.loginResult == 1) {
+					window.location.href = "/index.do";
+				} else if (data.loginResult == 0) {
+					alert("아이디, 비밀번호 불일치");
+				} else {
+					alert("시스템오류");
+				}
+			},
+			error : function(request, status, error) {
+				alert("오류");
+			}
+		});
+	}
+	
+</script>
 </head>
 <body>
-
-	<!-- 메인메뉴 영역 시작 -->
-	<header>
-		<div class="header-area header-transparent">
-			<div class="main-header header-sticky">
-				<div class="container-fluid">
-					<div
-						class="menu-wrapper d-flex align-items-center justify-content-between">
-
-						<!-- Logo -->
-						<div class="logo">
-							<a href="/index.do"><img src="../assets/img/logo/logo.png"
-								alt=""></a>
-						</div>
-
-						<!-- Main-menu -->
-						<div class="main-menu f-right d-none d-lg-block">
-							<nav>
-								<ul id="navigation">
-									<li><a href="index.html">내 서재</a></li>
-									<li><a href="/user/userLogin.do">로그인</a></li>
-									<li><a href="/notice/noticeList.do">공지사항</a></li>
-								</ul>
-							</nav>
-						</div>
-
-						<!-- Mobile Menu -->
-						<div class="col-12">
-							<div class="mobile_menu d-block d-lg-none"></div>
-						</div>
-
-					</div>
-				</div>
-			</div>
-		</div>
-	</header>
-	<!-- 메인메뉴 영역 끝 -->
+	<!-- 메인메뉴 영역  첨부 -->
+	<%@ include file="../mainMenu.jsp"%>
 
 	<!-- 히어로 영역 : 대형 시작 -->
 	<div class="slider-area hero-bg1 hero-overly">
@@ -75,25 +117,24 @@
 			<div class="container">
 				<div class="row justify-content-center">
 					<div class="col-xl-10 col-lg-10">
-						<!-- Hero Caption -->
+
+						<!-- 로그인 영역 시작 -->
 						<div class="hero__caption pt-100">
 							<h1>Bookeeper 로그인</h1>
-							<br>
-							<form name="loginForm" method="post" action="/user/LoginTest.do">
-								<input type="text" name="id" id="id" placeholder="아이디 입력"
-									class="single-input"> <br> <input type="password"
-									name="password" id="password" placeholder="비밀번호 입력"
-									class="single-input">
-									<br>
-									<button type="submit" id="login" class="genric-btn primary radius" onsubmit="return validate();">로그인</button>
-							</form>
-							<br> <a href="#" id="login_small"
+							<br> <input type="text" name="id" id="id"
+								placeholder="아이디 입력" class="single-input"> <br> <input
+								type="password" name="password" id="password"
+								placeholder="비밀번호 입력" class="single-input"> <br> <a
+								href="#" id="doLogin" class="genric-btn primary radius">로그인</a>
+							<br> <br> <a href="#" id="login_small"
 								class="genric-btn primary radius">아이디 찾기</a> <a
 								href="/bootstrap.do" id="login_small"
-								class="genric-btn primary radius">돌아가기</a> <br>
-							<br> <a href="/user/userRegister.do" id="login"
+								class="genric-btn primary radius">돌아가기</a> <br> <br> <a
+								href="/user/userRegister.do" id="login"
 								class="genric-btn primary radius">회원이 아니신가요? 회원가입 하기</a>
 						</div>
+						<!-- 로그인 영역 끝 -->
+
 					</div>
 				</div>
 			</div>
