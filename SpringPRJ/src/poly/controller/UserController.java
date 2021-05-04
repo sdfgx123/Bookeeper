@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
+import com.fasterxml.jackson.annotation.JsonTypeInfo.Id;
+
 import poly.dto.MailDTO;
 import poly.dto.UserDTO;
 import poly.service.IMailService;
@@ -210,6 +212,7 @@ public class UserController {
 		session.setAttribute("user_state", uDTO.getUser_state());
 		
 		log.info("session : " + session.getAttribute("user_seq"));
+		
 		
 		return "0";
 	}

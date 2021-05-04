@@ -6,6 +6,16 @@
 <meta charset="UTF-8">
 <title>유저 로그인</title>
 <style>
+#id {
+	width: 50%;
+	margin: auto;
+}
+
+#password {
+	width: 50%;
+	margin: auto;
+}
+
 #login {
 	width: 50%;
 	margin: auto;
@@ -69,13 +79,13 @@
 						<div class="hero__caption pt-100">
 							<h1>Bookeeper 로그인</h1>
 							<br>
-							<form name="loginForm" method="post" action="/user/LoginTest.do" onsubmit="return validate();">
-								<input type="text" name="id" id="login" placeholder="아이디 입력"
+							<form name="loginForm" method="post" action="/user/LoginTest.do">
+								<input type="text" name="id" id="id" placeholder="아이디 입력"
 									class="single-input"> <br> <input type="password"
-									name="password" id="login" placeholder="비밀번호 입력"
+									name="password" id="password" placeholder="비밀번호 입력"
 									class="single-input">
 									<br>
-									<button type="submit" id="login" class="genric-btn primary radius">로그인</button>
+									<button type="submit" id="login" class="genric-btn primary radius" onsubmit="return validate();">로그인</button>
 							</form>
 							<br> <a href="#" id="login_small"
 								class="genric-btn primary radius">아이디 찾기</a> <a
