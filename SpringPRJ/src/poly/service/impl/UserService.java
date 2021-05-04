@@ -48,21 +48,12 @@ public class UserService implements IUserService{
 	}
 
 	@Override
-	public int loginProc(UserDTO uDTO) throws Exception {
+	public UserDTO loginProc(UserDTO uDTO) throws Exception {
+		String password = uDTO.getPassword();
+		password = EncryptUtil.encHashSHA256(password);
+		uDTO.setPassword(password);
 		
-		int res = 0;
-		
-		UserDTO rDTO = userMapper.loginProc(uDTO);
-		
-		if (rDTO == null) {
-			rDTO = new UserDTO();
-		}
-		
-		if (CmmUtil.nvl(rDTO.getId()).length() > 0) {
-			res = 1;
-		}
-		
-		return res;
+		return userMapper.loginProc(uDTO);
 	}
 	
 }

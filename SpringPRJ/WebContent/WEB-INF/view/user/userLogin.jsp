@@ -114,19 +114,15 @@
 				data : query,
 				success : function(data) {
 					if (data == "0") {
-						location.href = "/main.do";
+						location.href = "/index.do";
 					} else if (data == "1") {
 						$("#errorMsg").html("아이디 또는 암호가 일치하지 않습니다.")
 					} else if (data == "2") {
 						$("#errorMsg").html("이메일 인증이 필요합니다.")
-					} else {
-						alert("해당 계정은 관리자에 의해 정지되었습니다.\n정지 사유 : " + data)
-						$("#errorMsg").html("관리자에 의해 정지된 계정입니다.")
 					}
 				}
 			});
 			return valid;
-
 		}
 	</script>
 	<!-- 로그인 형식 유효성 검사 끝 -->

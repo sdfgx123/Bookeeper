@@ -185,39 +185,33 @@ public class UserController {
 	
 	//로그인 처리 : 아이디, 비밀번호 검증
 	@ResponseBody
-	@RequestMapping(value = "LoginTest", method = RequestMethod.POST)
-	public String loginTest(HttpServletRequest request, HttpServletResponse response, ModelMap model, HttpSession session) throws Exception {
+	@RequestMapping(value = "LoginTest", method = RequestMethod.POST, produces="application/text; charset=UTF8")
+	public String loginTest(HttpServletRequest request, HttpServletResponse response, ModelMap model, HttpSession session, @ModelAttribute UserDTO uDTO) throws Exception {
 		
 		log.info(this.getClass().getName() + " .loginTest start");
 		
-		// 로그인 처리 결과 저장 변수 : 로그인 성공 1 / 아이디 비밀번호 불일치 실패 0 / 기타 시스템 에러로 인한 실패 2
-		int res = 0;
-		String url = "/index.do";
+		uDTO = userService.loginProc(uDTO);
 		
-		UserDTO uDTO = null;
+		log.info("uDTO null 여부 판단 : " + uDTO);
 		
-		try {
-			String id = CmmUtil.nvl(request.getParameter("id"));
-			String password = CmmUtil.nvl(request.getParameter("password"));
-			
-			uDTO = new UserDTO();
-			uDTO.setId(id);
-			uDTO.setPassword(EncryptUtil.encHashSHA256(password));
-			
-			res = userService.loginProc(uDTO);
-			
-		} catch (Exception e) {
-			res = 2;
-			log.info(e.toString());
-			e.printStackTrace();
-		} finally {
-			log.info(this.getClass().getName() + " .loginTest end");
-			
-			model.addAttribute("res", String.valueOf(res));
-			model.addAttribute("url", url);
+		// 아이디 또는 암호 틀렸을 경우
+		if (uDTO == null) {
+			return "1";
 		}
 		
-		return "/user/loginResult";
+		// 이메일 미인증
+		if (uDTO.getUser_state() == 0) {
+			return "2";
+		}
+		
+		log.info("세션 부여 전까지 통과");
+		session.setAttribute("user_seq", uDTO.getUser_seq());
+		session.setAttribute("user_type", uDTO.getUser_type());
+		session.setAttribute("user_state", uDTO.getUser_state());
+		
+		log.info("session : " + session.getAttribute("user_seq"));
+		
+		return "0";
 	}
 	
 }

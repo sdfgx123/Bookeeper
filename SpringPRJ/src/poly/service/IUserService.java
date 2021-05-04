@@ -12,5 +12,5 @@ public interface IUserService {
 	
 	int verifyEmail(String id, String state) throws Exception;
 	
-	int loginProc(UserDTO uDTO) throws Exception;
+	UserDTO loginProc(UserDTO uDTO) throws Exception;
 }
