@@ -2,45 +2,42 @@ package poly.dto;
 
 public class MelonDTO {
 
-	private String collect_time; //수집시간
-	private String rank; //순위
-	private String song; //노래제목
-	private String singer; //가수
-	private String album; //앨범
-	
-	public String getCollect_time() {
-		return collect_time;
+	private String collectTime;
+	private String song;
+	private String singer;
+
+	private int singerCnt;
+
+	public String getCollectTime() {
+		return collectTime;
 	}
-	public void setCollect_time(String collect_time) {
-		this.collect_time = collect_time;
+
+	public void setCollectTime(String collectTime) {
+		this.collectTime = collectTime;
 	}
-	public String getRank() {
-		return rank;
-	}
-	public void setRank(String rank) {
-		this.rank = rank;
-	}
+
 	public String getSong() {
 		return song;
 	}
+
 	public void setSong(String song) {
 		this.song = song;
 	}
+
 	public String getSinger() {
 		return singer;
 	}
+
 	public void setSinger(String singer) {
 		this.singer = singer;
 	}
-	public String getAlbum() {
-		return album;
+
+	public int getSingerCnt() {
+		return singerCnt;
 	}
-	public void setAlbum(String album) {
-		this.album = album;
+
+	public void setSingerCnt(int singerCnt) {
+		this.singerCnt = singerCnt;
 	}
-	
-	
-	
-	
-	
+
 }

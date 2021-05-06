@@ -9,7 +9,7 @@
 	<properties>
 		<java-version>1.8</java-version>
 		<!-- MongoDB에서 제공하는 스프링 버전과 연동을 위해 권장하는 버전인 4.2.9 버전으로 기존 4.3.7에서 다운그레이드함 -->
-		<org.springframework-version>4.2.9.RELEASE</org.springframework-version>
+		<org.springframework-version>4.3.27.RELEASE</org.springframework-version>
 		<org.aspectj-version>1.6.10</org.aspectj-version>
 		<slf4j.version>1.7.25</slf4j.version>
 		<log4j.version>1.2.17</log4j.version>
@@ -38,6 +38,69 @@
 			<artifactId>commons-dbcp</artifactId>
 			<version>1.4</version>
 		</dependency>
+		
+		<!-- 스프링 프레임워크 필수 라이브들 설정 시작! -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-tx</artifactId>
+			<version>${org.springframework-version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+			<version>${org.springframework-version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-beans</artifactId>
+			<version>${org.springframework-version}</version>
+		</dependency>
+
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-core</artifactId>
+			<version>${org.springframework-version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-expression</artifactId>
+			<version>${org.springframework-version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-web</artifactId>
+			<version>${org.springframework-version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-webmvc</artifactId>
+			<version>${org.springframework-version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-aop</artifactId>
+			<version>${org.springframework-version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-aspects</artifactId>
+			<version>${org.springframework-version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-jdbc</artifactId>
+			<version>${org.springframework-version}</version>
+		</dependency>
+		<!-- 스프링 프레임워크 필수 라이브들 설정 끝! -->
 
 		<!-- Mysql -->
 		<dependency>
@@ -97,20 +160,37 @@
 			<version>1.8.23.RELEASE</version>
 		</dependency>
 
-		<!-- MongoDB 접속을 위한 드라이버 -->
+		<!-- 이하는 원래 pom 파일에 있는 의존성 정보임 -->
+		<!-- 
+		MongoDB 접속을 위한 드라이버
 		<dependency>
 			<groupId>org.mongodb</groupId>
 			<artifactId>mongo-java-driver</artifactId>
 			<version>3.11.1</version>
 		</dependency>
 
-		<!-- MongoDB와 스프링 프레임워크와의 연동을 위해 추가 -->
+		MongoDB와 스프링 프레임워크와의 연동을 위해 추가
 		<dependency>
 			<groupId>org.springframework.data</groupId>
 			<artifactId>spring-data-mongodb</artifactId>
 			<version>1.9.11.RELEASE</version>
 		</dependency>
+		-->
 
+		<!-- 이하는 수업중 새로운 버전으로 의존성 주입한 내용임 -->
+		<!-- MongoDB 접속을 위한 드라이버 -->
+		<dependency>
+			<groupId>org.mongodb</groupId>
+			<artifactId>mongo-java-driver</artifactId>
+			<version>3.11.1</version>
+		</dependency>
+		
+		<!-- MongoDB와 스프링 프레임워크와의 연동을 위해 추가 -->
+		<dependency>
+			<groupId>org.springframework.data</groupId>
+			<artifactId>spring-data-mongodb</artifactId>
+			<version>2.0.14.RELEASE</version>
+		</dependency>
 
 		<!-- 스프링 프레임워크 필수 라이브들 설정 시작! -->
 		<dependency>
