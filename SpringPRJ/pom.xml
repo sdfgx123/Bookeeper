@@ -149,6 +149,13 @@
 			<artifactId>mail</artifactId>
 			<version>1.4</version>
 		</dependency>
+		
+		<!-- JSP에 JSTL 사용을 위한 외부라이브러리 -->
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>jstl</artifactId>
+			<version>1.2</version>
+		</dependency>
 
 		<!-- 웹 크롤링을 위해 jsoup 라이브러리 추가-->
 		<dependency>

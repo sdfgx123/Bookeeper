@@ -42,6 +42,7 @@ public class UserController {
 	
 	// 영역 : 로그인 관련
 	
+	// 로그인 프로세스 : 확정
 	@RequestMapping(value = "doLogin", method = RequestMethod.POST)
 	@ResponseBody
 	public String doLogin(HttpServletRequest request, HttpServletResponse response, HttpSession session, ModelMap model) throws Exception {
@@ -70,7 +71,7 @@ public class UserController {
 		
 	}
 	
-	// 로그인
+	// 로그인 페이지 호출
 	@RequestMapping(value = "userLogin")
 	public String UserLogin(HttpServletRequest request, HttpServletResponse response, ModelMap model) throws Exception {
 		
@@ -91,6 +92,7 @@ public class UserController {
 		return "/user/userLogin";
 	}
 	
+	// 로그아웃
 	@RequestMapping(value = "logout")
 	public String logout(HttpServletRequest request, HttpServletResponse response, HttpSession session, ModelMap model) throws Exception {
 		log.info(this.getClass().getName() + " .logout start");
