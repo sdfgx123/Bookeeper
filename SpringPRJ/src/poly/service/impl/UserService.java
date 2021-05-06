@@ -55,5 +55,11 @@ public class UserService implements IUserService{
 		
 		return userMapper.loginProc(uDTO);
 	}
+
+	@Override
+	public UserDTO checkLogin(String id, String pw) throws Exception {
+		
+		return null;
+	}
 	
 }

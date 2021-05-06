@@ -6,6 +6,11 @@
 <meta charset="UTF-8">
 <title>유저 로그인</title>
 <style>
+feedback {
+	width: 50%;
+	margin: auto;
+}
+
 #doLogin {
 	width: 50%;
 	margin: auto;
@@ -35,48 +40,46 @@
 <%@ include file="../header.jsp"%>
 
 <script>
-	$(document)
-			.ready(
-					function() {
-						
-						$("#doLogin").on("click", function() {
-							var id = $("#login_id").val();
-							var password = $("#login_password").val();
-							if (!id) {
-								alert("아이디를 입력하세요");
-								$("#login_id").focus();
-								return false;
-							}
-							if (!password) {
-								alert("비밀번호를 입력하세요");
-								$("#login_password").focus();
-								return false;
-							}
-							if (id && password) {
-								loginSubmit();
-							}
-						});
+	$(document).ready(function() {
 
-						$("#index").on("click", function() {
-							var id = $("#login_id").val();
-							var password = $("#login_password").val();
-							if (!email) {
-								alert("이메일을 입력하세요");
-								$("#login_email").focus();
-								return false;
-							}
-							if (!password) {
-								alert("비밀번호를 입력하세요");
-								$("#login_password").focus();
-								return false;
-							}
-							if (email && password) {
-								loginSubmit();
-							}
-						});
+		$("#doLogin").on("click", function() {
+			var id = $("#login_id").val();
+			var password = $("#login_password").val();
+			if (!id) {
+				alert("아이디를 입력하세요");
+				$("#login_id").focus();
+				return false;
+			}
+			if (!password) {
+				alert("비밀번호를 입력하세요");
+				$("#login_password").focus();
+				return false;
+			}
+			if (id && password) {
+				loginSubmit();
+			}
+		});
 
-					});
-	
+		$("#index").on("click", function() {
+			var id = $("#login_id").val();
+			var password = $("#login_password").val();
+			if (!email) {
+				alert("이메일을 입력하세요");
+				$("#login_email").focus();
+				return false;
+			}
+			if (!password) {
+				alert("비밀번호를 입력하세요");
+				$("#login_password").focus();
+				return false;
+			}
+			if (email && password) {
+				loginSubmit();
+			}
+		});
+
+	});
+
 	function loginSubmit() {
 		var myJSON = JSON.stringify({
 			id : $('#login_id').val(),
@@ -103,7 +106,6 @@
 			}
 		});
 	}
-	
 </script>
 </head>
 <body>
@@ -121,17 +123,21 @@
 						<!-- 로그인 영역 시작 -->
 						<div class="hero__caption pt-100">
 							<h1>Bookeeper 로그인</h1>
-							<br> <input type="text" name="id" id="id"
-								placeholder="아이디 입력" class="single-input"> <br> <input
-								type="password" name="password" id="password"
-								placeholder="비밀번호 입력" class="single-input"> <br> <a
-								href="#" id="doLogin" class="genric-btn primary radius">로그인</a>
-							<br> <br> <a href="#" id="login_small"
-								class="genric-btn primary radius">아이디 찾기</a> <a
-								href="/bootstrap.do" id="login_small"
-								class="genric-btn primary radius">돌아가기</a> <br> <br> <a
-								href="/user/userRegister.do" id="login"
-								class="genric-btn primary radius">회원이 아니신가요? 회원가입 하기</a>
+							<form id="loginForm">
+								<br>
+								<input type="text" name="id" id="id" placeholder="아이디 입력" class="single-input">
+								<br>
+								<div id="feedback" hidden=hidden>아이디와 암호를 모두 입력해 주십시오</div>
+								<br>
+								<input type="password" name="password" id="password" placeholder="비밀번호 입력" class="single-input">
+								<br>
+								<button type="submit" id="doLogin" class="genric-btn primary radius">로그인</button>
+							</form>
+								<br>
+								<a href="#" id="login_small" class="genric-btn primary radius">아이디 찾기</a>
+								<a href="/bootstrap.do" id="login_small" class="genric-btn primary radius">돌아가기</a>
+								<br><br>
+								<a href="/user/userRegister.do" id="login" class="genric-btn primary radius">회원이 아니신가요? 회원가입 하기</a>
 						</div>
 						<!-- 로그인 영역 끝 -->
 
@@ -141,42 +147,38 @@
 		</div>
 	</div>
 	<!-- 히어로 영역 : 대형 끝 -->
-
-	<!-- 로그인 형식 유효성 검사 시작 -->
+	
+	<!-- 로그인 처리 -->
 	<script>
-		function validate() {
-
-			var valid = false;
-			if (document.loginForm.id.value == "") {
-				alert("아이디를 입력해주세요");
-				return false;
-			} else if (document.loginForm.password.value == "") {
-				alert("암호를 입력해주세요");
-				return false;
-			}
-
-			var query = {
-				id : $("#id").val(),
-				password : $("#password").val()
-			};
+	$("#loginForm").submit(function(e){
+		e.preventDefault();
+		var id = $("#id");
+		var pw = $("#password");
+		if(!Boolean(id.val().trim()) || !Boolean(pw.val().trim())){
+			$("#pw-feedback").removeAttr('hidden')
+		}else{
+			$("#pw-feedback").attr('hidden', 'hidden')
 			$.ajax({
-				url : "/user/LoginTest.do",
-				type : "post",
-				data : query,
+				data : {id : id.val(), pw : pw.val()},
+				type : "POST",
+				url : "doLogin.do",
 				success : function(data) {
-					if (data == "0") {
+					if(data=="0"){
 						location.href = "/index.do";
-					} else if (data == "1") {
-						$("#errorMsg").html("아이디 또는 암호가 일치하지 않습니다.")
-					} else if (data == "2") {
-						$("#errorMsg").html("이메일 인증이 필요합니다.")
+					}else{
+						$("#pw-feedback").html('아이디 또는 암호가 올바르지 않습니다.');
+						$("#pw-feedback").removeAttr('hidden')
 					}
-				}
-			});
-			return valid;
+				},
+				error: function (xhr, ajaxOptions, thrownError) {
+					$("#pw-feedback").html('서버 오류입니다.');
+					$("#pw-feedback").removeAttr('hidden')
+			      }
+		})
 		}
+	})
 	</script>
-	<!-- 로그인 형식 유효성 검사 끝 -->
+
 </body>
 <!-- footer 영역 -->
 <%@ include file="../footer.jsp"%>

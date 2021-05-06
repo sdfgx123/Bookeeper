@@ -21,7 +21,7 @@ import poly.dto.UserDTO;
 import poly.service.IMailService;
 import poly.service.IUserService;
 import poly.service.impl.MailService;
-import poly.util.CmmUtil;
+import static poly.util.CmmUtil.nvl;
 import poly.util.EncryptUtil;
 
 @EnableWebMvc
@@ -40,13 +40,37 @@ public class UserController {
 	
 	// 영역 : 로그인 관련
 	
+	@RequestMapping(value = "doLogin", method = RequestMethod.POST)
+	@ResponseBody
+	public String doLogin(HttpServletRequest request, HttpServletResponse response, HttpSession session, ModelMap model) throws Exception {
+		log.info(this.getClass().getName() + " .doLogin start");
+		
+		String pw = nvl(request.getParameter("pw"));
+		String id = nvl(request.getParameter("id"));
+		log.info("id : " + id);
+		log.info("pw : " + pw);
+		UserDTO rDTO = userService.checkLogin(id, pw);
+		if (rDTO == null) {
+			log.info("null");
+			log.info(this.getClass().getName() + " .doLogin end");
+			return "1";
+		}
+		log.info("user_seq : " + rDTO.getUser_seq());
+		session.setAttribute("user_seq", rDTO.getUser_seq());
+		session.setAttribute("user_type", rDTO.getUser_type());
+		session.setAttribute("id", rDTO.getId());
+		log.info(this.getClass().getName() + " .doLogin end");
+		return "0";
+		
+	}
+	
 	// 로그인
 	@RequestMapping(value = "userLogin")
 	public String UserLogin(HttpServletRequest request, HttpServletResponse response, ModelMap model) throws Exception {
 		
 		log.info("userLogin start");
 		
-		String error = CmmUtil.nvl(request.getParameter("error"));
+		String error = nvl(request.getParameter("error"));
 		
 		// error가 1이면 아이디 또는 비밀번호 틀림
 		log.info("error : " + error);
