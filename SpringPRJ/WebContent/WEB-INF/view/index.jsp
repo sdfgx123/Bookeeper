@@ -3,6 +3,8 @@
 <!doctype html>
 <html class="no-js" lang="zxx">
 <head>
+<!-- session 첨부 -->
+<%@ include file="./session.jsp" %>
 <title>Bookeeper 메인페이지</title>
 
 <!-- header 영역 첨부 -->

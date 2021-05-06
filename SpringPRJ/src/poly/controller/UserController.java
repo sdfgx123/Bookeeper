@@ -91,6 +91,21 @@ public class UserController {
 		return "/user/userLogin";
 	}
 	
+	@RequestMapping(value = "logout")
+	public String logout(HttpServletRequest request, HttpServletResponse response, HttpSession session, ModelMap model) throws Exception {
+		log.info(this.getClass().getName() + " .logout start");
+		
+		session.invalidate();
+		String url = "/index.do";
+		String msg = "로그아웃 하였습니다.";
+		model.addAttribute("url", url);
+		model.addAttribute("msg", msg);
+		
+		log.info(this.getClass().getName() + " .logout end");
+		
+		return "/redirect";
+	}
+	
 	// 유저 회원가입
 	@RequestMapping(value = "userRegister")
 	public String UserRegister() {

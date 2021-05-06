@@ -19,8 +19,13 @@
 						<nav>
 							<ul id="navigation">
 								<li><a href="index.html">내 서재</a></li>
+								<%if (user_type.equals("0")) { %>
+								<li><a href="/user/logout.do">로그아웃</a></li>
+								<%} else {%>
 								<li><a href="/user/userLogin.do">로그인</a></li>
+								<%} %>
 								<li><a href="/notice/noticeList.do">공지사항</a></li>
+								<li><a href="/notice/noticeList.do">마이페이지</a></li>
 							</ul>
 						</nav>
 					</div>
