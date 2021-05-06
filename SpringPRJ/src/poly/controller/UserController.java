@@ -22,6 +22,8 @@ import poly.service.IMailService;
 import poly.service.IUserService;
 import poly.service.impl.MailService;
 import static poly.util.CmmUtil.nvl;
+
+import poly.util.CmmUtil;
 import poly.util.EncryptUtil;
 
 @EnableWebMvc
@@ -49,6 +51,8 @@ public class UserController {
 		String id = nvl(request.getParameter("id"));
 		log.info("id : " + id);
 		log.info("pw : " + pw);
+		pw = EncryptUtil.encHashSHA256(pw);
+		log.info("암호화한 pw : " + pw);
 		UserDTO rDTO = userService.checkLogin(id, pw);
 		if (rDTO == null) {
 			log.info("null");
@@ -126,9 +130,32 @@ public class UserController {
 	
 	// 유저 회원가입 프로세스
 	@RequestMapping(value = "UserRegProc")
-	public String userRegProc(HttpServletRequest request, HttpServletResponse response, ModelMap model, @ModelAttribute UserDTO uDTO) throws Exception {
+	public String userRegProc(HttpServletRequest request, HttpServletResponse response, ModelMap model) throws Exception {
 		
 		log.info(this.getClass().getName() + " .userRegProc start");
+		
+		UserDTO uDTO = new UserDTO();
+		
+		String user_name = CmmUtil.nvl(request.getParameter("user_name"));
+		String id = CmmUtil.nvl(request.getParameter("id"));
+		String email = CmmUtil.nvl(request.getParameter("email"));
+		String user_tel = CmmUtil.nvl(request.getParameter("user_tel"));
+		String password = CmmUtil.nvl(request.getParameter("password"));
+		
+		log.info(user_name);
+		log.info(id);
+		log.info(email);
+		log.info(user_tel);
+		log.info(password);
+		
+		password = EncryptUtil.encHashSHA256(password);
+		log.info(password);
+		
+		uDTO.setUser_name(user_name);
+		uDTO.setId(id);
+		uDTO.setEmail(email);
+		uDTO.setUser_tel(user_tel);
+		uDTO.setPassword(password);
 		
 		uDTO.setUser_type("0");
 		
@@ -152,7 +179,7 @@ public class UserController {
 			StringBuilder content = new StringBuilder();
 			content.append("아래 링크를 클릭하시면 이메일 인증이 완료됩니다.\n");
 			content.append("http://localhost:8080/user/VerifyEmail.do?code=");
-			String id = uDTO.getId();
+			id = uDTO.getId();
 			String code = EncryptUtil.encAES128CBC(id + ",1");
 			content.append(code);
 			

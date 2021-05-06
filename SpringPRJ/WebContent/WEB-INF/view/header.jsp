@@ -23,3 +23,5 @@
 <link rel="stylesheet" href="../assets/css/slick.css">
 <link rel="stylesheet" href="../assets/css/nice-select.css">
 <link rel="stylesheet" href="../assets/css/style.css">
+
+<script src="/js/jquery-3.6.0.min.js"></script>

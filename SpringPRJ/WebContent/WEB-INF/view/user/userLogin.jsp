@@ -6,9 +6,10 @@
 <meta charset="UTF-8">
 <title>유저 로그인</title>
 <style>
-feedback {
+#pw-feedback {
 	width: 50%;
 	margin: auto;
+	font-style: white;
 }
 
 #doLogin {
@@ -38,75 +39,6 @@ feedback {
 </style>
 <!-- header 영역  -->
 <%@ include file="../header.jsp"%>
-
-<script>
-	$(document).ready(function() {
-
-		$("#doLogin").on("click", function() {
-			var id = $("#login_id").val();
-			var password = $("#login_password").val();
-			if (!id) {
-				alert("아이디를 입력하세요");
-				$("#login_id").focus();
-				return false;
-			}
-			if (!password) {
-				alert("비밀번호를 입력하세요");
-				$("#login_password").focus();
-				return false;
-			}
-			if (id && password) {
-				loginSubmit();
-			}
-		});
-
-		$("#index").on("click", function() {
-			var id = $("#login_id").val();
-			var password = $("#login_password").val();
-			if (!email) {
-				alert("이메일을 입력하세요");
-				$("#login_email").focus();
-				return false;
-			}
-			if (!password) {
-				alert("비밀번호를 입력하세요");
-				$("#login_password").focus();
-				return false;
-			}
-			if (email && password) {
-				loginSubmit();
-			}
-		});
-
-	});
-
-	function loginSubmit() {
-		var myJSON = JSON.stringify({
-			id : $('#login_id').val(),
-			password : $('#login_password').val()
-		});
-		$.ajax({
-			type : "POST",
-			url : "/user/getUserLoginCheck.do",
-			data : myJSON,
-			contentType : "application/json",
-			dataType : "json",
-			success : function(data) {
-				console.log(data);
-				if (data.loginResult == 1) {
-					window.location.href = "/index.do";
-				} else if (data.loginResult == 0) {
-					alert("아이디, 비밀번호 불일치");
-				} else {
-					alert("시스템오류");
-				}
-			},
-			error : function(request, status, error) {
-				alert("오류");
-			}
-		});
-	}
-</script>
 </head>
 <body>
 	<!-- 메인메뉴 영역  첨부 -->
@@ -127,7 +59,7 @@ feedback {
 								<br>
 								<input type="text" name="id" id="id" placeholder="아이디 입력" class="single-input">
 								<br>
-								<div id="feedback" hidden=hidden>아이디와 암호를 모두 입력해 주십시오</div>
+								<div id="pw-feedback" hidden=hidden>아이디와 암호를 모두 입력해 주십시오</div>
 								<br>
 								<input type="password" name="password" id="password" placeholder="비밀번호 입력" class="single-input">
 								<br>
@@ -135,7 +67,7 @@ feedback {
 							</form>
 								<br>
 								<a href="#" id="login_small" class="genric-btn primary radius">아이디 찾기</a>
-								<a href="/bootstrap.do" id="login_small" class="genric-btn primary radius">돌아가기</a>
+								<a href="index.do" id="login_small" class="genric-btn primary radius">돌아가기</a>
 								<br><br>
 								<a href="/user/userRegister.do" id="login" class="genric-btn primary radius">회원이 아니신가요? 회원가입 하기</a>
 						</div>

@@ -34,9 +34,6 @@ public class UserService implements IUserService{
 	@Override
 	public int regUser(UserDTO uDTO) throws Exception {
 		
-		String password = uDTO.getPassword();
-		password = EncryptUtil.encHashSHA256(password);
-		uDTO.setPassword(password);
 		return userMapper.regUser(uDTO);
 	}
 
@@ -59,7 +56,7 @@ public class UserService implements IUserService{
 	@Override
 	public UserDTO checkLogin(String id, String pw) throws Exception {
 		
-		return null;
+		return userMapper.checkLogin(id, pw);
 	}
 	
 }
