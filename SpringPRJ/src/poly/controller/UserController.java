@@ -63,6 +63,8 @@ public class UserController {
 		session.setAttribute("user_seq", rDTO.getUser_seq());
 		session.setAttribute("user_type", rDTO.getUser_type());
 		session.setAttribute("id", rDTO.getId());
+		
+		log.info("session identification : " + session.getAttribute("id"));
 		log.info(this.getClass().getName() + " .doLogin end");
 		return "0";
 		
