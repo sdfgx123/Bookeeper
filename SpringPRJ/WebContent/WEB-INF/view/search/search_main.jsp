@@ -7,6 +7,8 @@
 <!DOCTYPE html>
 <html>
 <head>
+<!-- session 첨부 -->
+<%@ include file="../session.jsp" %>
 <meta charset="UTF-8">
 <title>Form result</title>
 <!-- header 영역 첨부 -->

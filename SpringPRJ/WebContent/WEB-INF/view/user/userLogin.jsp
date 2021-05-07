@@ -68,7 +68,7 @@
 								<button type="submit" id="doLogin" class="genric-btn primary radius">로그인</button>
 							</form>
 								<br>
-								<a href="#" id="login_small" class="genric-btn primary radius">아이디 찾기</a>
+								<a href="/user/FindID.do" id="login_small" class="genric-btn primary radius">아이디 찾기</a>
 								<a href="/index.do" id="login_small" class="genric-btn primary radius">돌아가기</a>
 								<br><br>
 								<a href="/user/userRegister.do" id="login" class="genric-btn primary radius">회원이 아니신가요? 회원가입 하기</a>

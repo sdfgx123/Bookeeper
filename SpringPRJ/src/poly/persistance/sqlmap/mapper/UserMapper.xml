@@ -60,4 +60,9 @@ SET USER_STATE=#{1}
 WHERE ID=#{0} AND USER_STATE=0
 </update>
 
+<select id="findUserID" parameterType="String" resultType="String">
+SELECT ID FROM USER_INFO
+WHERE EMAIL = #{email} AND USER_STATE NOT IN(0)
+</select>
+
 </mapper>

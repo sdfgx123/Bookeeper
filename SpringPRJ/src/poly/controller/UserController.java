@@ -40,7 +40,47 @@ public class UserController {
 	@Resource(name = "MailService")
 	private IMailService mailService;
 	
-	// 영역 : 로그인 관련
+	// 아이디 찾기
+	@RequestMapping(value = "FindIDProc")
+	public String FindIDProc(HttpServletRequest request, ModelMap model) throws Exception {
+		log.info(this.getClass().getName() + " .FindIDProc start");
+		
+		String email = request.getParameter("email");
+		String id = userService.findUserID(email);
+		model.addAttribute("title", "아이디 찾기 결과");
+		model.addAttribute("findType", "id");
+		
+		// status : 0 성공, 1 실패
+		
+		if (id == null) {
+			model.addAttribute("msg", "해당 이메일로 가입된 아이디가 없습니다.");
+			model.addAttribute("status", "1");
+			return "/user/findResult";
+		} else {
+			String censoredId = id.substring(0, 2);
+			if (id.length() <= 6) {
+				for (int i = 2; i < id.length(); i++) {
+					censoredId += "*";
+				}
+			} else {
+				for (int i = 2; i < id.length() - 2; i++) {
+					censoredId += "*";
+				}
+				censoredId += id.substring(id.length() - 2, id.length());
+				censoredId += id.substring(censoredId.length(), id.length());
+			}
+			model.addAttribute("msg", "해당 이메일로 가입된 아이디는<br>" + censoredId + "입니다.");
+			model.addAttribute("status", "0");
+			model.addAttribute("id");
+			return "/user/findResult";
+		}
+	}
+	
+	@RequestMapping(value = "FindID")
+	public String FindID() throws Exception {
+		log.info(this.getClass().getName() + " .FindID");
+		return "/user/findID";
+	}
 	
 	// 로그인 프로세스 : 확정
 	@RequestMapping(value = "doLogin", method = RequestMethod.POST)

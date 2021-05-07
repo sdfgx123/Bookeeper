@@ -58,5 +58,11 @@ public class UserService implements IUserService{
 		
 		return userMapper.checkLogin(id, pw);
 	}
+
+	@Override
+	public String findUserID(String email) throws Exception {
+		
+		return userMapper.findUserID(email);
+	}
 	
 }

@@ -1,7 +1,23 @@
 <%@page import="poly.util.CmmUtil"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-
+    pageEncoding="UTF-8"%>
+<%
+	String title = CmmUtil.nvl((String)request.getAttribute("title"));
+	String status = CmmUtil.nvl((String)request.getAttribute("status"));
+	String msg = CmmUtil.nvl((String)request.getAttribute("msg"));
+	String id = CmmUtil.nvl((String)request.getAttribute("id"));
+	String findType = CmmUtil.nvl((String)request.getAttribute("findType"));
+	String user_type = (String) session.getAttribute("user_type");
+%>
+<!DOCTYPE html>
+<html>
+<!-- header 영역  -->
+<%@ include file="../header.jsp"%>
+<head>
+<meta charset="UTF-8">
+<title><%=title %></title>
+</head>
+<body>
 <!-- 메인메뉴 영역 시작 -->
 <header>
 	<div class="header-area header-transparent">
@@ -44,3 +60,8 @@
 	</div>
 </header>
 <!-- 메인메뉴 영역 끝 -->
+<%=msg %>
+</body>
+<!-- footer 영역 -->
+<%@ include file="../footer.jsp"%>
+</html>

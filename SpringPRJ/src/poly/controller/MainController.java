@@ -34,7 +34,7 @@ public class MainController {
 		
 		model.addAttribute("bookName",query);
 		
-		return "/search/main";
+		return "/search/search_main";
 	}
 	
 	
