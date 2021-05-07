@@ -1,11 +1,6 @@
 <%@page import="poly.util.CmmUtil"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%
-	String user_seq = CmmUtil.nvl(String.valueOf(session.getAttribute("user_seq")));
-	String user_type = CmmUtil.nvl((String) session.getAttribute("user_type"));
-%>
-
 <!-- 메인메뉴 영역 시작 -->
 <header>
 	<div class="header-area header-transparent">
