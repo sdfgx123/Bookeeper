@@ -14,6 +14,15 @@
 <!-- header 영역  -->
 <%@ include file="../header.jsp"%>
 <head>
+<style>
+	#msg {
+	color: white;
+	}
+	#button {
+	width: 50%;
+	margin: auto;
+}
+</style>
 <meta charset="UTF-8">
 <title><%=title %></title>
 </head>
@@ -32,23 +41,9 @@
 							alt=""></a>
 					</div>
 					
-					
-					<!-- 메인메뉴 영역 -->
 					<div class="main-menu f-right d-none d-lg-block">
-						<nav>
-							<ul id="navigation">
-								<li><a href="index.html">내 서재</a></li>
-								<%if (user_type.equals("0")) { %>
-								<li><a href="/user/logout.do">로그아웃</a></li>
-								<%} else {%>
-								<li><a href="/user/userLogin.do">로그인</a></li>
-								<%} %>
-								<li><a href="/notice/noticeList.do">공지사항</a></li>
-								<li><a href="/notice/noticeList.do">마이페이지</a></li>
-							</ul>
-						</nav>
 					</div>
-
+					
 					<!-- Mobile Menu -->
 					<div class="col-12">
 						<div class="mobile_menu d-block d-lg-none"></div>
@@ -60,7 +55,29 @@
 	</div>
 </header>
 <!-- 메인메뉴 영역 끝 -->
-<%=msg %>
+
+<!--히어로 영역 시작 -->
+	<div class="slider-area2">
+		<div
+			class="slider-height3  hero-overly hero-bg4 d-flex align-items-center">
+			<div class="container">
+				<div class="row">
+					<div class="col-xl-12">
+						<div class="hero-cap2 pt-20 text-center">
+							<h2>아이디 찾기 결과</h2>
+							<hr>
+							<p id="msg"><%=msg %></p>
+							<br>
+							<a href="/user/findPw.do" id="button" class="genric-btn primary radius">비밀번호 찾기</a>
+							<br><br>
+							<a href="/user/userLogin.do" id="button" class="genric-btn primary radius">돌아기기</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- 히어로 영역 끝 -->
 </body>
 <!-- footer 영역 -->
 <%@ include file="../footer.jsp"%>
