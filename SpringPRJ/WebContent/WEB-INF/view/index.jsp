@@ -53,7 +53,7 @@
 							<p>책 검색을 통해 나만의 서재를 만들어 보세요!</p>
 						</div>
 						<!--Hero form -->
-						<form action="/doForm.do" class="search-box mb-100">
+						<form action="/search/doForm.do" class="search-box mb-100">
 							<div id="search_bar" class="input-form">
 								<input type="text" id="bookName" name="bookName"
 									placeholder="검색할 책 제목 입력">

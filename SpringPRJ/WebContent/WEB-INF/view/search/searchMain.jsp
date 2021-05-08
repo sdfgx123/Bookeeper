@@ -46,13 +46,14 @@
 	</div>
 	<!-- 히어로 영역 끝 -->
 	
+	<!-- 검색한 책 정보 영역 -->
 	<br><br>
 	<div id="container">
 	<br>
 	<p id="thumb"></p>
 	<hr>
 	<p id="title"></p>
-	<a href="#" id="button" class="genric-btn primary radius">자세히 보기</a>
+	<a href="/search/SearchDetail.do?bookName='<%=bookName %>'" id="button" class="genric-btn primary radius">자세히 보기</a>
 	</div>
 
 	<script src="https://code.jquery.com/jquery-3.6.0.js"
