@@ -68,7 +68,7 @@
 							<hr>
 							<p id="msg"><%=msg %></p>
 							<br>
-							<a href="/user/findPw.do" id="button" class="genric-btn primary radius">비밀번호 찾기</a>
+							<a href="/user/FindPw.do" id="button" class="genric-btn primary radius">비밀번호 찾기</a>
 							<br><br>
 							<a href="/user/userLogin.do" id="button" class="genric-btn primary radius">돌아기기</a>
 						</div>

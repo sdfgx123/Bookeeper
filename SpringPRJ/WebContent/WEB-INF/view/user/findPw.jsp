@@ -4,17 +4,17 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Bookeeper 아이디 찾기</title>
+<title>Bookeeper 비밀번호 찾기</title>
 <style>
-#email {
+	#button {
 	width: 50%;
 	margin: auto;
 }
 
-#button {
+	#id {
 	width: 50%;
 	margin: auto;
-}
+	}
 </style>
 <!-- header 영역  -->
 <%@ include file="../header.jsp"%>
@@ -30,17 +30,15 @@
 
 						<!-- 폼 영역 시작 -->
 						<div class="hero__caption pt-100">
-							<h1>Bookeeper ID 찾기</h1>
+							<h1>Bookeeper 비밀번호 찾기</h1>
 							<form id="findIdForm" action="/user/FindIDProc.do" method="post" onsubmit="return validCheck();">
 								<br>
-								<p>이메일을 입력해 주세요</p>
-								<input type="text" name="email" id="email" placeholder="이메일 입력" class="single-input">
+								<p>아이디를 입력해 주세요</p>
+								<input type="text" name="email" id="id" placeholder="아이디 입력" class="single-input">
 								<br>
-								<button type="submit" id="button" class="genric-btn primary radius">아이디 찾기</button>
+								<button type="submit" id="button" class="genric-btn primary radius">비밀번호 초기화</button>
 							</form>
 								<br>
-								<a href="/user/FindPw.do" id="button" class="genric-btn primary radius">비밀번호 찾기</a>
-								<br><br>
 								<a href="/user/userLogin.do" id="button" class="genric-btn primary radius">돌아가기</a>
 								<br><br>
 								<a href="/user/userRegister.do" id="button" class="genric-btn primary radius">회원이 아니신가요? 회원가입 하기</a>
@@ -55,8 +53,8 @@
 	<!-- 히어로 영역 : 대형 끝 -->
 	<script>
     function validCheck(){
-    	if(document.findIdForm.email.value==""){
-    		alert("이메일을 입력해주세요");
+    	if(document.findIdForm.id.value==""){
+    		alert("아이디를 입력해주세요");
     		return false;
     	}else{
     		return true;

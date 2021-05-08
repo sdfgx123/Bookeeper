@@ -40,6 +40,14 @@ public class UserController {
 	@Resource(name = "MailService")
 	private IMailService mailService;
 	
+	// 비밀번호 찾기 jsp
+	@RequestMapping(value = "FindPw")
+	public String FindPw() throws Exception {
+		log.info(this.getClass().getName() + " .FindPw start");
+		
+		return "/user/findPw";
+	}
+	
 	// 아이디 찾기
 	@RequestMapping(value = "FindIDProc")
 	public String FindIDProc(HttpServletRequest request, ModelMap model) throws Exception {
@@ -69,7 +77,7 @@ public class UserController {
 				censoredId += id.substring(id.length() - 2, id.length());
 				censoredId += id.substring(censoredId.length(), id.length());
 			}
-			model.addAttribute("msg", "해당 이메일로 가입된 아이디는<br>" + censoredId + "입니다.");
+			model.addAttribute("msg", "해당 이메일로 가입된 아이디는<br>" + censoredId + " 입니다.");
 			model.addAttribute("status", "0");
 			model.addAttribute("id");
 			return "/user/findResult";
