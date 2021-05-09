@@ -23,4 +23,9 @@ public interface IUserMapper {
 	void setFindPassword(String id, String state) throws Exception;
 	
 	UserDTO recoverPw(UserDTO uDTO) throws Exception;
+	
+	int verifyPwFind(String id) throws Exception;
+	
+	int recoverPwProc(String id, String password) throws Exception;
+
 }

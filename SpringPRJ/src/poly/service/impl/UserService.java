@@ -105,5 +105,17 @@ public class UserService implements IUserService{
 					return rDTO;
 				}
 	}
+
+	@Override
+	public int verifyPwFind(String id) throws Exception {
+		
+		return userMapper.verifyPwFind(id);
+	}
+
+	@Override
+	public int recoverPwProc(String id, String password) throws Exception {
+		password = EncryptUtil.encHashSHA256(password);
+		return userMapper.recoverPwProc(id, password);
+	}
 	
 }

@@ -72,4 +72,17 @@ SELECT ID FROM USER_INFO
 WHERE EMAIL = #{email} AND USER_STATE NOT IN(0)
 </select>
 
+<select id="verifyPwFind" parameterType="String" resultType="Integer">
+	SELECT COUNT(1) FROM USER_INFO WHERE ID=#{0} AND FIND_PW=1
+</select>
+
+<update id="recoverPwProc" parameterType="String">
+	UPDATE
+		USER_INFO
+	SET
+		PASSWORD = #{1},
+		FIND_PW = 0
+	WHERE
+		ID = #{0}
+</update>
 </mapper>

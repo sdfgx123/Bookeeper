@@ -27,7 +27,7 @@
 <title><%=title %></title>
 </head>
 <body>
-<!-- 메인메뉴 영역 시작 -->
+<!-- 메인메뉴 영역 시작, 메인메뉴 부분은 없앰 -->
 <header>
 	<div class="header-area header-transparent">
 		<div class="main-header header-sticky">
