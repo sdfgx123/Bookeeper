@@ -64,13 +64,14 @@
 				<div class="row">
 					<div class="col-xl-12">
 						<div class="hero-cap2 pt-20 text-center">
-							<h2>아이디 찾기 결과</h2>
+							<h2><%=title %></h2>
 							<hr>
 							<p id="msg"><%=msg %></p>
 							<br>
 							<a href="/user/FindPw.do" id="button" class="genric-btn primary radius">비밀번호 찾기</a>
 							<br><br>
 							<a href="/user/userLogin.do" id="button" class="genric-btn primary radius">돌아기기</a>
+							<br>
 						</div>
 					</div>
 				</div>

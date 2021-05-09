@@ -34,7 +34,7 @@
 							<form id="findIdForm" action="/user/FindPwProc.do" method="post">
 								<br>
 								<p>아이디를 입력해 주세요</p>
-								<input type="text" name="email" id="id" placeholder="아이디 입력" class="single-input">
+								<input type="text" name="id" id="id" placeholder="아이디 입력" class="single-input">
 								<br>
 								<button type="submit" id="button" class="genric-btn primary radius">비밀번호 초기화</button>
 							</form>

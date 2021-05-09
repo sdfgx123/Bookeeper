@@ -12,7 +12,14 @@ public class UserDTO {
 	private String user_tel;
 	private String regdate;
 	private String upddate;
+	private String find_pw;
 	
+	public String getFind_pw() {
+		return find_pw;
+	}
+	public void setFind_pw(String find_pw) {
+		this.find_pw = find_pw;
+	}
 	public int getUser_seq() {
 		return user_seq;
 	}

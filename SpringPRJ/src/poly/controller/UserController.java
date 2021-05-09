@@ -40,6 +40,74 @@ public class UserController {
 	@Resource(name = "MailService")
 	private IMailService mailService;
 	
+	// 비밀번호 초기화 프로세스
+	@RequestMapping(value = "FindPwProc")
+	public String findPwProc(HttpServletRequest request, ModelMap model) throws Exception {
+		log.info(this.getClass().getName() + " .FindPwProc start");
+		
+		UserDTO uDTO = new UserDTO();
+		uDTO.setId(request.getParameter("id"));
+		
+		// uDTO에 암호화된 패스워드와 이메일 불러옴
+		uDTO = userService.recoverPw(uDTO);
+		
+		model.addAttribute("title", "비밀번호 초기화");
+		model.addAttribute("findType", "pw");
+		
+		// 없을 경우
+		if (uDTO == null) {
+			model.addAttribute("msg", "해당 아이디는 존재하지 않습니다.");
+			model.addAttribute("status", "1");
+			return "/user/FindResult";
+
+			// 있을 경우
+		} else {
+			MailDTO mDTO = new MailDTO();
+			mDTO.setTitle("Bookeeper 비밀번호 초기화 링크");
+			mDTO.setToMail(uDTO.getEmail());
+			StringBuilder content = new StringBuilder();
+			content.append("아래 링크를 클릭하시면 암호 초기화 페이지로 이동합니다.\n");
+			content.append("http://localhost:8080/user/RecoverPwForm.do?code=");
+			content.append(uDTO.getPassword());
+			mDTO.setContents(content.toString());
+			int res = mailService.doSendMail(mDTO);
+			if (res > 0) {
+				String email = uDTO.getEmail();
+				String[] splitEmail = email.split("@");
+				String id = splitEmail[0];
+				String domain = splitEmail[1];
+
+				
+				// 아이디 가리기
+				String censoredId = id.substring(0, 2);
+				if (id.length() <= 6) {
+					for (int i = 2; i < id.length(); i++) {
+						censoredId += "*";
+					}
+				} else {
+					for (int i = 2; i < id.length() - 2; i++) {
+						censoredId += "*";
+					}
+					censoredId += id.substring(id.length() - 2, id.length());
+					censoredId += id.substring(censoredId.length(), id.length());
+
+				}
+
+				String censoredEmail = censoredId + "@" + domain;
+				StringBuilder msg = new StringBuilder("아래 이메일로 초기화 링크를 보내드렸습니다:<br>");
+				msg.append(censoredEmail);
+				msg.append("<br>");
+				msg.append("암호 초기화 링크는 20분간 유효합니다.");
+
+				model.addAttribute("msg", msg.toString());
+				model.addAttribute("status", "0");
+			}
+			
+			return "/user/findResult";
+		}
+		
+	}
+	
 	// 비밀번호 찾기 jsp
 	@RequestMapping(value = "FindPw")
 	public String FindPw() throws Exception {

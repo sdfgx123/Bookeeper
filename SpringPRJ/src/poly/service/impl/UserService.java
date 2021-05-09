@@ -76,9 +76,12 @@ public class UserService implements IUserService{
 		
 		//아이디 + 발급날짜로 
 				rDTO = userMapper.recoverPw(uDTO);
+				
 				if (rDTO == null) {
 					return null;
+					
 				} else {
+					
 					String id = uDTO.getId();
 					
 					SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddhhmm");
@@ -88,9 +91,11 @@ public class UserService implements IUserService{
 					c.add(Calendar.MINUTE, 20);
 					
 					String timeLimit = sdf.format(c.getTime());
+					log.info("timeLimit : " + timeLimit);
 					
 					// 암호화된 암호와 아이디를 섞어서 해시 코드 생성
 					String accessCode = EncryptUtil.encAES128CBC(timeLimit + "," + id);
+					log.info("access code : " + accessCode);
 					
 					// 앞서 만든 코드를 데이터베이스 암호란에 업데이트
 					rDTO.setPassword(accessCode);
@@ -99,8 +104,6 @@ public class UserService implements IUserService{
 					userMapper.setFindPassword(id, "1");
 					return rDTO;
 				}
-		
-		return null;
 	}
 	
 }
