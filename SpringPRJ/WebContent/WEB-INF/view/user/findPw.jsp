@@ -31,7 +31,7 @@
 						<!-- 폼 영역 시작 -->
 						<div class="hero__caption pt-100">
 							<h1>Bookeeper 비밀번호 찾기</h1>
-							<form id="findIdForm" action="/user/FindIDProc.do" method="post" onsubmit="return validCheck();">
+							<form id="findIdForm" action="/user/FindPwProc.do" method="post">
 								<br>
 								<p>아이디를 입력해 주세요</p>
 								<input type="text" name="email" id="id" placeholder="아이디 입력" class="single-input">
@@ -51,16 +51,7 @@
 		</div>
 	</div>
 	<!-- 히어로 영역 : 대형 끝 -->
-	<script>
-    function validCheck(){
-    	if(document.findIdForm.id.value==""){
-    		alert("아이디를 입력해주세요");
-    		return false;
-    	}else{
-    		return true;
-    	}
-    }
-    </script>
+	
 </body>
 <!-- footer 영역 -->
 <%@ include file="../footer.jsp"%>

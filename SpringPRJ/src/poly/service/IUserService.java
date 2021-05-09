@@ -17,4 +17,6 @@ public interface IUserService {
 	UserDTO checkLogin(String id, String pw) throws Exception;
 	
 	String findUserID(String email) throws Exception;
+	
+	UserDTO recoverPw(UserDTO uDTO) throws Exception;
 }

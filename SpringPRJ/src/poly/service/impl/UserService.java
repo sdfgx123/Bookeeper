@@ -1,5 +1,9 @@
 package poly.service.impl;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+
 import javax.annotation.Resource;
 
 import org.apache.log4j.Logger;
@@ -63,6 +67,40 @@ public class UserService implements IUserService{
 	public String findUserID(String email) throws Exception {
 		
 		return userMapper.findUserID(email);
+	}
+
+	@Override
+	public UserDTO recoverPw(UserDTO uDTO) throws Exception {
+		
+		UserDTO rDTO = new UserDTO();
+		
+		//아이디 + 발급날짜로 
+				rDTO = userMapper.recoverPw(uDTO);
+				if (rDTO == null) {
+					return null;
+				} else {
+					String id = uDTO.getId();
+					
+					SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddhhmm");
+					Date d = new Date();
+					Calendar c = Calendar.getInstance();
+					c.setTime(d);
+					c.add(Calendar.MINUTE, 20);
+					
+					String timeLimit = sdf.format(c.getTime());
+					
+					// 암호화된 암호와 아이디를 섞어서 해시 코드 생성
+					String accessCode = EncryptUtil.encAES128CBC(timeLimit + "," + id);
+					
+					// 앞서 만든 코드를 데이터베이스 암호란에 업데이트
+					rDTO.setPassword(accessCode);
+					
+					// 암호 찾기 활성화
+					userMapper.setFindPassword(id, "1");
+					return rDTO;
+				}
+		
+		return null;
 	}
 	
 }

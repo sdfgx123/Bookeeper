@@ -15,6 +15,13 @@
 	AND
 		PASSWORD = #{1}
 </select>
+<select id="recoverPw" resultType="UserDTO">
+	SELECT USER_SEQ, PASSWORD, EMAIL FROM USERINFO WHERE ID = #{id} AND USER_STATE NOT IN(4)
+</select>
+	
+<update id="setFindPassword" parameterType="String">
+	UPDATE USERINFO SET FIND_PW = #{1} WHERE ID = #{0}
+</update>
 <!-- 로그인 -->
 <select id="loginProc" resultType="UserDTO">
 	SELECT * FROM USER_INFO
