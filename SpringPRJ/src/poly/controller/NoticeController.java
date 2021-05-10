@@ -23,6 +23,14 @@ public class NoticeController {
 	@Resource(name = "NoticeService")
 	private NoticeService noticeService;
 	
+	// 공지사항 상세
+	@RequestMapping(value = "noticeDetail")
+	public String noticeDetail() throws Exception {
+		log.info(this.getClass().getName() + " noticeDetail start");
+		
+		return "/notice/noticeDetail";
+	}
+	
 	//공지사항 리스트
 	@RequestMapping(value = "noticeList")
 	public String noticeList(ModelMap model) throws Exception {
