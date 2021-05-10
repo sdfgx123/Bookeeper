@@ -14,7 +14,7 @@
 <!-- session 첨부 -->
 <%@ include file="../session.jsp" %>
 <meta charset="UTF-8">
-<title>공지사항</title>
+<title>Bookeeper 공지사항</title>
 
 <!-- header 영역 첨부 -->
 <%@ include file="../header.jsp"%>
@@ -53,7 +53,7 @@
 			<%for(NoticeDTO e : rList) { %>
 			<div class="table-row">
 				<div class="serial"><%=nvl(e.getSeq()) %></div>
-				<div class="country"><%=nvl(e.getPost_title()) %></div>
+				<div class="country" style="cursor: pointer" role="button" onclick="location.href='/notice/NoticeInfo.do?seq=<%=nvl(e.getSeq())%>'"><%=nvl(e.getPost_title()) %></div>
 				<div class="visit"><%=nvl(e.getReg_id()) %></div>
 				<div class="visit"><%=nvl(e.getReg_dt()) %></div>
 			</div>

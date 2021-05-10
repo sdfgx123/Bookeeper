@@ -8,4 +8,6 @@ public interface INoticeService {
 
 	List<NoticeDTO> getNoticeList() throws Exception;
 	
+	NoticeDTO getNoticeInfo(NoticeDTO pDTO) throws Exception;
+	
 }

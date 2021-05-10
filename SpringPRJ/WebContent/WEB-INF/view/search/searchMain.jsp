@@ -10,7 +10,7 @@
 <!-- session 첨부 -->
 <%@ include file="../session.jsp" %>
 <meta charset="UTF-8">
-<title>Form result</title>
+<title>책 검색 결과</title>
 <!-- header 영역 첨부 -->
 <%@ include file="../header.jsp"%>
 <style>
@@ -53,7 +53,7 @@
 	<p id="thumb"></p>
 	<hr>
 	<p id="title"></p>
-	<a href="/search/SearchDetail.do?bookName='<%=bookName %>'" id="button" class="genric-btn primary radius">자세히 보기</a>
+	<a href="/search/SearchDetail.do?bookName=<%=bookName %>" id="button" class="genric-btn primary radius">자세히 보기</a>
 	</div>
 
 	<script src="https://code.jquery.com/jquery-3.6.0.js"
@@ -62,7 +62,7 @@
 
 	<script>
 		let query = "<%=bookName%>";
-		console.log(query);
+		console.log("query : "+query);
 
 		$.ajax({
 			method : "GET",

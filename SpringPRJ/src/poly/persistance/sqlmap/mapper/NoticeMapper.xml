@@ -2,8 +2,16 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="poly.persistance.mapper.INoticeMapper">
 
-<select id="getNoticeList" parameterType="NoticeDTO" resultType="NoticeDTO">
-SELECT * FROM NOTICE_INFO
-</select>
+	<select id="getNoticeList" parameterType="NoticeDTO"
+		resultType="NoticeDTO">
+		SELECT * FROM NOTICE_INFO
+	</select>
 
+	<!-- 게시판 상세보기 쿼리 -->
+	<select id="getNoticeInfo" resultType="NoticeDTO">
+		SELECT SEQ,
+		POST_TITLE, POST_CONTENT, REG_DT
+		FROM NOTICE_INFO
+		WHERE SEQ = #{seq}
+	</select>
 </mapper>

@@ -41,4 +41,17 @@ public class CmmUtil {
 			return "";
 		}
 	}
+	
+	public static String revertXSS(String value) {
+
+		value = value.replaceAll("& lt;br& gt;", "<br>")
+				.replaceAll("& lt;", "&lt;")
+				.replaceAll("& gt;", "&gt;")
+				.replaceAll("& #40;", "&#40;")
+				.replaceAll("& #39;", "&#39;")
+				.replaceAll("& #41;", "&#41;")
+				.replaceAll("\"", "&#34;")
+				.replaceAll("scr!pt", "script");
+		return value;
+	}
 }

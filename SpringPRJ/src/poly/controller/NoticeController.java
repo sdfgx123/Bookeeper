@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import poly.dto.NoticeDTO;
 import poly.service.impl.NoticeService;
+import poly.util.CmmUtil;
 
 @Controller
 @RequestMapping(value = "notice/")
@@ -24,11 +27,40 @@ public class NoticeController {
 	private NoticeService noticeService;
 	
 	// 공지사항 상세
-	@RequestMapping(value = "noticeDetail")
-	public String noticeDetail() throws Exception {
-		log.info(this.getClass().getName() + " noticeDetail start");
+	@RequestMapping(value = "NoticeInfo")
+	public String NoticeInfo(HttpServletRequest request, HttpServletResponse response, ModelMap model) throws Exception {
+		log.info(this.getClass().getName() + " NoticeInfo start");
 		
-		return "/notice/noticeDetail";
+		String nSeq = CmmUtil.nvl(request.getParameter("seq"));
+		
+		log.info("nSeq : " + nSeq);
+		
+		NoticeDTO pDTO = new NoticeDTO();
+		pDTO.setSeq(nSeq);
+		
+		// 공지사항 내용 가져오기
+		NoticeDTO rDTO = noticeService.getNoticeInfo(pDTO);
+		
+		if (rDTO == null) {
+			rDTO = new NoticeDTO();
+
+		}
+		
+		log.info("getNoticeInfo success!!!");
+		log.info("title before revertXSS : " + rDTO.getPost_title());
+		
+		rDTO.setPost_content(CmmUtil.revertXSS(rDTO.getPost_content()));
+		rDTO.setPost_title(CmmUtil.revertXSS(rDTO.getPost_title()));
+		log.info("title before revertXSS : " + rDTO.getPost_title());
+		
+		model.addAttribute("rDTO", rDTO);
+		
+		rDTO = null;
+		pDTO = null;
+		
+		log.info(this.getClass().getName() + " NoticeInfo end");
+		
+		return "/notice/noticeInfo";
 	}
 	
 	//공지사항 리스트

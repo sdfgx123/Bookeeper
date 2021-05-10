@@ -9,5 +9,8 @@ import poly.dto.NoticeDTO;
 public interface INoticeMapper {
 	
 	List<NoticeDTO> getNoticeList() throws Exception;
+	
+	// 게시판 상세보기
+	NoticeDTO getNoticeInfo(NoticeDTO pDTO) throws Exception;
 
 }
