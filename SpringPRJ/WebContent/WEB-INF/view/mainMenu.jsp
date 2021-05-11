@@ -18,7 +18,7 @@
 					
 					
 					<!-- 메인메뉴 영역 -->
-					<div class="main-menu f-right d-none d-lg-block">
+					<div class="main-menu  f-right d-none d-lg-block">
 						<nav>
 							<ul id="navigation">
 								<li><a href="index.html">내 서재</a></li>
@@ -28,7 +28,7 @@
 								<li><a href="/user/userLogin.do">로그인</a></li>
 								<%} %>
 								<li><a href="/notice/noticeList.do">공지사항</a></li>
-								<li><a href="/notice/noticeList.do">마이페이지</a></li>
+								<li><a href="/my/MyMain.do">마이페이지</a></li>
 							</ul>
 						</nav>
 					</div>

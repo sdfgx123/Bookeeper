@@ -23,4 +23,7 @@ public interface IUserService {
 	int verifyPwFind(String id) throws Exception;
 	
 	int recoverPwProc(String id, String password) throws Exception;
+	
+	UserDTO getUserInfo(String user_seq) throws Exception;
+	
 }

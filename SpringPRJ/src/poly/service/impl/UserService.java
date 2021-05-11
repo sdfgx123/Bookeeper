@@ -117,5 +117,15 @@ public class UserService implements IUserService{
 		password = EncryptUtil.encHashSHA256(password);
 		return userMapper.recoverPwProc(id, password);
 	}
-	
+
+	@Override
+	public UserDTO getUserInfo(String user_seq) throws Exception {
+		
+		UserDTO rDTO = new UserDTO();
+		
+		rDTO = userMapper.getUserInfo(user_seq);
+		
+		return rDTO;
+	}
+
 }

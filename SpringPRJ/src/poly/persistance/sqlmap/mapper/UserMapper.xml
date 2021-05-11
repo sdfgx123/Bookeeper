@@ -85,4 +85,9 @@ WHERE EMAIL = #{email} AND USER_STATE NOT IN(0)
 	WHERE
 		ID = #{0}
 </update>
+
+<!-- 마이페이지 유저 정보 호출 -->
+<select id="getUserInfo" parameterType="String" resultType="UserDTO">
+	SELECT * FROM USER_INFO WHERE USER_SEQ = #{0}
+</select>
 </mapper>

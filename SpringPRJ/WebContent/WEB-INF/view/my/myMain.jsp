@@ -1,5 +1,9 @@
+<%@page import="poly.dto.UserDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%
+	UserDTO uDTO = (UserDTO) request.getAttribute("uDTO");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -30,7 +34,7 @@
 		</div>
 	</div>
 	<!-- 히어로 영역 끝 -->
-
+	<%=uDTO.getUser_name() %>
 
 </body>
 <!-- footer 영역 -->
