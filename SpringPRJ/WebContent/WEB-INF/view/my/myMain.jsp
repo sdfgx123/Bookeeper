@@ -7,17 +7,36 @@
 <!DOCTYPE html>
 <html>
 <head>
+<style>
+.myContainer {
+	margin: auto;
+	width: 300px;
+	height: 650px;
+	border: solid;
+}
+
+#profile {
+	width: 150px;
+	height: 250px;
+	margin-left: 65px;
+	object-fit: contain;
+}
+
+#margin-setting {
+	margin-left: 10px;
+}
+</style>
 <!-- session 첨부 -->
 <%@ include file="../session.jsp"%>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>마이페이지</title>
 <!-- header 영역 첨부 -->
 <%@ include file="../header.jsp"%>
 </head>
 <body>
 	<!-- 메인메뉴 영역 첨부 -->
 	<%@ include file="../mainMenu.jsp"%>
-	
+
 	<!--히어로 영역 시작 -->
 	<div class="slider-area2">
 		<div
@@ -34,7 +53,22 @@
 		</div>
 	</div>
 	<!-- 히어로 영역 끝 -->
-	<%=uDTO.getUser_name() %>
+	<br>
+	<br>
+	<br>
+	<div class="myContainer">
+		<img id="profile" src="/assets/img/profile.PNG">
+		<ul class="unordered-list" id="margin-setting">
+			<li>이름 : <%=uDTO.getUser_name() %></li>
+			<li>아이디 : <%=uDTO.getId() %></li>
+			<li>이메일 : <%=uDTO.getEmail() %></li>
+			<li>전화번호 : <%=uDTO.getUser_tel() %></li>
+			<li>가입일 : <%=uDTO.getRegdate() %></li>
+		</ul>
+		<a href="#" class="genric-btn primary radius">수정</a>
+		<a href="#" class="genric-btn danger radius">탈퇴</a>
+		
+	</div>
 
 </body>
 <!-- footer 영역 -->

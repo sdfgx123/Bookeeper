@@ -56,6 +56,7 @@
 	<a href="/search/SearchDetail.do?bookName=<%=bookName %>" id="button" class="genric-btn primary radius">자세히 보기</a>
 	</div>
 
+	<!-- 책 검색 AJAX 세트 시작 -->
 	<script src="https://code.jquery.com/jquery-3.6.0.js"
 		integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
 		crossorigin="anonymous"></script>
@@ -63,7 +64,6 @@
 	<script>
 		let query = "<%=bookName%>";
 		console.log("query : "+query);
-
 		$.ajax({
 			method : "GET",
 			url : "https://dapi.kakao.com/v3/search/book?target=title",
@@ -78,10 +78,9 @@
 			console.log(msg.documents[0].thumbnail);
 			$("#thumb").append("<img src='" + msg.documents[0].thumbnail + "'/>");
 			$("#title").append("<strong>" + msg.documents[0].title + "</strong>");
-			
-
 		});
 	</script>
+	<!-- 책 검색 AJAX 세트 끝 -->
 
 </body>
 <!-- footer 영역 -->

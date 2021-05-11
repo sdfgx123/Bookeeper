@@ -7,6 +7,12 @@
 <!DOCTYPE html>
 <html>
 <head>
+<style>
+	#detail {
+		width: 80%;
+		margin-left: 20px;
+	}
+</style>
 <!-- session 첨부 -->
 <%@ include file="../session.jsp"%>
 <meta charset="UTF-8">
@@ -36,7 +42,44 @@
 		</div>
 	</div>
 	<!-- 히어로 영역 끝 -->
+	<div class="section-top-border" id="detail">
+					<h3 class="mb-30" id="title"></h3>
+					<div class="row">
+						<div class="col-md-3">
+							<div id="thumb" alt="" class="img-fluid"></div>
+						</div>
+						<div class="col-md-9 mt-sm-20">
+							<p id="contents"></p>
+						</div>
+					</div>
+				</div>
+				
+				<!-- 책 검색 AJAX 세트 시작 -->
+	<script src="https://code.jquery.com/jquery-3.6.0.js"
+		integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+		crossorigin="anonymous"></script>
 
-	<%=bookName%>
+	<script>
+		let query = "<%=bookName%>";
+		console.log("query : "+query);
+		$.ajax({
+			method : "GET",
+			url : "https://dapi.kakao.com/v3/search/book?target=title",
+			data : {
+				"query" : query
+			},
+			headers : {
+				Authorization : "KakaoAK d6ed1d1cbb3e2caa8769e2c3e233acca"
+			}
+		}).done(function(msg) {
+			console.log(msg.documents[0].title);
+			console.log(msg.documents[0].thumbnail);
+			console.log(msg.documents[0].contents);
+			$("#thumb").append("<img src='" + msg.documents[0].thumbnail + "'/>");
+			$("#title").append("<strong>" + msg.documents[0].title + "</strong>");
+			$("#contents").append("<strong>" + msg.documents[0].contents + "</strong>");
+		});
+	</script>
+	<!-- 책 검색 AJAX 세트 끝 -->
 </body>
 </html>
