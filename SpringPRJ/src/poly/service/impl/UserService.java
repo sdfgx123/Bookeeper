@@ -119,11 +119,11 @@ public class UserService implements IUserService{
 	}
 
 	@Override
-	public UserDTO getUserInfo(String user_type) throws Exception {
+	public UserDTO getUserInfo(String id) throws Exception {
 		
 		UserDTO rDTO = new UserDTO();
 		
-		rDTO = userMapper.getUserInfo(user_type);
+		rDTO = userMapper.getUserInfo(id);
 		
 		return rDTO;
 	}

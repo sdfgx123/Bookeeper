@@ -28,17 +28,17 @@ public class MyController {
 	public String MyMain(HttpServletRequest request, HttpServletResponse response, HttpSession session, ModelMap model) throws Exception {
 		log.info(this.getClass().getName() + " .MyMain start");
 		
-		String user_type = CmmUtil.nvl((String) session.getAttribute("user_type"));
-		log.info("user_type : " + user_type);
+		String id = CmmUtil.nvl((String) session.getAttribute("id"));
+		log.info("id : " + id);
 		
-		if (user_type.equals("")) {
+		if (id.equals("")) {
 			model.addAttribute("msg", "로그인이 필요한 서비스 입니다.");
 			model.addAttribute("url", "/index.do");
 			
 			return "/redirect";
 		}
 		
-		UserDTO uDTO = userService.getUserInfo(user_type);
+		UserDTO uDTO = userService.getUserInfo(id);
 		
 		if(uDTO == null) {
 			model.addAttribute("msg", "존재하지 않는 회원입니다.");
