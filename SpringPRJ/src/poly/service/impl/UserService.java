@@ -119,13 +119,25 @@ public class UserService implements IUserService{
 	}
 
 	@Override
-	public UserDTO getUserInfo(String user_seq) throws Exception {
+	public UserDTO getUserInfo(String user_type) throws Exception {
 		
 		UserDTO rDTO = new UserDTO();
 		
-		rDTO = userMapper.getUserInfo(user_seq);
+		rDTO = userMapper.getUserInfo(user_type);
 		
 		return rDTO;
+	}
+
+	@Override
+	public UserDTO getUserEditInfo(UserDTO uDTO) throws Exception {
+		
+		return userMapper.getUserEditInfo(uDTO);
+	}
+
+	@Override
+	public int updateUser(UserDTO uDTO) throws Exception {
+		
+		return userMapper.updateUser(uDTO);
 	}
 
 }

@@ -28,6 +28,10 @@ public interface IUserMapper {
 	
 	int recoverPwProc(String id, String password) throws Exception;
 	
-	UserDTO getUserInfo(String user_seq) throws Exception;
+	UserDTO getUserInfo(String user_type) throws Exception;
+	
+	UserDTO getUserEditInfo(UserDTO uDTO) throws Exception;
+	
+	int updateUser(UserDTO uDTO) throws Exception;
 
 }

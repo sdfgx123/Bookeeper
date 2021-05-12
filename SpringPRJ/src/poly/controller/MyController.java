@@ -23,21 +23,22 @@ public class MyController {
 	@Resource(name = "UserService")
 	private UserService userService;
 	
+	// 마이페이지 메인
 	@RequestMapping(value = "MyMain")
 	public String MyMain(HttpServletRequest request, HttpServletResponse response, HttpSession session, ModelMap model) throws Exception {
 		log.info(this.getClass().getName() + " .MyMain start");
 		
-		String user_seq = CmmUtil.nvl(String.valueOf(session.getAttribute("user_seq")));
-		log.info("user_seq code : " + user_seq);
+		String user_type = CmmUtil.nvl((String) session.getAttribute("user_type"));
+		log.info("user_type : " + user_type);
 		
-		if (CmmUtil.nvl(user_seq).equals("")) {
+		if (user_type.equals("")) {
 			model.addAttribute("msg", "로그인이 필요한 서비스 입니다.");
 			model.addAttribute("url", "/index.do");
 			
 			return "/redirect";
 		}
 		
-		UserDTO uDTO = userService.getUserInfo(user_seq);
+		UserDTO uDTO = userService.getUserInfo(user_type);
 		
 		if(uDTO == null) {
 			model.addAttribute("msg", "존재하지 않는 회원입니다.");
@@ -48,6 +49,69 @@ public class MyController {
 		model.addAttribute("uDTO", uDTO);
 		
 		return "/my/myMain";
+	}
+	
+	// 회원정보 수정
+	@RequestMapping(value = "UserEdit")
+	public String UserEdit(HttpServletRequest request, ModelMap model, HttpSession session) throws Exception {
 		
+		log.info(this.getClass().getName() + " .UserEdit start");
+		
+		String seq = request.getParameter("user_seq");
+		int user_seq = Integer.parseInt(seq);
+		
+		UserDTO uDTO = new UserDTO();
+		uDTO.setUser_seq(user_seq);
+		
+		uDTO = userService.getUserEditInfo(uDTO);
+		model.addAttribute("uDTO", uDTO);
+		
+		return "/my/editUserInfo";
+		
+	}
+	
+	@RequestMapping(value = "DoUserEdit")
+	public String DoUserEdit(HttpServletRequest request, HttpSession session, ModelMap model) throws Exception {
+		
+		log.info(this.getClass().getName() + " .DoUserEdit start");
+		
+		
+		
+		String user_name = request.getParameter("user_name");
+		String email = request.getParameter("email");
+		String id = request.getParameter("id");
+		String user_tel = request.getParameter("user_tel");
+		String regdate = request.getParameter("regdate");
+		
+		UserDTO uDTO = new UserDTO();
+		uDTO.setUser_name(user_name);
+		uDTO.setEmail(email);
+		uDTO.setId(id);
+		uDTO.setUser_tel(user_tel);
+		uDTO.setRegdate(regdate);
+		
+		int res = 0;
+		
+		try {
+			res = userService.updateUser(uDTO);
+		} catch (Exception e) {
+			log.info(e.toString());
+		}
+		
+		String msg = "";
+		String url = "/my/MyMain.do?id=" + id;
+		
+		if (res == 0) {
+			msg = "회원정보 수정에 실패 하였습니다. 다시 시도해 주십시오.";
+		} else {
+			msg = "회원정보 수정에 성공 하였습니다.";
+		}
+		
+		model.addAttribute("msg", msg);
+		model.addAttribute("url", url);
+		
+		log.info(this.getClass().getName() + " .DoUserEdit end");
+		
+		return "/redirect";
 	}
 }

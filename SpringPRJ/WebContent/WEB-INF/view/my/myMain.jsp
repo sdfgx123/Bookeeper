@@ -12,7 +12,7 @@
 	margin: auto;
 	width: 300px;
 	height: 650px;
-	border: solid;
+	box-shadow: 1px 1px 3px 1px #dadce0;
 }
 
 #profile {
@@ -24,6 +24,10 @@
 
 #margin-setting {
 	margin-left: 10px;
+}
+
+#button {
+	margin-left: 30px;
 }
 </style>
 <!-- session 첨부 -->
@@ -65,8 +69,9 @@
 			<li>전화번호 : <%=uDTO.getUser_tel() %></li>
 			<li>가입일 : <%=uDTO.getRegdate() %></li>
 		</ul>
-		<a href="#" class="genric-btn primary radius">수정</a>
-		<a href="#" class="genric-btn danger radius">탈퇴</a>
+		<br>
+		<a href="/my/UserEdit.do?user_seq=<%=uDTO.getUser_seq() %>" id="button" class="genric-btn primary radius">수정</a>
+		<a href="#" id="button" class="genric-btn danger radius">탈퇴</a>
 		
 	</div>
 

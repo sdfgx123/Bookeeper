@@ -2,92 +2,124 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="poly.persistance.mapper.IUserMapper">
 
-<!-- 로그인 신규 -->
-<select id="checkLogin" parameterType="String" resultType="UserDTO">
-	SELECT
+	<!-- 로그인 신규 -->
+	<select id="checkLogin" parameterType="String"
+		resultType="UserDTO">
+		SELECT
 		USER_SEQ,
 		USER_TYPE,
 		ID
-	FROM
+		FROM
 		USER_INFO
-	WHERE
+		WHERE
 		ID = #{0}
-	AND
+		AND
 		PASSWORD = #{1}
-</select>
-<select id="recoverPw" resultType="UserDTO">
-	SELECT USER_SEQ, PASSWORD, EMAIL FROM USER_INFO WHERE ID = #{id} AND USER_STATE NOT IN(0)
-</select>
+	</select>
+	<select id="recoverPw" resultType="UserDTO">
+		SELECT USER_SEQ, PASSWORD, EMAIL FROM USER_INFO WHERE ID = #{id} AND
+		USER_STATE NOT IN(0)
+	</select>
+
+	<update id="setFindPassword" parameterType="String">
+		UPDATE USER_INFO SET FIND_PW = #{1} WHERE ID = #{0}
+	</update>
+	<!-- 로그인 -->
+	<select id="loginProc" resultType="UserDTO">
+		SELECT * FROM USER_INFO
+		WHERE
+		ID = #{id} AND PASSWORD = #{password} AND USER_STATE NOT IN(0)
+	</select>
+
+	<!-- ID 중복확인 -->
+	<select id="checkID" parameterType="String" resultType="UserDTO">
+		SELECT DISTINCT(ID) FROM USER_INFO WHERE ID = #{value}
+	</select>
+
+	<!-- 이메일 중복확인 -->
+	<select id="checkEmail" parameterType="String"
+		resultType="UserDTO">
+		SELECT DISTINCT(EMAIL) FROM USER_INFO WHERE EMAIL = #{value}
+	</select>
+
+	<!-- 유저 회원가입 -->
+	<insert id="regUser">
+		INSERT INTO USER_INFO
+		(
+		USER_TYPE,
+		ID,
+		EMAIL,
+		PASSWORD,
+		USER_NAME,
+		USER_TEL
+		)
+		VALUES
+		(
+		0,
+		#{id},
+		#{email},
+		#{password},
+		#{user_name},
+		#{user_tel}
+		)
+	</insert>
+
+	<update id="verifyEmail" parameterType="String">
+		UPDATE USER_INFO
+		SET USER_STATE=#{1}
+		WHERE ID=#{0} AND USER_STATE=0
+	</update>
+
+	<select id="findUserID" parameterType="String"
+		resultType="String">
+		SELECT ID FROM USER_INFO
+		WHERE EMAIL = #{email} AND USER_STATE NOT IN(0)
+	</select>
+
+	<select id="verifyPwFind" parameterType="String"
+		resultType="Integer">
+		SELECT COUNT(1) FROM USER_INFO WHERE ID=#{0} AND FIND_PW=1
+	</select>
+
+	<update id="recoverPwProc" parameterType="String">
+		UPDATE
+		USER_INFO
+		SET
+		PASSWORD = #{1},
+		FIND_PW = 0
+		WHERE
+		ID = #{0}
+	</update>
+
+	<!-- 마이페이지 유저 정보 호출 -->
+	<select id="getUserInfo" parameterType="String"
+		resultType="UserDTO">
+		SELECT * FROM USER_INFO WHERE USER_TYPE = #{0}
+	</select>
+
+	<!-- 회원정보 수정을 위해 회원정보 호출 -->
+	<select id="getUserEditInfo" parameterType="UserDTO"
+		resultType="UserDTO">
+		SELECT
+			USER_SEQ,
+			ID,
+			REGDATE,
+			USER_NAME,
+			EMAIL,
+			USER_TEL,
+			USER_TYPE
+		FROM USER_INFO
+		WHERE USER_SEQ = #{user_seq}
+	</select>
 	
-<update id="setFindPassword" parameterType="String">
-	UPDATE USER_INFO SET FIND_PW = #{1} WHERE ID = #{0}
-</update>
-<!-- 로그인 -->
-<select id="loginProc" resultType="UserDTO">
-	SELECT * FROM USER_INFO
-	WHERE
-	ID = #{id} AND PASSWORD = #{password} AND USER_STATE NOT IN(0)
-</select>
-
-<!-- ID 중복확인 -->
-<select id="checkID" parameterType="String" resultType="UserDTO">
-SELECT DISTINCT(ID) FROM USER_INFO WHERE ID = #{value}
-</select>
-
-<!-- 이메일 중복확인 -->
-<select id="checkEmail" parameterType="String" resultType="UserDTO">
-SELECT DISTINCT(EMAIL) FROM USER_INFO WHERE EMAIL = #{value} 
-</select>
-
-<!-- 유저 회원가입 -->
-<insert id="regUser">
-	INSERT INTO USER_INFO
-	(
-	USER_TYPE,
-	ID,
-	EMAIL,
-	PASSWORD,
-	USER_NAME,
-	USER_TEL
-	)
-	VALUES
-	(
-	0,
-	#{id},
-	#{email},
-	#{password},
-	#{user_name},
-	#{user_tel}
-	)
-</insert>
-
-<update id="verifyEmail" parameterType="String">
-UPDATE USER_INFO
-SET USER_STATE=#{1}
-WHERE ID=#{0} AND USER_STATE=0
-</update>
-
-<select id="findUserID" parameterType="String" resultType="String">
-SELECT ID FROM USER_INFO
-WHERE EMAIL = #{email} AND USER_STATE NOT IN(0)
-</select>
-
-<select id="verifyPwFind" parameterType="String" resultType="Integer">
-	SELECT COUNT(1) FROM USER_INFO WHERE ID=#{0} AND FIND_PW=1
-</select>
-
-<update id="recoverPwProc" parameterType="String">
+	<!-- 회원정보 수정 -->
+	<update id="updateUser" parameterType="UserDTO">
 	UPDATE
 		USER_INFO
 	SET
-		PASSWORD = #{1},
-		FIND_PW = 0
+		USER_NAME = #{user_name},
+		USER_TEL = #{user_tel}
 	WHERE
-		ID = #{0}
-</update>
-
-<!-- 마이페이지 유저 정보 호출 -->
-<select id="getUserInfo" parameterType="String" resultType="UserDTO">
-	SELECT * FROM USER_INFO WHERE USER_SEQ = #{0}
-</select>
+		ID = #{id}
+	</update>
 </mapper>

@@ -21,7 +21,7 @@
 					<div class="main-menu  f-right d-none d-lg-block">
 						<nav>
 							<ul id="navigation">
-								<li><a href="index.html">내 서재</a></li>
+								<li><a href="/lib/LibMain.do">내 서재</a></li>
 								<%if (user_type.equals("0")) { %>
 								<li><a href="/user/logout.do">로그아웃</a></li>
 								<%} else {%>
