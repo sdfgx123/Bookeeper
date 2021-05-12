@@ -51,7 +51,7 @@ public class MyController {
 		return "/my/myMain";
 	}
 	
-	// 회원정보 수정
+	// 회원정보 수정 JSP
 	@RequestMapping(value = "UserEdit")
 	public String UserEdit(HttpServletRequest request, ModelMap model, HttpSession session) throws Exception {
 		
@@ -70,6 +70,7 @@ public class MyController {
 		
 	}
 	
+	// 회원정보 수정 처리
 	@RequestMapping(value = "DoUserEdit")
 	public String DoUserEdit(HttpServletRequest request, HttpSession session, ModelMap model) throws Exception {
 		
@@ -113,5 +114,14 @@ public class MyController {
 		log.info(this.getClass().getName() + " .DoUserEdit end");
 		
 		return "/redirect";
+	}
+	
+	@RequestMapping(value = "DeleteUserInfo")
+	public String DeleteUserInfo() throws Exception {
+		
+		log.info(this.getClass().getName() + " .DeleteUserInfo start");
+		
+		return "/my/deleteUserInfo";
+		
 	}
 }

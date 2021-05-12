@@ -15,11 +15,11 @@
 <%@ include file="../header.jsp"%>
 <style>
 	#container {
-	width: 210px;
-		height: 370px;
-		text-align: center;
+		width: 300px;
+		height: 500px;
 		margin: auto;
-		border-style: solid;
+		text-align: center;
+		box-shadow: 1px 1px 3px 1px #dadce0;
 	}
 	
 	
@@ -46,15 +46,20 @@
 	</div>
 	<!-- 히어로 영역 끝 -->
 	
-	<!-- 검색한 책 정보 영역 -->
+	<!-- 검색한 책 정보 컨테이너 영역 시작-->
 	<br><br>
+	<%for (int i=0; i<10; i++) { %>
 	<div id="container">
 	<br>
+	<%for (int j=0; j<10; j++) { %>
 	<p id="thumb"></p>
+	<%} %>
 	<hr>
 	<p id="title"></p>
 	<a href="/search/SearchDetail.do?bookName=<%=bookName %>" id="button" class="genric-btn primary radius">자세히 보기</a>
 	</div>
+	<%} %>
+	<!-- 검색한 책 정보 컨테이너 영역 끝 -->
 
 	<!-- 책 검색 AJAX 세트 시작 -->
 	<script src="https://code.jquery.com/jquery-3.6.0.js"
@@ -63,10 +68,10 @@
 
 	<script>
 		let query = "<%=bookName%>";
-		console.log("query : "+query);
+		console.log("query : " + query);
 		$.ajax({
 			method : "GET",
-			url : "https://dapi.kakao.com/v3/search/book?target=title",
+			url : "https://dapi.kakao.com/v3/search/book?target=title&page=1&size=10",
 			data : {
 				"query" : query
 			},
@@ -76,8 +81,10 @@
 		}).done(function(msg) {
 			console.log(msg.documents[0].title);
 			console.log(msg.documents[0].thumbnail);
-			$("#thumb").append("<img src='" + msg.documents[0].thumbnail + "'/>");
-			$("#title").append("<strong>" + msg.documents[0].title + "</strong>");
+			<%for (int i=0; i<10; i++) { %>
+			$("#thumb").append("<img src='" + msg.documents[<%=i%>].thumbnail + "'/>");
+			$("#title").append("<strong>" + msg.documents[<%=i%>].title + "</strong>");
+			<%} %>
 		});
 	</script>
 	<!-- 책 검색 AJAX 세트 끝 -->

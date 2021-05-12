@@ -71,7 +71,7 @@
 		</ul>
 		<br>
 		<a href="/my/UserEdit.do?user_seq=<%=uDTO.getUser_seq() %>" id="button" class="genric-btn primary radius">수정</a>
-		<a href="#" id="button" class="genric-btn danger radius">탈퇴</a>
+		<a href="/my/DeleteUserInfo.do" id="button" class="genric-btn danger radius">탈퇴</a>
 		
 	</div>
 
