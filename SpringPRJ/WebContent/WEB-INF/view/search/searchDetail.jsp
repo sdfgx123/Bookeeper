@@ -3,6 +3,7 @@
 	pageEncoding="UTF-8"%>
 <%
 	String bookName = CmmUtil.nvl((String) request.getAttribute("bookName"));
+	bookName = bookName.replaceAll("& #40;","(").replaceAll("& #41;",")");
 %>
 <!DOCTYPE html>
 <html>
@@ -19,42 +20,7 @@
 <title>책 검색 결과</title>
 <!-- header 영역 첨부 -->
 <%@ include file="../header.jsp"%>
-</head>
-<body>
-	<!-- 메인메뉴 영역 첨부 -->
-	<%@ include file="../mainMenu.jsp"%>
-
-	<!--히어로 영역 시작 -->
-	<div class="slider-area2">
-		<div
-			class="slider-height3  hero-overly hero-bg4 d-flex align-items-center">
-			<div class="container">
-				<div class="row">
-					<div class="col-xl-12">
-						<div class="hero-cap2 pt-20 text-center">
-							<h2>
-								"<%=bookName%>"
-							</h2>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- 히어로 영역 끝 -->
-	<div class="section-top-border" id="detail">
-					<h3 class="mb-30" id="title"></h3>
-					<div class="row">
-						<div class="col-md-3">
-							<div id="thumb" alt="" class="img-fluid"></div>
-						</div>
-						<div class="col-md-9 mt-sm-20">
-							<p id="contents"></p>
-						</div>
-					</div>
-				</div>
-				
-				<!-- 책 검색 AJAX 세트 시작 -->
+<!-- 책 검색 AJAX 세트 시작 -->
 	<script src="https://code.jquery.com/jquery-3.6.0.js"
 		integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
 		crossorigin="anonymous"></script>
@@ -81,5 +47,43 @@
 		});
 	</script>
 	<!-- 책 검색 AJAX 세트 끝 -->
+</head>
+<body>
+	<!-- 메인메뉴 영역 첨부 -->
+	<%@ include file="../mainMenu.jsp"%>
+
+	<!--히어로 영역 시작 -->
+	<div class="slider-area2">
+		<div
+			class="slider-height3  hero-overly hero-bg4 d-flex align-items-center">
+			<div class="container">
+				<div class="row">
+					<div class="col-xl-12">
+						<div class="hero-cap2 pt-20 text-center">
+							<h2>
+								<%=bookName%>
+							</h2>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- 히어로 영역 끝 -->
+	
+	<!-- 책 디테일 표시 영역 시작 -->
+	<div class="section-top-border" id="detail">
+					<h3 class="mb-30" id="title"></h3>
+					<div class="row">
+						<div class="col-md-3">
+							<div id="thumb" alt="" class="img-fluid"></div>
+						</div>
+						<div class="col-md-9 mt-sm-20">
+							<p id="contents"></p>
+						</div>
+					</div>
+				</div>
+	<!-- 책 디테일 표시 영역 끝 -->
+				
 </body>
 </html>

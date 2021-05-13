@@ -55,13 +55,21 @@
 	<p>비밀번호</p>
 	<input type="password" name="password" placeholder="비밀번호 입력" class="single-input-primary">
 	<br>
-	<button type="submit" id="done" class="genric-btn primary radius">탈퇴하기</button>
+	<button type="submit" id="done" class="genric-btn primary radius" onclick="ask();">탈퇴하기</button>
 	</form>
 	<br>
 	<a href="/my/MyMain.do" id="done" class="genric-btn danger radius">취소</a>
 	</div>
 	
-
+<script type="text/javascript">
+function ask() {
+	if (confirm("정말 탈퇴 하시겠습니까?")) {
+		document.deleteForm.submit();
+	} else {
+		location.href="/my/MyMain.do";
+	}
+}
+</script>
 </body>
 <!-- footer 영역 -->
 <%@ include file="../footer.jsp"%>

@@ -15,12 +15,14 @@
 <%@ include file="../header.jsp"%>
 <style>
 	#container {
-		width: 300px;
-		height: 500px;
 		margin: auto;
 		text-align: center;
 		box-shadow: 1px 1px 3px 1px #dadce0;
 	}
+	#button {
+	width:300px;
+	}
+
 	
 	
 </style>
@@ -48,17 +50,8 @@
 	
 	<!-- 검색한 책 정보 컨테이너 영역 시작-->
 	<br><br>
-	<%for (int i=0; i<10; i++) { %>
 	<div id="container">
-	<br>
-	<%for (int j=0; j<10; j++) { %>
-	<p id="thumb"></p>
-	<%} %>
-	<hr>
-	<p id="title"></p>
-	<a href="/search/SearchDetail.do?bookName=<%=bookName %>" id="button" class="genric-btn primary radius">자세히 보기</a>
 	</div>
-	<%} %>
 	<!-- 검색한 책 정보 컨테이너 영역 끝 -->
 
 	<!-- 책 검색 AJAX 세트 시작 -->
@@ -79,12 +72,25 @@
 				Authorization : "KakaoAK d6ed1d1cbb3e2caa8769e2c3e233acca"
 			}
 		}).done(function(msg) {
-			console.log(msg.documents[0].title);
-			console.log(msg.documents[0].thumbnail);
-			<%for (int i=0; i<10; i++) { %>
+			let list = msg.documents
+			let resHTML = "";
+			
+			for(let i=0; i<list.length;i++){
+				console.log(list[i]);
+				let searchTitle = list[i].title.replaceAll(" ","+");
+				
+				resHTML+='<div id="bookCont">';
+				resHTML+='<p id="thumb"><img src=\''+list[i].thumbnail+'\'/></p>';
+				resHTML+='<p id=""title"">'+list[i].title+'</p>';
+				resHTML+='<a href="/search/SearchDetail.do?bookName='+searchTitle+'" id="button" class="genric-btn primary radius">자세히 보기</a>' 
+				resHTML+='</div>';
+			}
+			$("#container").html(resHTML);
+			
+			<%-- <%for (int i=0; i<10; i++) { %>
 			$("#thumb").append("<img src='" + msg.documents[<%=i%>].thumbnail + "'/>");
 			$("#title").append("<strong>" + msg.documents[<%=i%>].title + "</strong>");
-			<%} %>
+			<%} %> --%>
 		});
 	</script>
 	<!-- 책 검색 AJAX 세트 끝 -->
