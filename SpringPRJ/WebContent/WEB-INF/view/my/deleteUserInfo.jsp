@@ -48,7 +48,7 @@
 	<div class="deleteContainer">
 	<p>회원 탈퇴 처리를 위해 아이디와 비밀번호를 입력해 주십시오.</p>
 	<hr>
-	<form name="deleteForm" action="DoDeleteUserInfo" method="post">
+	<form name="deleteForm" action="/my/DoDeleteUserInfo.do" method="post">
 	<p>아이디</p>
 	<input type="text" name="id" placeholder="아이디 입력" class="single-input-primary">
 	<br>
@@ -61,12 +61,11 @@
 	<a href="/my/MyMain.do" id="done" class="genric-btn danger radius">취소</a>
 	</div>
 	
+<!-- Confirm 함수로 회원 탈퇴시 예, 아니오 구현하려 했으나 어느 것을 클릭해도 예 실행 오류 -->
 <script type="text/javascript">
 function ask() {
-	if (confirm("정말 탈퇴 하시겠습니까?")) {
-		document.deleteForm.submit();
-	} else {
-		location.href="/my/MyMain.do";
+	if (!confirm("정말 탈퇴 하시겠습니까?")) {
+		return false;
 	}
 }
 </script>

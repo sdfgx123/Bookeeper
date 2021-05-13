@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import poly.dto.UserDTO;
 import poly.service.impl.UserService;
 import poly.util.CmmUtil;
+import poly.util.EncryptUtil;
 
 @Controller
 @RequestMapping(value = "my/")
@@ -123,5 +124,41 @@ public class MyController {
 		
 		return "/my/deleteUserInfo";
 		
+	}
+	
+	@RequestMapping(value = "DoDeleteUserInfo")
+	public String DoDeleteUserInfo(HttpServletRequest request, HttpSession session, ModelMap model) throws Exception {
+		
+		log.info(this.getClass().getName() + " .DoDeleteUserInfo start");
+		
+		String id = CmmUtil.nvl(request.getParameter("id"));
+		String pw = CmmUtil.nvl(request.getParameter("password"));
+		
+		log.info("id : " + id);
+		log.info("pw : " + pw);
+		
+		pw = EncryptUtil.encHashSHA256(pw);
+		log.info("암호화한 pw : " + pw);
+		
+		int res = 0;
+		
+		String msg = "";
+		String url = "/index.do";
+		
+		res = userService.deleteUserInfo(id, pw);
+		
+		if (res > 0) {
+			msg = "회원 탈퇴에 성공 하였습니다. Bookeeper를 이용해 주셔서 감사합니다.";
+			session.invalidate();
+		} else {
+			msg = "회원 탈퇴에 실패 하였습니다. 잠시 후 다시 시도하여 주십시오.";
+		}
+		
+		model.addAttribute("msg", msg);
+		model.addAttribute("url", url);
+		
+		log.info(this.getClass().getName() + " .DoDeleteUserInfo end");
+		
+		return "/redirect";
 	}
 }

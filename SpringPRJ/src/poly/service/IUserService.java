@@ -30,4 +30,6 @@ public interface IUserService {
 	
 	int updateUser(UserDTO uDTO) throws Exception;
 	
+	int deleteUserInfo(String id, String pw) throws Exception;
+	
 }

@@ -140,4 +140,10 @@ public class UserService implements IUserService{
 		return userMapper.updateUser(uDTO);
 	}
 
+	@Override
+	public int deleteUserInfo(String id, String pw) throws Exception {
+		
+		return userMapper.deleteUserInfo(id, pw);
+	}
+
 }

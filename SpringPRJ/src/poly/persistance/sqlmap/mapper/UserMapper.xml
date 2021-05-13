@@ -122,4 +122,11 @@
 	WHERE
 		ID = #{id}
 	</update>
+	
+	<!-- 회원 탈퇴 -->
+	<delete id="deleteUserInfo" parameterType="String">
+	DELETE FROM USER_INFO
+	WHERE ID = #{0} AND PASSWORD = #{1}
+	</delete>
+	
 </mapper>
