@@ -8,6 +8,9 @@
 <meta charset="UTF-8">
 <title>유저 로그인</title>
 <style>
+#admin-login {
+	color: white;
+}
 #pw-feedback {
 	width: 50%;
 	margin: auto;
@@ -72,6 +75,8 @@
 								<a href="/index.do" id="login_small" class="genric-btn primary radius">돌아가기</a>
 								<br><br>
 								<a href="/user/userRegister.do" id="login" class="genric-btn primary radius">회원이 아니신가요? 회원가입 하기</a>
+								<br><br>
+								<a href="/admin/AdminLogin.do" id="admin-login">관리자 로그인</a>
 						</div>
 						<!-- 로그인 영역 끝 -->
 
