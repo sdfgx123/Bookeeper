@@ -3,10 +3,19 @@
 <!DOCTYPE html>
 <html>
 <head>
+<!-- session 첨부 -->
+<%@ include file="../session.jsp" %>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Bookeeper 관리자 메인페이지</title>
+<!-- header 영역 첨부 -->
+<%@ include file="../header.jsp"%>
 </head>
 <body>
+	<!-- 메인메뉴 영역 첨부 -->
+	<%@ include file="../mainMenu.jsp"%>
+	관리자 메인페이지 확인용
 
 </body>
+	<!-- footer 영역 첨부 -->
+	<%@ include file="../footer.jsp"%>
 </html>

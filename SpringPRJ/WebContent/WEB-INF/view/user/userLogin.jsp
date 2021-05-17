@@ -14,7 +14,7 @@
 #pw-feedback {
 	width: 50%;
 	margin: auto;
-	font-style: white;
+	color: white;
 }
 
 #doLogin {
@@ -87,7 +87,7 @@
 	</div>
 	<!-- 히어로 영역 : 대형 끝 -->
 	
-	<!-- 로그인 처리 -->
+	<!-- 로그인 처리 시작-->
 	<script>
 	$("#loginForm").submit(function(e){
 		e.preventDefault();
@@ -117,6 +117,7 @@
 		}
 	})
 	</script>
+	<!-- 로그인 처리 끝 -->
 
 </body>
 <!-- footer 영역 -->

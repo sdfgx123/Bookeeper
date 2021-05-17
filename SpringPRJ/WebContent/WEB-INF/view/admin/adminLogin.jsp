@@ -3,11 +3,23 @@
 <!DOCTYPE html>
 <html>
 <head>
+<script src="https://code.jquery.com/jquery-3.6.0.js"
+		integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+		crossorigin="anonymous"></script>
 <style>
+#DoAdminLogin {
+	width: 100%;
+}
+
+#pw-feedback {
+	width: 50%;
+	margin: auto;
+}
+
 #container {
 	margin: auto;
-	width: 300px;
-	height: 650px;
+	width: 350px;
+	height: 450px;
 	box-shadow: 1px 1px 3px 1px #dadce0;
 	padding: 20px;
 }
@@ -44,24 +56,60 @@
 	</div>
 	<!-- 히어로 영역 끝 -->
 
+	<!-- 관리자 로그인 영역 시작 -->
 	<br>
 	<div id="container">
-	<form name="adminLogin" action="/admin/DoAdminLogin" method="post">
+	<form id="loginForm">
 	<br>
 	아이디 입력
-	<input type="text" name="id" placeholder="아이디 입력"
+	<input type="text" name="id" id="id" placeholder="아이디 입력"
 			class="single-input-primary">
+	<br>
+	<div id="pw-feedback" hidden=hidden>아이디와 암호를 모두 입력해 주십시오</div>
 	<br>
 	비밀번호 입력
-	<input type="password" name="pw" placeholder="비밀번호 입력"
+	<input type="password" name="password" id="password" placeholder="비밀번호 입력"
 			class="single-input-primary">
 	<br>
-	<button type="submit" id="done" class="genric-btn primary radius">로그인</button>
+	<button type="submit" id="DoAdminLogin" class="genric-btn primary radius">로그인</button>
 	</form>
 	<br>
-	<a href="/my/UserLogin.do" id="done" class="genric-btn danger radius">돌아가기</a>
+	<a href="/user/userLogin.do" id="done" class="genric-btn danger radius">돌아가기</a>
 	</div>
+	<!-- 관리자 로그인 영역 끝 -->
 
+	<!-- AJAX 로그인 처리 시작-->
+	<script>
+	$("#loginForm").submit(function(e){
+		e.preventDefault();
+		var id = $("#id");
+		var pw = $("#password");
+		if(!Boolean(id.val().trim()) || !Boolean(pw.val().trim())){
+			$("#pw-feedback").removeAttr('hidden')
+		}else{
+			$("#pw-feedback").attr('hidden', 'hidden')
+			$.ajax({
+				data : {id : id.val(), pw : pw.val()},
+				type : "POST",
+				url : "DoAdminLogin.do",
+				success : function(data) {
+					if(data=="0"){
+						location.href = "/admin/AdminMain.do";
+					}else{
+						$("#pw-feedback").html('아이디 또는 암호가 올바르지 않습니다.');
+						$("#pw-feedback").removeAttr('hidden')
+					}
+				},
+				error: function (xhr, ajaxOptions, thrownError) {
+					$("#pw-feedback").html('서버 오류입니다.');
+					$("#pw-feedback").removeAttr('hidden')
+			      }
+		})
+		}
+	})
+	</script>
+	<!-- AJAX 로그인 처리 끝 -->
+	
 </body>
 <!-- footer 영역 -->
 <%@ include file="../footer.jsp"%>
