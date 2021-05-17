@@ -1,5 +1,9 @@
+<%@page import="poly.dto.UserDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%
+	UserDTO uDTO = (UserDTO) request.getAttribute("uDTO");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,7 +17,24 @@
 <body>
 	<!-- 메인메뉴 영역 첨부 -->
 	<%@ include file="../mainMenu.jsp"%>
-	구동 확인용
+	
+	<!--히어로 영역 시작 -->
+	<div class="slider-area2">
+		<div
+			class="slider-height3  hero-overly hero-bg4 d-flex align-items-center">
+			<div class="container">
+				<div class="row">
+					<div class="col-xl-12">
+						<div class="hero-cap2 pt-20 text-center">
+							<h2><%=uDTO.getId() %>님의 서재</h2>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- 히어로 영역 끝 -->
+	
 </body>
 <!-- footer 영역 첨부 -->
 <%@ include file="../footer.jsp"%>
