@@ -146,4 +146,10 @@ public class UserService implements IUserService{
 		return userMapper.deleteUserInfo(id, pw);
 	}
 
+	@Override
+	public UserDTO adminLogin(String id, String pw) throws Exception {
+		
+		return userMapper.adminLogin(id, pw);
+	}
+
 }

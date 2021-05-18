@@ -60,7 +60,7 @@ public class AdminController {
 		pw = EncryptUtil.encHashSHA256(pw);
 		log.info("암호화 pw : " + pw);
 		
-		UserDTO rDTO = userService.checkLogin(id, pw);
+		UserDTO rDTO = userService.adminLogin(id, pw);
 		
 		if (rDTO == null) {
 			log.info("null");

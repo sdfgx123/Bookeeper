@@ -35,5 +35,7 @@ public interface IUserMapper {
 	int updateUser(UserDTO uDTO) throws Exception;
 	
 	int deleteUserInfo(String id, String pw) throws Exception;
+	
+	UserDTO adminLogin(String id, String pw) throws Exception;
 
 }

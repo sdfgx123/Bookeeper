@@ -32,4 +32,6 @@ public interface IUserService {
 	
 	int deleteUserInfo(String id, String pw) throws Exception;
 	
+	UserDTO adminLogin(String id, String pw) throws Exception;
+	
 }
