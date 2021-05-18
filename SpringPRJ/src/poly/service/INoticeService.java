@@ -10,4 +10,8 @@ public interface INoticeService {
 	
 	NoticeDTO getNoticeInfo(NoticeDTO pDTO) throws Exception;
 	
+	int insertNoticeInfo(String title, String content) throws Exception;
+	
+	int deleteNoticeInfo(int num) throws Exception;
+	
 }

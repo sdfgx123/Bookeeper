@@ -11,6 +11,12 @@
 <!DOCTYPE html>
 <html>
 <head>
+<style>
+	#write-button {
+		float: right;
+		padding: 30px;
+	}
+</style>
 <!-- session 첨부 -->
 <%@ include file="../session.jsp" %>
 <meta charset="UTF-8">
@@ -61,6 +67,14 @@
 		</div>
 	</div>
 	<!-- Table 영역 끝 -->
+	
+	<!-- 공지사항 글쓰기 버튼 영역 시작-->
+	<%if (user_type.equals("1")) { %>
+	<div id="write-button">
+	<a href="/notice/NoticeForm.do" class="genric-btn primary radius">글쓰기</a>
+	</div>
+	<%} %>
+	<!-- 공지사항 글쓰기 버튼 영역 끝-->
 
 	<!-- footer 영역 첨부 -->
 	<%@ include file="../footer.jsp"%>

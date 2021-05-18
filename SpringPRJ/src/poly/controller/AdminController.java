@@ -35,7 +35,6 @@ public class AdminController {
 		return "/admin/adminMain";
 	}
 	
-	
 	// 관리자 로그인 페이지 호출
 	@RequestMapping(value = "AdminLogin")
 	public String AdminLogin() throws Exception {

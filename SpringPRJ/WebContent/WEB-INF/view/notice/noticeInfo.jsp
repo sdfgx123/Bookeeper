@@ -7,9 +7,23 @@
 <!DOCTYPE html>
 <html>
 <head>
+<!-- Confirm 함수로 회원 탈퇴시 예, 아니오 구현하려 했으나 어느 것을 클릭해도 예 실행 오류 -->
+<script type="text/javascript">
+function ask() {
+	if (!confirm("정말 삭제 하시겠습니까?")) {
+		return false;
+	}
+}
+</script>
 <style>
 	#date {
 		float: right;
+	}
+	
+	#write-button {
+		float: right;
+		padding: 30px;
+		margin-right: 330px;
 	}
 </style>
 <!-- session 첨부 -->
@@ -40,6 +54,7 @@
 	</div>
 	<!-- 히어로 영역 끝 -->
 	
+	<!-- 공지사항 상세 시작 -->
 	<section class="sample-text-area">
 			<div class="container box_1170">
 				<h2 class="text-heading"><%=rDTO.getPost_title() %></h2>
@@ -49,7 +64,18 @@
 					<%=rDTO.getPost_content() %>
 				</p>
 			</div>
-		</section>
+	<!-- 관리자 공지사항 글 수정, 삭제 버튼 영역 시작-->
+	<%if (user_type.equals("1")) { %>
+	<div id="write-button">
+	<a href="/notice/NoticeForm.do" class="genric-btn primary radius">수정</a>
+	<a href="/notice/DeleteNoticeInfo.do?seq=<%=rDTO.getSeq() %>" class="genric-btn primary radius" onclick="ask();">삭제</a>
+	</div>
+	<%} %>
+	<!-- 관리자 공지사항 글 수정, 삭제 버튼 영역 끝-->
+	</section>
+	<!-- 공지사항 상세 끝 -->
+	
+	
 
 </body>
 <!-- footer 영역 첨부 -->

@@ -32,7 +32,7 @@
 							<br>
 							<a href="/user/userRegister.do" id="admin-button" class="genric-btn primary radius">회원 리스트</a>
 							<br><br>
-							<a href="/user/userRegister.do" id="admin-button" class="genric-btn primary radius">공지사항 관리</a>
+							<a href="/notice/noticeList.do" id="admin-button" class="genric-btn primary radius">공지사항 관리</a>
 							<br><br>
 							<a href="/user/logout.do" id="admin-button" class="genric-btn primary radius">로그아웃</a>
 						</div>

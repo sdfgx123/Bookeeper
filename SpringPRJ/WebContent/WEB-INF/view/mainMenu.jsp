@@ -22,13 +22,16 @@
 						<nav>
 							<ul id="navigation">
 								<li><a href="/lib/LibMain.do">내 서재</a></li>
-								<%if (user_type.equals("0")) { %>
+								<%if (user_type.equals("0") || user_type.equals("1")) { %>
 								<li><a href="/user/logout.do">로그아웃</a></li>
 								<%} else {%>
 								<li><a href="/user/userLogin.do">로그인</a></li>
 								<%} %>
 								<li><a href="/notice/noticeList.do">공지사항</a></li>
 								<li><a href="/my/MyMain.do">마이페이지</a></li>
+								<%if (user_type.equals("1")) { %>
+								<li><a href="/admin/AdminMain.do">관리자 메인페이지</a></li>
+								<%} %>
 							</ul>
 						</nav>
 					</div>

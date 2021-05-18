@@ -83,4 +83,75 @@ public class NoticeController {
 		
 		return "/notice/noticeList";
 	}
+	
+	// 공지사항 등록 화면 호출
+	@RequestMapping(value = "NoticeForm")
+	public String NoticeForm() throws Exception {
+		
+		log.info(this.getClass().getName() + " NoticeForm start");
+		
+		return "/notice/noticeForm";
+	}
+	
+	// 공지사항 등록 프로세스
+	@RequestMapping(value = "DoNoticeForm")
+	public String DoNoticeForm(HttpServletRequest request, HttpServletResponse response, ModelMap model) throws Exception {
+		
+		log.info(this.getClass().getName() + " DoNoticeForm start");
+		
+		String title = CmmUtil.nvl(request.getParameter("title"));
+		String content = CmmUtil.nvl(request.getParameter("content"));
+		
+		// 0 : 실패, 1 : 성공
+		int res = 0;
+		String msg = "";
+		String url = "/notice/noticeList.do";
+		
+		try {
+			res = noticeService.insertNoticeInfo(title, content);
+		} catch (Exception e) {
+			msg = "공지사항 등록에 실패 하였습니다 : " + e.toString();
+			log.info(e.toString());
+			e.printStackTrace();
+		} finally {
+			log.info(this.getClass().getName() + " DoNoticeForm end");
+			msg = "공지사항 등록에 성공 하였습니다.";
+			model.addAttribute("msg", msg);
+			model.addAttribute("url", url);
+		}
+		return "/redirect";
+	}
+	
+	// 공지사항 삭제
+	@RequestMapping(value = "DeleteNoticeInfo")
+	public String DeleteNoticeInfo(HttpServletRequest request, HttpServletResponse response, ModelMap model) throws Exception {
+		
+		log.info(this.getClass().getName() + " DeleteNoticeInfo start");
+		
+		String seq = CmmUtil.nvl(request.getParameter("seq"));
+		log.info("seq : " + seq);
+		
+		int num = Integer.parseInt(seq);
+		log.info("int num : " + num);
+		
+		int res = 0;
+		
+		String msg = "";
+		String url = "/notice/noticeList.do";
+		
+		res = noticeService.deleteNoticeInfo(num);
+		
+		if (res > 0) {
+			msg = "게시글 삭제에 성공 하였습니다.";
+		} else {
+			msg = "게시글 삭제에 실패 하였습니다. 잠시 후 다시 시도 하십시오.";
+		}
+		
+		model.addAttribute("msg", msg);
+		model.addAttribute("url", url);
+		
+		log.info(this.getClass().getName() + " DeleteNoticeInfo end");
+		
+		return "/redirect";
+	}
 }

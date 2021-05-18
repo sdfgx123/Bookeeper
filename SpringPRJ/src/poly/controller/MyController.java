@@ -52,7 +52,7 @@ public class MyController {
 		return "/my/myMain";
 	}
 	
-	// 회원정보 수정 JSP
+	// 회원정보 수정 화면 호출
 	@RequestMapping(value = "UserEdit")
 	public String UserEdit(HttpServletRequest request, ModelMap model, HttpSession session) throws Exception {
 		
@@ -117,6 +117,7 @@ public class MyController {
 		return "/redirect";
 	}
 	
+	// 회원탈퇴 재확인 화면 호출
 	@RequestMapping(value = "DeleteUserInfo")
 	public String DeleteUserInfo() throws Exception {
 		
@@ -126,6 +127,7 @@ public class MyController {
 		
 	}
 	
+	// 회원탈퇴 프로세스
 	@RequestMapping(value = "DoDeleteUserInfo")
 	public String DoDeleteUserInfo(HttpServletRequest request, HttpSession session, ModelMap model) throws Exception {
 		

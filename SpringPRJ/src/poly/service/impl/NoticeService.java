@@ -28,5 +28,17 @@ public class NoticeService implements INoticeService {
 		
 		return noticeMapper.getNoticeInfo(pDTO);
 	}
+
+	@Override
+	public int insertNoticeInfo(String title, String content) throws Exception
+	{
+		return noticeMapper.insertNoticeInfo(title, content);
+	}
+
+	@Override
+	public int deleteNoticeInfo(int num) throws Exception {
+		
+		return noticeMapper.deleteNoticeInfo(num);
+	}
 	
 }

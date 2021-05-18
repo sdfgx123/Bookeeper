@@ -12,5 +12,11 @@ public interface INoticeMapper {
 	
 	// 게시판 상세보기
 	NoticeDTO getNoticeInfo(NoticeDTO pDTO) throws Exception;
+	
+	// 공지사항 등록
+	int insertNoticeInfo(String title, String content) throws Exception;
+	
+	// 공지사항 삭제
+	int deleteNoticeInfo(int num) throws Exception;
 
 }
