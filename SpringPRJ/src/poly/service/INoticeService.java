@@ -14,4 +14,6 @@ public interface INoticeService {
 	
 	int deleteNoticeInfo(int num) throws Exception;
 	
+	int updateNoticeInfo(NoticeDTO pDTO) throws Exception;
+	
 }

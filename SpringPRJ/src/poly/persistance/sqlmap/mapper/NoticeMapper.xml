@@ -35,4 +35,13 @@
 	WHERE SEQ = #{0}
 	</delete>
 	
+	<!-- 공지사항 수정 -->
+	<update id="updateNoticeInfo" parameterType="NoticeDTO">
+		UPDATE NOTICE_INFO SET
+			POST_TITLE = #{post_title},
+			POST_CONTENT = #{post_content}
+		WHERE
+			SEQ = #{seq}
+	</update>
+	
 </mapper>

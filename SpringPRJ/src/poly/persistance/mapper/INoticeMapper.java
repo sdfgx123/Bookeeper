@@ -18,5 +18,8 @@ public interface INoticeMapper {
 	
 	// 공지사항 삭제
 	int deleteNoticeInfo(int num) throws Exception;
+	
+	// 공지사항 수정
+	int updateNoticeInfo(NoticeDTO pDTO) throws Exception;
 
 }
