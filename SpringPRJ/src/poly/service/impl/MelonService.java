@@ -15,6 +15,7 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.springframework.stereotype.Service;
 
+import poly.dto.MelonDTO;
 import poly.persistance.mongo.IMelonMapper;
 import poly.service.IMelonService;
 import poly.util.CmmUtil;
@@ -23,21 +24,22 @@ import poly.util.DateUtil;
 @Service("MelonService")
 public class MelonService implements IMelonService {
 
+	// MongoDB에 저장할 Mapper
 	@Resource(name = "MelonMapper")
-	private IMelonMapper melonMapper; // MongoDB에 저장할 Mapper
+	private IMelonMapper melonMapper;
 
 	// 로그 파일 생성 및 로그 출력을 위한 log4j 프레임워크의 자바 객체
 	private Logger log = Logger.getLogger(this.getClass());
-
+	
 	@Override
 	public int collectMelonSong() throws Exception {
 
-		// 로그 찍기(추후 찍은 로그를 통해 이 함수에 접근했는지 파악하기 용이하다.)
 		log.info(this.getClass().getName() + ".collectMelonRank Start!");
+		
+		// 데이터 수집시간
+		String collectTime = DateUtil.getDateTime("yyyyMMddhhmmss");
 
 		int res = 0;
-
-		List<Map<String, Object>> pList = new LinkedList<Map<String, Object>>();
 
 		// 멜론 Top100 중 50위까지 정보 가져오는 페이지
 		String url = "https://www.melon.com/chart/index.htm";
@@ -66,49 +68,37 @@ public class MelonService implements IMelonService {
 
 			// 가수와 노래 정보가 모두 수집되었다면, 저장함
 			if ((song.length() > 0) && (singer.length() > 0)) {
-
-				Map<String, Object> pMap = new LinkedHashMap<String, Object>();
-
-				pMap.put("collectTime", DateUtil.getDateTime("yyyyMMddhhmmss"));
-				pMap.put("song", song);
-				pMap.put("singer", singer);
-
-				// 한번에 여러개의 데이터를 MongoDB에 저장할 List 형태의 데이터 저장하기
-				pList.add(pMap);
-
-				// 사용이 완료되면 메모리 비우기
-				pMap = null;
+				
+				MelonDTO pDTO = new MelonDTO();
+				
+				pDTO.setCollect_time(collectTime);
+				pDTO.setSong(song);
+				pDTO.setSinger(singer);
+				
+				melonMapper.insertSong(pDTO);
+				
+				pDTO = null;
 			}
-
+			
 			songInfo = null;
-
 		}
-
+		
 		doc = null;
-
-		// 생성할 컬렉션명
-		String colNm = "MELON_" + DateUtil.getDateTime("yyyyMMdd");
-
-		// MongoDB에 데이터저장하기
-		melonMapper.insertSong(pList, colNm);
-
-		// 로그 찍기(추후 찍은 로그를 통해 이 함수에 접근했는지 파악하기 용이하다.)
+		
 		log.info(this.getClass().getName() + ".collectMelonSong End!");
-
+		
 		return res;
 	}
 
 	@Override
-	public List<Map<String, String>> getSongList() throws Exception {
+	public List<MelonDTO> getSongList() throws Exception {
 
 		log.info(this.getClass().getName() + ".getSongList Start!");
-
-		String colNm = "MELON_" + DateUtil.getDateTime("yyyyMMdd");
-
-		List<Map<String, String>> rList = melonMapper.getSongList(colNm);
-
+		
+		List<MelonDTO> rList = melonMapper.getSongList();
+		
 		if (rList == null) {
-			rList = new LinkedList<Map<String, String>>();
+			rList = new LinkedList<MelonDTO>();
 		}
 
 		log.info(this.getClass().getName() + ".getSongList End!");
@@ -120,18 +110,43 @@ public class MelonService implements IMelonService {
 	public List<Map<String, Object>> getSingerSongCnt() throws Exception {
 
 		log.info(this.getClass().getName() + ".getSingerSongCnt Start!");
-
-		String colNm = "MELON_" + DateUtil.getDateTime("yyyyMMdd");
-
-		List<Map<String, Object>> rList = melonMapper.getSingerSongCnt(colNm);
-
+		
+		List<MelonDTO> rList = melonMapper.getSingerCnt();
+		
 		if (rList == null) {
-			rList = new LinkedList<Map<String, Object>>();
+			rList = new LinkedList<MelonDTO>();
 		}
-
+		
+		List<Map<String, Object>> sList = new LinkedList<Map<String, Object>>();
+		
+		Iterator<MelonDTO> it = rList.iterator();
+		
+		while (it.hasNext()) {
+			MelonDTO rDTO = it.next();
+			
+			if (rDTO == null) {
+				rDTO = new MelonDTO();
+			}
+			
+			String singer = CmmUtil.nvl(rDTO.getSinger());
+			int songCnt = rDTO.getSingerCnt();
+			
+			// 전달되는 Map 구조
+			Map<String, Object> sMap = new LinkedHashMap<String, Object>();
+			
+			sMap.put("singer", singer);
+			sMap.put("songCnt", songCnt);
+			
+			sList.add(sMap);
+			sMap = null;
+			
+		}
+		
 		log.info(this.getClass().getName() + ".getSingerSongCnt End!");
+		
+		return sList;
 
-		return rList;
+		
 	}
 
 }

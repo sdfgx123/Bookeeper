@@ -1,32 +1,36 @@
 package poly.persistance.mongo;
 
+
 import java.util.List;
 
+import config.Mapper;
 import poly.dto.MelonDTO;
-import poly.dto.MelonSingerDTO;
-import poly.dto.MelonSongDTO;
 
+@Mapper("MelonMapper")
 public interface IMelonMapper {
 
-	public boolean createCollection(String colNm) throws Exception;
-	
-	public int insertRank(List<MelonDTO> pList, String colNm) throws Exception;
+	/**
+	 * 멜론 노래 리스트 저장
+	 * 
+	 * @param pList 저장될 정보
+	 * @param colNm 저장할 컬렉션 이름
+	 * @return 저장 결과
+	 */
+	public int insertSong(MelonDTO pDTO) throws Exception;
 	
 	/**
-	 * MongoDB ��� ������ ��������
+	 * 오늘 수집된 멜론 노래 리스트 가져오기
 	 * 
-	 * @param colNm ������ �÷��� �̸�
+	 * @param colNm 조회할 컬렉션 이름
+	 * @return 노래 리스트
 	 */
-	public List<MelonDTO> getRank(String colNm) throws Exception;
+	public List<MelonDTO> getSongList() throws Exception;
 	
 	/**
-	 * MongoDB 가수의 노래 데이터 가져오기
+	 * 가수별 수집된 노래의 수 가져오기
 	 * 
-	 * @param colNm 가져올 컬렉션 이름
-	 * @param singer 가수 이름
+	 * @param colNm 조회할 컬렉션 이름
+	 * @return 노래 리스트
 	 */
-	public List<MelonSongDTO> getSongForSinger(String colNm, String singer) throws Exception;
-	
-	// MongoDB 가수별 멜론 랭킹에 많이 등록된 순서대로 가져오기
-	public List<MelonSingerDTO> getRankForSinger(String colNm) throws Exception;
+	public List<MelonDTO> getSingerCnt() throws Exception;
 }

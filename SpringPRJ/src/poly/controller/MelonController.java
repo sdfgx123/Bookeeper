@@ -58,12 +58,12 @@ public class MelonController {
 	 */
 	@RequestMapping(value = "melon/getSongList")
 	@ResponseBody
-	public List<Map<String, String>> getSongList(HttpServletRequest request, HttpServletResponse response)
+	public List<MelonDTO> getSongList(HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 
 		log.info(this.getClass().getName() + ".getSongList Start!");
 
-		List<Map<String, String>> rList = melonService.getSongList();
+		List<MelonDTO> rList = melonService.getSongList();
 
 		log.info(this.getClass().getName() + ".getSongList End!");
 

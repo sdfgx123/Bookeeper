@@ -67,7 +67,7 @@ public class MelonServiceUsingDTO implements IMelonServiceUsingDTO {
 			if ((song.length() > 0) && (singer.length() > 0)) {
 				MelonDTO pDTO = new MelonDTO();
 
-				pDTO.setCollectTime(DateUtil.getDateTime("yyyyMMddhhmmss"));
+				pDTO.setCollect_time(DateUtil.getDateTime("yyyyMMddhhmmss"));
 				pDTO.setSong(song);
 				pDTO.setSinger(singer);
 

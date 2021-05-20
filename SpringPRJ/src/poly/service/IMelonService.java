@@ -3,6 +3,8 @@ package poly.service;
 import java.util.List;
 import java.util.Map;
 
+import poly.dto.MelonDTO;
+
 public interface IMelonService {
 
 	/**
@@ -13,7 +15,7 @@ public interface IMelonService {
 	/**
 	 * 오늘 수집된 멜론 노래리스트 가져오기
 	 */
-	public List<Map<String, String>> getSongList() throws Exception;
+	public List<MelonDTO> getSongList() throws Exception;
 
 	/**
 	 * 멜론 가수별 노래 수 가져오기

@@ -6,5 +6,6 @@
     	<!-- 사용할 DTO 등록  -->
 		<typeAlias type="poly.dto.UserDTO" alias="UserDTO"/>
 		<typeAlias type="poly.dto.NoticeDTO" alias="NoticeDTO"/>
+		<typeAlias type="poly.dto.MelonDTO" alias="MelonDTO"/>
     </typeAliases>
 </configuration>
