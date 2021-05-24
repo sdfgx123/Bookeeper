@@ -16,10 +16,6 @@
 		color: blue;
 		text-decoration: underline;
 	}
-	
-	#button {
-	margin-left: 30px;
-}
 </style>
 
 <!-- session 첨부 -->
