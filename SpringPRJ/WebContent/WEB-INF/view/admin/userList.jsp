@@ -17,12 +17,25 @@
 		text-decoration: underline;
 	}
 </style>
+
 <!-- session 첨부 -->
 <%@ include file="../session.jsp" %>
+
 <meta charset="UTF-8">
 <title>Bookeeper 회원 리스트</title>
+
 <!-- header 영역 첨부 -->
 <%@ include file="../header.jsp"%>
+
+<!-- Confirm 함수로 회원 탈퇴시 예, 아니오 구현하려 했으나 어느 것을 클릭해도 예 실행 오류 -->
+<script type="text/javascript">
+function ask() {
+	if (!confirm("정말 탈퇴 하시겠습니까?")) {
+		return false;
+	}
+}
+</script>
+
 </head>
 <body>
 	<!-- 메인메뉴 영역 첨부 -->
@@ -65,7 +78,7 @@
 				<div class="visit">관리자</div>
 				<%} %>
 				<%if (type.equals("0")) { %>
-				<a id="delete-button" href="/admin/DeleteUser.do?seq=<%=e.getUser_seq() %>" class="visit">회원 삭제</a>
+				<a id="delete-button" href="/admin/DeleteUser.do?seq=<%=e.getUser_seq() %>" class="visit" onclick="ask();">회원 삭제</a>
 				<%} %>
 			</div>
 			<%} %>
