@@ -1,5 +1,8 @@
 package poly.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -77,6 +80,58 @@ public class AdminController {
 		log.info(this.getClass().getName() + " .DoAdminLogin end");
 		return "0";
 		
+	}
+	
+	// 회원 리스트 페이지 호출
+	@RequestMapping(value = "UserList")
+	public String UserList(ModelMap model) throws Exception {
+		
+		log.info(this.getClass().getName() + " .UserList start");
+		
+		List<UserDTO> rList = userService.userList();
+		
+		if (rList == null) {
+			rList = new ArrayList<UserDTO>();
+		}
+		
+		model.addAttribute("rList", rList);
+		
+		rList = null;
+		
+		log.info(this.getClass().getName() + " noticeList end");
+		
+		return "/admin/userList";
+	}
+	
+	// 관리자, 회원 리스트, 회원 삭제
+	@RequestMapping(value = "DeleteUser")
+	public String DeleteUser(HttpServletRequest request, ModelMap model, HttpSession session) throws Exception {
+		
+		log.info(this.getClass().getName() + " .DeleteUser start");
+		
+		String seq = request.getParameter("seq");
+		log.info("seq : " + seq);
+		int user_seq = Integer.parseInt(seq);
+		
+		int res = 0;
+		String msg = "";
+		String url = "/admin/AdminMain.do";
+		
+		res = userService.deleteUser(user_seq);
+		log.info("res : " + res);
+		
+		if (res>0) {
+			msg = "회원 삭제 처리 성공 : 관리자 메인페이지로 이동합니다.";
+		} else {
+			msg = "회원 삭제 처리 실패 : 잠시 후 다시 시도하여 주십시오.";
+		}
+		
+		model.addAttribute("msg", msg);
+		model.addAttribute("url", url);
+		
+		log.info(this.getClass().getName() + " .DeleteUser end");
+		
+		return "/redirect";
 	}
 
 }

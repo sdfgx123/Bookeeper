@@ -4,13 +4,27 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
         http://www.springframework.org/schema/jdbc  http://www.springframework.org/schema/jdbc/spring-jdbc-4.0.xsd">
 
+	
 	<!-- MySQL dataSource -->
     <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource"> 
         <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
         <property name="url" value="jdbc:mysql://mysql.cq4takflfnmx.ap-northeast-2.rds.amazonaws.com:3306/Bookeeper?useSSL=false&amp;allowMultiQueries=true&amp;serverTimezone=Asia/Seoul" />
-        <property name="username" value="admin"/> <!-- mysql 계정 --> 
-        <property name="password" value="adminadmin"/> <!-- mysql 패스워드 -->
+        <property name="username" value="admin"/>  <!-- mysql 계정 -->
+        <property name="password" value="adminadmin"/>  <!-- mysql 패스워드 -->
     </bean>
+    
+    
+    
+    <!-- MySQL Using Paas-Ta dataSource 
+    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource"> 
+        <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+        <property name="url" value="jdbc:mysql://localhost:9000/cf_ac36ac74_e005_40d2_bb96_74ed301cee2d" />
+        <property name="username" value="rN9Ubld8Zz2ccXIj"/>  mysql 계정 
+        <property name="password" value="6ksO6hj79LNZSpC1"/>  mysql 패스워드
+    </bean>
+    -->
+    
+    
     
     
 </beans>

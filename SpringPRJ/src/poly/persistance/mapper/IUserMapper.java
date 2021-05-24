@@ -1,5 +1,7 @@
 package poly.persistance.mapper;
 
+import java.util.List;
+
 import config.Mapper;
 import poly.dto.UserDTO;
 
@@ -37,5 +39,9 @@ public interface IUserMapper {
 	int deleteUserInfo(String id, String pw) throws Exception;
 	
 	UserDTO adminLogin(String id, String pw) throws Exception;
+	
+	List<UserDTO> userList() throws Exception;
+	
+	int deleteUser(int user_seq) throws Exception;
 
 }

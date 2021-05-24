@@ -146,4 +146,16 @@
 	WHERE ID = #{0} AND PASSWORD = #{1}
 	</delete>
 	
+	<!-- 관리자, 회원 리스트 호출 -->
+	<select id="userList" parameterType="UserDTO"
+		resultType="UserDTO">
+		SELECT * FROM USER_INFO
+	</select>
+	
+	<!-- 관리자, 회원 삭제 처리 -->
+	<delete id="deleteUser" parameterType="Integer">
+	DELETE FROM USER_INFO
+	WHERE USER_SEQ = #{user_seq}
+	</delete>
+	
 </mapper>

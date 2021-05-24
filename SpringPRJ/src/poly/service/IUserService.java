@@ -1,5 +1,7 @@
 package poly.service;
 
+import java.util.List;
+
 import poly.dto.UserDTO;
 
 public interface IUserService {
@@ -33,5 +35,9 @@ public interface IUserService {
 	int deleteUserInfo(String id, String pw) throws Exception;
 	
 	UserDTO adminLogin(String id, String pw) throws Exception;
+	
+	List<UserDTO> userList() throws Exception;
+	
+	int deleteUser(int user_seq) throws Exception;
 	
 }

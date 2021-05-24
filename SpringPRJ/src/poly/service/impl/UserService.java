@@ -3,6 +3,7 @@ package poly.service.impl;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 import javax.annotation.Resource;
 
@@ -150,6 +151,18 @@ public class UserService implements IUserService{
 	public UserDTO adminLogin(String id, String pw) throws Exception {
 		
 		return userMapper.adminLogin(id, pw);
+	}
+
+	@Override
+	public List<UserDTO> userList() throws Exception {
+		
+		return userMapper.userList();
+	}
+
+	@Override
+	public int deleteUser(int user_seq) throws Exception {
+		
+		return userMapper.deleteUser(user_seq);
 	}
 
 }
