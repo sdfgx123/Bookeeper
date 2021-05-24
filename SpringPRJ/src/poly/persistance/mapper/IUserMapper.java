@@ -43,5 +43,7 @@ public interface IUserMapper {
 	List<UserDTO> userList() throws Exception;
 	
 	int deleteUser(int user_seq) throws Exception;
+	
+	UserDTO userDetail(int user_seq) throws Exception;
 
 }

@@ -134,4 +134,27 @@ public class AdminController {
 		return "/redirect";
 	}
 
+	// 관리자, 회원 상세 페이지 호출
+	@RequestMapping(value = "UserDetail")
+	public String UserDetail(HttpServletRequest request, ModelMap model) throws Exception {
+		
+		log.info(this.getClass().getName() + " .UserDetail start");
+		
+		String seq = CmmUtil.nvl(request.getParameter("seq"));
+		int user_seq = Integer.parseInt(seq);
+		
+		UserDTO uDTO = userService.userDetail(user_seq);
+		
+		if(uDTO == null) {
+			model.addAttribute("msg", "존재하지 않는 회원입니다.");
+			model.addAttribute("url", "/index.do");
+			return "/redirect";
+		}
+		
+		model.addAttribute("uDTO", uDTO);
+		
+		return "/admin/userDetail";
+		
+		
+	}
 }

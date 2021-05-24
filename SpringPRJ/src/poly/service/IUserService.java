@@ -40,4 +40,6 @@ public interface IUserService {
 	
 	int deleteUser(int user_seq) throws Exception;
 	
+	UserDTO userDetail(int user_seq) throws Exception;
+	
 }

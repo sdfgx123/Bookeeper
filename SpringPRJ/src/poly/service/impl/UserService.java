@@ -165,4 +165,10 @@ public class UserService implements IUserService{
 		return userMapper.deleteUser(user_seq);
 	}
 
+	@Override
+	public UserDTO userDetail(int user_seq) throws Exception {
+		
+		return userMapper.userDetail(user_seq);
+	}
+
 }

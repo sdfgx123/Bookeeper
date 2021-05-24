@@ -19,10 +19,18 @@
 		text-align: center;
 		box-shadow: 1px 1px 3px 1px #dadce0;
 	}
+	
 	#button {
 	width:300px;
 	}
+	
+	#search_bar {
+	width: 78%;
+	}
 
+	#mainButton {
+	background-color: #B367FF;
+	}
 	
 	
 </style>
@@ -40,6 +48,20 @@
 					<div class="col-xl-12">
 						<div class="hero-cap2 pt-20 text-center">
 							<h2>"<%=bookName %>" 검색결과</h2>
+							
+							<!-- 검색엔진 시작 -->
+						<form action="/search/doForm.do" class="search-box mb-100">
+							<div id="search_bar" class="input-form">
+								<input type="text" id="bookName" name="bookName"
+									placeholder="검색할 책 제목 입력">
+							</div>
+							<br>
+							<button type="submit" id="mainButton" class="search-form">
+								<i class="ti-search"></i> 검색
+							</button>
+						</form>
+							<!-- 검색엔진 끝  -->
+							
 						</div>
 					</div>
 				</div>

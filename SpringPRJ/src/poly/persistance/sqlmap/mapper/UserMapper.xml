@@ -158,4 +158,10 @@
 	WHERE USER_SEQ = #{user_seq}
 	</delete>
 	
+	<!-- 관리자, 회원 정보 상세 호출 -->
+	<select id="userDetail" parameterType="Integer"
+		resultType="UserDTO">
+		SELECT * FROM USER_INFO WHERE USER_SEQ = #{user_seq}
+	</select>
+	
 </mapper>

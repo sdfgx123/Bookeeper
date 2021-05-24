@@ -16,6 +16,10 @@
 		color: blue;
 		text-decoration: underline;
 	}
+	
+	#button {
+	margin-left: 30px;
+}
 </style>
 
 <!-- session 첨부 -->
@@ -62,6 +66,7 @@ function ask() {
 	<div class="progress-table-wrap">
 		<div class="progress-table">
 			<div class="table-head">
+				<div class="serial">회원번호</div>
 				<div class="serial">이름</div>
 				<div class="visit">아이디</div>
 				<div class="visit">등급</div>
@@ -69,8 +74,9 @@ function ask() {
 			</div>
 			<%for(UserDTO e : rList) { %>
 			<div class="table-row">
+				<div class="serial"><%=e.getUser_seq() %></div>
 				<div class="serial"><%=nvl(e.getUser_name()) %></div>
-				<div class="visit"><%=nvl(e.getId()) %></div>
+				<div style="cursor: pointer" role="button" onclick="location.href='/admin/UserDetail.do?seq=<%=e.getUser_seq() %>'" class="visit"><%=nvl(e.getId()) %></div>
 				<%String type = nvl(e.getUser_type()); %>
 				<%if (type.equals("0")) { %>
 				<div class="visit">사용자</div>
