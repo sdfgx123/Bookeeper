@@ -11,7 +11,12 @@
 <style>
 	#detail {
 		width: 80%;
-		margin-left: 20px;
+		margin: auto;
+		padding: 30px;
+	}
+	.button-container {
+		width: 200px;
+		margin: auto;
 	}
 </style>
 <!-- session 첨부 -->
@@ -20,7 +25,7 @@
 <title>책 검색 결과</title>
 <!-- header 영역 첨부 -->
 <%@ include file="../header.jsp"%>
-<!-- 책 검색 AJAX 세트 시작 -->
+	<!-- 책 검색 AJAX 세트 시작 -->
 	<script src="https://code.jquery.com/jquery-3.6.0.js"
 		integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
 		crossorigin="anonymous"></script>
@@ -43,7 +48,10 @@
 			console.log(msg.documents[0].contents);
 			$("#thumb").append("<img src='" + msg.documents[0].thumbnail + "'/>");
 			$("#title").append("<strong>" + msg.documents[0].title + "</strong>");
-			$("#contents").append("<strong>" + msg.documents[0].contents + "</strong>");
+			$("#contents").append(msg.documents[0].contents);
+			$("#datetime").append(msg.documents[0].datetime);
+			$("#authors").append(msg.documents[0].authors);
+			$("#publisher").append(msg.documents[0].publisher);
 		});
 	</script>
 	<!-- 책 검색 AJAX 세트 끝 -->
@@ -71,9 +79,12 @@
 	</div>
 	<!-- 히어로 영역 끝 -->
 	
+	<br>
 	<!-- 책 디테일 표시 영역 시작 -->
 	<div class="section-top-border" id="detail">
 					<h3 class="mb-30" id="title"></h3>
+					<p id="datetime" style="float: right;"></p>
+					<hr>
 					<div class="row">
 						<div class="col-md-3">
 							<div id="thumb" alt="" class="img-fluid"></div>
@@ -82,8 +93,22 @@
 							<p id="contents"></p>
 						</div>
 					</div>
-				</div>
+					<hr>
+					<div style="float: right; text-align: right;">
+					<p id="authors"></p>
+					<p id="publisher"></p>
+					</div>
+					<br>
+					<br>
+	</div>
 	<!-- 책 디테일 표시 영역 끝 -->
-				
+	<br>
+	<br>
+	<!-- 버튼 영역 -->
+	<div class="button-container">
+	<a href="/notice/NoticeForm.do" class="genric-btn primary radius">내 서재에 추가</a>
+	</div>
 </body>
+<!-- footer 영역 첨부 -->
+<%@ include file="../footer.jsp"%>
 </html>
