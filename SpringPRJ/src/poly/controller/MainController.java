@@ -37,4 +37,9 @@ public class MainController {
 		
 		return "/header";
 	}
+	
+	@RequestMapping(value = "CloudTest")
+	public String CloudTest() {
+		return "/cloudTest";
+	}
 }
