@@ -17,6 +17,7 @@ import org.jsoup.select.Elements;
 import org.springframework.stereotype.Service;
 
 import poly.dto.MelonDTO;
+import poly.dto.MelonRankDTO;
 import poly.dto.MelonSingerDTO;
 import poly.dto.MelonSongDTO;
 import poly.persistance.mongo.IMelonMapper;
@@ -141,6 +142,26 @@ public class MelonService implements IMelonService {
         if (rList == null) {
             rList = new ArrayList<>();
         }
+
+        return rList;
+    }
+	
+	@Override
+    public List<MelonRankDTO> getCompareRank() throws Exception {
+
+        log.info(this.getClass().getName() + ".getCompareRank Start!");
+
+        String curColNm = "MelonTOP100_20210525"; // 현재 랭킹 컬렉션
+        String preColNm = "MelonTOP100_20210429"; // 이전 랭킹 컬렉션
+
+        // 노래별 랭킹 비교결과 가져오기
+        List<MelonRankDTO> rList = melonMapper.getCompareRank(curColNm, preColNm);
+
+        if (rList == null) {
+            rList = new ArrayList<>();
+        }
+
+        log.info(this.getClass().getName() + ".getCompareRank End!");
 
         return rList;
     }

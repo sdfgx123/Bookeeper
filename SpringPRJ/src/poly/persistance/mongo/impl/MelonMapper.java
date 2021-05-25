@@ -18,6 +18,7 @@ import com.mongodb.DBCollection;
 import com.mongodb.DBObject;
 
 import poly.dto.MelonDTO;
+import poly.dto.MelonRankDTO;
 import poly.dto.MelonSingerDTO;
 import poly.dto.MelonSongDTO;
 import poly.persistance.mongo.IMelonMapper;
@@ -245,6 +246,110 @@ public class MelonMapper implements IMelonMapper {
         }
 
         log.info(this.getClass().getName() + ".getRankForSinger End!");
+
+        return rList;
+    }
+    
+    @Override
+    public List<MelonRankDTO> getCompareRank(String curColNm, String preColNm) throws Exception {
+
+        log.info(this.getClass().getName() + ".getCompareRank Start!");
+
+        // 데이터를 가져올 컬렉션 선택
+        DBCollection rCol = mongodb.getCollection(curColNm); //기준이 되는 현재 컬렉션 이름
+
+        // 쿼리 만들기
+        List<DBObject> pipeline = Arrays.asList(
+                //조회되는 데이터 표시를 위한 항목
+                new BasicDBObject()
+                        .append("$project", new BasicDBObject()
+                                .append("_id", 0)
+                                .append(curColNm, "$$ROOT")
+                        ),
+                // MongoDB는 조인이 없기 때문에 LookUp을 통해 유사하게 구현가능함
+                new BasicDBObject()
+                        .append("$lookup", new BasicDBObject()
+                                .append("localField", curColNm + ".song")
+                                .append("from", preColNm)
+                                .append("foreignField", "song")
+                                .append("as", preColNm)
+                        ),
+                new BasicDBObject()
+                        .append("$unwind", new BasicDBObject()
+                                .append("path", "$" + preColNm)
+                                .append("preserveNullAndEmptyArrays", true) //left조인은 true, inner 조인은 false
+                        ),
+                //실제 최종 조회되는 데이터 표시를 위한 항목
+                new BasicDBObject()
+                        .append("$project", new BasicDBObject()
+                                .append("song", "$" + curColNm + ".song") //현재 기준 컬렉션의 노래 제목
+                                .append("singer", "$" + curColNm + ".singer") //현재 기준 컬렉션의 가수 이름
+                                .append("current_rank", "$" + curColNm + ".rank") //현재 기준 컬렉션의 노래 랭킹
+                                .append("pre_rank", "$" + preColNm + ".rank") //이전 켈렉션의 노래 랭킹
+                                .append("_id", 0)
+                        )
+        );
+
+        AggregationOptions options = AggregationOptions.builder().allowDiskUse(true).build();
+
+        // 쿼리 실행하기
+        Cursor cursor = rCol.aggregate(pipeline, options);
+
+        // 컬렉션으로부터 전체 데이터 가져온 것을 List 형태로 저장하기 위한 변수 선언
+        List<MelonRankDTO> rList = new ArrayList<>();
+
+        // 퀴즈팩별 정답률 일자별 저장하기
+        MelonRankDTO rDTO = null;
+
+        while (cursor.hasNext()) {
+
+            rDTO = new MelonRankDTO();
+
+            final DBObject current = cursor.next();
+
+            String song = CmmUtil.nvl((String) current.get("song")); // 노래
+            String singer = CmmUtil.nvl((String) current.get("singer")); // 가수
+
+            // 현재 랭킹
+            int current_rank = Integer.parseInt(CmmUtil.nvl((String) current.get("current_rank"), "0"));
+
+            // 이전 랭킹
+            int pre_rank = Integer.parseInt(CmmUtil.nvl((String) current.get("pre_rank"), "0"));
+
+            int change = Math.abs(current_rank - pre_rank); // 랭킹 변화(절대값 변환)
+
+            String change_rank = ""; // 랭킹 변화 문구
+
+            if (pre_rank == current_rank) {
+                change_rank = "유지";
+
+            } else if (current_rank < pre_rank) { //랭킹 상승
+                change_rank = change + "단계 상승!";
+
+            } else {
+                change_rank = change + "단계 하강!";
+
+            }
+
+            log.info("song : " + song);
+            log.info("singer : " + singer);
+            log.info("current_rank : " + current_rank);
+            log.info("pre_rank : " + pre_rank);
+            log.info("change_rank : " + change_rank);
+
+            rDTO.setSong(song);
+            rDTO.setSinger(singer);
+            rDTO.setCurrent_rank(current_rank);
+            rDTO.setPre_rank(pre_rank);
+            rDTO.setChange_rank(change_rank);
+
+            rList.add(rDTO); // List에 데이터 저장
+
+            rDTO = null;
+
+        }
+
+        log.info(this.getClass().getName() + ".getCompareRank End!");
 
         return rList;
     }

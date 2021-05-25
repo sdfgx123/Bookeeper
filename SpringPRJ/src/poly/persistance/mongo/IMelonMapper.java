@@ -5,6 +5,7 @@ import java.util.List;
 
 import config.Mapper;
 import poly.dto.MelonDTO;
+import poly.dto.MelonRankDTO;
 import poly.dto.MelonSingerDTO;
 import poly.dto.MelonSongDTO;
 
@@ -43,5 +44,13 @@ public interface IMelonMapper {
      * MongoDB 가수별 멜론 랭킹에 많이 등록된 순서대로 가져오기
      */
     public List<MelonSingerDTO> getRankForSinger(String colNm) throws Exception;
+    
+    /**
+     * MongoDB 노래별 순위 변동 정보
+     *
+     * @param curColNm 현재 기준이되는 컬렉션 이름
+     * @param preColNm 이전 컬렉션 이름
+     */
+    public List<MelonRankDTO> getCompareRank(String curColNm, String preColNm) throws Exception;
 
 }
