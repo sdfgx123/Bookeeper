@@ -42,4 +42,9 @@ public class MainController {
 	public String CloudTest() {
 		return "/cloudTest";
 	}
+	
+	@RequestMapping(value = "CloudTest2")
+	public String CloudTest2() {
+		return "/cloudTest2";
+	}
 }

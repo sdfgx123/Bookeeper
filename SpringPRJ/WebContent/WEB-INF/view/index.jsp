@@ -71,139 +71,22 @@
 	</div>
 	<!--히어로 영역 끝-->
 	
-	<!--? Popular Locations Start 01-->
+	<!--워드클라우드 영역-->
 	<div class="popular-location border-bottom section-padding40">
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-12">
 					<!-- Section Tittle -->
 					<div class="section-tittle text-center mb-80">
-						<h2>워드클라우드 영역</h2>
-						<p>교보문고에서 검색한 최신 단행본 몇권의 워드클라우를 확인해 보세요!</p>
+						<h2>워드클라우드</h2>
+						<p>교보문고에서 추출한 워드클라우드를 확인해 보세요!</p>
 					</div>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-lg-6 col-md-6 col-sm-6">
-					<div class="single-location mb-30">
-						<div class="location-img">
-							<img src="assets/img/gallery/location1.png" alt="">
-						</div>
-						<div class="location-details">
-							<p>New York</p>
-							<a href="#" class="location-btn">65 <i class="ti-plus"></i>
-								Listing
-							</a>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-6 col-md-6 col-sm-6">
-					<div class="single-location mb-30">
-						<div class="location-img">
-							<img src="assets/img/gallery/location2.png" alt="">
-						</div>
-						<div class="location-details">
-							<p>Paris</p>
-							<a href="#" class="location-btn">60 <i class="ti-plus"></i>
-								Listing
-							</a>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-4 col-md-6 col-sm-6">
-					<div class="single-location mb-30">
-						<div class="location-img">
-							<img src="assets/img/gallery/location3.png" alt="">
-						</div>
-						<div class="location-details">
-							<p>Rome</p>
-							<a href="#" class="location-btn">50 <i class="ti-plus"></i>
-								Listing
-							</a>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-4 col-md-6 col-sm-6">
-					<div class="single-location mb-30">
-						<div class="location-img">
-							<img src="assets/img/gallery/location4.png" alt="">
-						</div>
-						<div class="location-details">
-							<p>Italy</p>
-							<a href="#" class="location-btn">28 <i class="ti-plus"></i>
-								Location
-							</a>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-4 col-md-6 col-sm-6">
-					<div class="single-location mb-30">
-						<div class="location-img">
-							<img src="assets/img/gallery/location5.png" alt="">
-						</div>
-						<div class="location-details">
-							<p>Nepal</p>
-							<a href="#" class="location-btn">99 <i class="ti-plus"></i>
-								Listing
-							</a>
-						</div>
-					</div>
+					<%@ include file="./cloudTest2.jsp" %>
 				</div>
 			</div>
 		</div>
 	</div>
-	<!-- Popular Locations End --> <!--? Popular Locations Start 01-->
-	<div class="popular-location border-bottom section-padding40">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-12">
-					<!-- Section Tittle -->
-					<div class="section-tittle text-center mb-80">
-						<h2>News & Updates</h2>
-						<p>Let's uncover the best places to eat, drink, and shop
-							nearest to you.</p>
-					</div>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-lg-6 col-md-6 col-sm-12">
-					<div class="single-location mb-30">
-						<div class="location-img">
-							<img src="assets/img/gallery/home-blog1.png" alt="">
-						</div>
-						<div class="location-details">
-							<a href="#" class="location-btn">Tips</a>
-							<ul>
-								<li>12 March I by Alan</li>
-							</ul>
-							<p>
-								<a href="blog_details.html">The Best SPA Salons For Your
-									Relaxation</a>
-							</p>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-6 col-md-6 col-sm-12">
-					<div class="single-location mb-30">
-						<div class="location-img">
-							<img src="assets/img/gallery/home-blog2.png" alt="">
-						</div>
-						<div class="location-details">
-							<a href="#" class="location-btn">Tips</a>
-							<ul>
-								<li>12 March I by Alan</li>
-							</ul>
-							<p>
-								<a href="blog_details.html">The Best SPA Salons For Your
-									Relaxation</a>
-							</p>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- Popular Locations End --></main>
+	<!-- //워드클라우드 영역 --></main>
 </body>
 <!-- footer 영역 -->
 <%@ include file="./footer.jsp"%>
