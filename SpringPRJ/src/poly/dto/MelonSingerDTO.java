@@ -2,9 +2,10 @@ package poly.dto;
 
 public class MelonSingerDTO {
 
-	private int rank;
+	private int rank; // 순위
 	private int song_cnt; // 링크에 올라간 노래의 수
-	private String singer;
+	private String singer; // 가수
+	
 	public int getRank() {
 		return rank;
 	}
