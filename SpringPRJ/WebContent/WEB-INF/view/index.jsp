@@ -203,35 +203,7 @@
 			</div>
 		</div>
 	</div>
-	<!-- Popular Locations End --> <!--? Want To work 02-->
-	<section class="wantToWork-area">
-		<div class="container">
-			<div class="wants-wrapper w-padding2">
-				<div class="row justify-content-between">
-					<div class="col-xl-8 col-lg-8 col-md-7">
-						<div class="wantToWork-caption wantToWork-caption2">
-							<img src="assets/img/logo/logo2_footer.png" alt="" class="mb-20">
-							<p>Zookeeper를 통해 책을 검색하고 내 서재를 만들어 그 책들을 관리해 보세요!</p>
-							<br>
-							<p style="font-size: 12px">서울특별시 강서구 우장산로 10길 112 한국폴리텍 강서캠퍼스
-								데이터분석과</p>
-						</div>
-					</div>
-
-				</div>
-			</div>
-		</div>
-	</section>
-	<!-- Want To work End --> <!--? Want To work 01-->
-	<section class="wantToWork-area">
-		<div class="container">
-			<div class="wants-wrapper">
-				<div class="row align-items-center justify-content-between"></div>
-			</div>
-		</div>
-	</section>
-	<!-- Want To work End --> </main>
-
+	<!-- Popular Locations End --></main>
 </body>
 <!-- footer 영역 -->
 <%@ include file="./footer.jsp"%>

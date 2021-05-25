@@ -55,6 +55,12 @@
 		});
 	</script>
 	<!-- 책 검색 AJAX 세트 끝 -->
+	
+	<!-- 내 서재에 책 저장 함수 시작 -->
+	<script type="text/javascript">
+		insertBookInfo();
+		
+	</script>
 </head>
 <body>
 	<!-- 메인메뉴 영역 첨부 -->
@@ -106,7 +112,7 @@
 	<br>
 	<!-- 버튼 영역 -->
 	<div class="button-container">
-	<a href="/notice/NoticeForm.do" class="genric-btn primary radius">내 서재에 추가</a>
+	<a href="/lib/InsertBookInfo.do" class="genric-btn primary radius">내 서재에 추가</a>
 	</div>
 </body>
 <!-- footer 영역 첨부 -->

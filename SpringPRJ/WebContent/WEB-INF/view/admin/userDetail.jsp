@@ -29,7 +29,7 @@
 <!-- Confirm 함수로 회원 탈퇴시 예, 아니오 구현하려 했으나 어느 것을 클릭해도 예 실행 오류 -->
 <script type="text/javascript">
 function ask() {
-	if (!confirm("정말 탈퇴 하시겠습니까?")) {
+	if (!confirm("정말 삭제 하시겠습니까?")) {
 		return false;
 	}
 }

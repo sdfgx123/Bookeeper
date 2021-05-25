@@ -154,7 +154,5 @@ public class AdminController {
 		model.addAttribute("uDTO", uDTO);
 		
 		return "/admin/userDetail";
-		
-		
 	}
 }

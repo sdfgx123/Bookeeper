@@ -17,11 +17,11 @@
 	#container {
 		margin: auto;
 		text-align: center;
-		box-shadow: 1px 1px 3px 1px #dadce0;
+		padding: 30px;
 	}
 	
 	#button {
-	width:300px;
+	width:250px;
 	}
 	
 	#search_bar {
@@ -32,6 +32,9 @@
 	background-color: #B367FF;
 	}
 	
+	#bookCont {
+	width: 250px;
+	}
 	
 </style>
 </head>
@@ -39,17 +42,19 @@
 	<!-- 메인메뉴 영역 첨부 -->
 	<%@ include file="../mainMenu.jsp" %>
 	
-	<!--히어로 영역 시작 -->
-	<div class="slider-area2">
+	<!--히어로 영역 시작-->
+	<div class="slider-area hero-bg1 hero-overly">
 		<div
-			class="slider-height3  hero-overly hero-bg4 d-flex align-items-center">
+			class="single-slider hero-overly  slider-height1 d-flex align-items-center">
 			<div class="container">
-				<div class="row">
-					<div class="col-xl-12">
-						<div class="hero-cap2 pt-20 text-center">
-							<h2>"<%=bookName %>" 검색결과</h2>
-							
-							<!-- 검색엔진 시작 -->
+				<div class="row justify-content-center">
+					<div class="col-xl-10 col-lg-10">
+						<!-- Hero Caption -->
+						<div class="hero__caption pt-100">
+							<h1><%=bookName %> 검색결과</h1>
+							<br>
+						</div>
+						<!--Hero form -->
 						<form action="/search/doForm.do" class="search-box mb-100">
 							<div id="search_bar" class="input-form">
 								<input type="text" id="bookName" name="bookName"
@@ -60,20 +65,16 @@
 								<i class="ti-search"></i> 검색
 							</button>
 						</form>
-							<!-- 검색엔진 끝  -->
-							
-						</div>
+
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-	<!-- 히어로 영역 끝 -->
+	<!--히어로 영역 끝-->
 	
 	<!-- 검색한 책 정보 컨테이너 영역 시작-->
-	<br><br>
-	<div id="container">
-	</div>
+	<div id="container"></div>
 	<!-- 검색한 책 정보 컨테이너 영역 끝 -->
 
 	<!-- 책 검색 AJAX 세트 시작 -->
@@ -103,9 +104,11 @@
 				
 				resHTML+='<div id="bookCont">';
 				resHTML+='<p id="thumb"><img src=\''+list[i].thumbnail+'\'/></p>';
+				resHTML+='<hr>';
 				resHTML+='<p id=""title"">'+list[i].title+'</p>';
 				resHTML+='<a href="/search/SearchDetail.do?bookName='+searchTitle+'" id="button" class="genric-btn primary radius">자세히 보기</a>' 
 				resHTML+='</div>';
+				resHTML+='<br>';
 			}
 			$("#container").html(resHTML);
 			
