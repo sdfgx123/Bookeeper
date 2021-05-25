@@ -78,4 +78,96 @@ public class MelonMapper implements IMelonMapper {
         log.info(this.getClass().getName() + ".insertRank End!");
 
     }
+    
+    @Override
+    public List<MelonDTO> getRank(String colNm) throws Exception {
+
+        log.info(this.getClass().getName() + ".getRank Start!");
+
+        // 데이터를 가져올 컬렉션 선택
+        DBCollection rCol = mongodb.getCollection(colNm);
+
+        // 컬렉션으로부터 전체 데이터 가져오기
+        Iterator<DBObject> cursor = rCol.find();
+
+        // 컬렉션으로부터 전체 데이터 가져온 것을 List 형태로 저장하기 위한 변수 선언
+        List<MelonDTO> rList = new ArrayList<>();
+
+        // 퀴즈팩별 정답률 일자별 저장하기
+        MelonDTO rDTO;
+
+        while (cursor.hasNext()) {
+
+            rDTO = new MelonDTO();
+
+            final DBObject current = cursor.next();
+
+            String collect_time = CmmUtil.nvl((String) current.get("collect_time")); // 수집시간
+            String rank = CmmUtil.nvl((String) current.get("rank")); // 순위
+            String song = CmmUtil.nvl((String) current.get("song")); // 노래제목
+            String singer = CmmUtil.nvl((String) current.get("singer")); // 가수
+            String album = CmmUtil.nvl((String) current.get("album")); // 엘범
+
+            rDTO.setCollect_time(collect_time);
+            rDTO.setRank(rank);
+            rDTO.setSong(song);
+            rDTO.setSinger(singer);
+            rDTO.setAlbum(album);
+
+            rList.add(rDTO); // List에 데이터 저장
+
+            rDTO = null;
+
+        }
+
+        log.info(this.getClass().getName() + ".getRank End!");
+
+        return rList;
+    }
+    
+    @Override
+    public List<MelonSongDTO> getSongForSinger(String colNm, String singer) throws Exception {
+
+        log.info(this.getClass().getName() + ".getSongForSinger Start!");
+
+        // 데이터를 가져올 컬렉션 선택
+        DBCollection rCol = mongodb.getCollection(colNm);
+
+        // 쿼리 만들기
+        BasicDBObject query = new BasicDBObject();
+        query.put("singer", singer);
+
+        // 쿼리 실행하기
+        Cursor cursor = rCol.find(query);
+
+        // 컬렉션으로부터 전체 데이터 가져온 것을 List 형태로 저장하기 위한 변수 선언
+        List<MelonSongDTO> rList = new ArrayList<>();
+
+        // 퀴즈팩별 정답률 일자별 저장하기
+        MelonSongDTO rDTO;
+
+        while (cursor.hasNext()) {
+
+            rDTO = new MelonSongDTO();
+
+            final DBObject current = cursor.next();
+
+            String rank = CmmUtil.nvl((String) current.get("rank")); // 순위
+            String song = CmmUtil.nvl((String) current.get("song")); // 노래
+
+            log.info("song : " + song);
+
+            rDTO.setRank(rank);
+            rDTO.setSong(song);
+
+            rList.add(rDTO); // List에 데이터 저장
+
+            rDTO = null;
+
+        }
+
+        log.info(this.getClass().getName() + ".getSongForSinger End!");
+
+        return rList;
+    }
 }

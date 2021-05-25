@@ -1,3 +1,10 @@
+<%--
+  Created by IntelliJ IDEA.
+  User: data03
+  Date: 2021-04-29
+  Time: 오전 10:40
+  To change this template use File | Settings | File Templates.
+--%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
 <!DOCTYPE html>
@@ -11,11 +18,10 @@
             //페이지 로딩 완료 후, 멜론 순위가져오기 함수 실행함
             getRank();
         });
-        //멜론 순위가져오기
         function getRank() {
             //Ajax 호출
             $.ajax({
-                url: "/melon/getRank.do",
+                url: "/melon/getSongForSinger.do",
                 type: "post",
                 dataType: "JSON",
                 contentType: "application/json; charset=UTF-8",
@@ -23,9 +29,7 @@
                     var melon_rank = "";
                     for (var i = 0; i < json.length; i++) {
                         melon_rank += (json[i].rank + "위 | ");
-                        melon_rank += (json[i].song + " | ");
-                        melon_rank += (json[i].singer + " | ");
-                        melon_rank += (json[i].album + "<br>");
+                        melon_rank += (json[i].song + " <br>");
                     }
                     $('#melon_rank').html(melon_rank);
                 }
@@ -34,7 +38,7 @@
     </script>
 </head>
 <body>
-<h1>멜론 순위</h1>
+<h1>멜론 top100에 랭크된 아이유의 노래 제목가져오기</h1>
 <hr/>
 <div id="melon_rank"></div>
 <br/>
