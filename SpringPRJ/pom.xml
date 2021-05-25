@@ -9,7 +9,8 @@
 	<properties>
 		<java-version>1.8</java-version>
 		<!-- MongoDB에서 제공하는 스프링 버전과 연동을 위해 권장하는 버전인 4.2.9 버전으로 기존 4.3.7에서 다운그레이드함 -->
-		<org.springframework-version>4.3.27.RELEASE</org.springframework-version>
+		<!-- MongoDB 4.3.27 버전은 DTO 사용하는 실습에서 활용하기 위함임. 본 프로젝트에서는 4.2.9 버전을 사용함. -->
+		<org.springframework-version>4.2.9.RELEASE</org.springframework-version>
 		<org.aspectj-version>1.6.10</org.aspectj-version>
 		<slf4j.version>1.7.25</slf4j.version>
 		<log4j.version>1.2.17</log4j.version>
@@ -227,10 +228,11 @@
 		</dependency>
 		
 		<!-- MongoDB와 스프링 프레임워크와의 연동을 위해 추가 -->
+		<!-- 수업중 새로운 버전은 2.0.14 버전임 -->
 		<dependency>
 			<groupId>org.springframework.data</groupId>
 			<artifactId>spring-data-mongodb</artifactId>
-			<version>2.0.14.RELEASE</version>
+			<version>1.9.11.RELEASE</version>
 		</dependency>
 
 		<!-- 스프링 프레임워크 필수 라이브들 설정 시작! -->
