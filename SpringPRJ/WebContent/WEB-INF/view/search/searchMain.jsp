@@ -61,7 +61,7 @@
 									placeholder="검색할 책 제목 입력">
 							</div>
 							<br>
-							<button type="submit" id="mainButton" class="search-form">
+							<button type="submit" id="mainButton" class="search-form" style="cursor: pointer">
 								<i class="ti-search"></i> 검색
 							</button>
 						</form>

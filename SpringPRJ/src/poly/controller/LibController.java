@@ -1,5 +1,7 @@
 package poly.controller;
 
+import java.util.Map;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -8,6 +10,8 @@ import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import poly.dto.UserDTO;
 import poly.service.impl.UserService;
@@ -52,6 +56,7 @@ public class LibController {
 	
 	// 내 서재에 책 추가하기 기능
 	@RequestMapping(value = "InsertBookInfo")
+	@ResponseBody
 	public String InsertBookInfo(HttpServletRequest request, HttpSession session, ModelMap model) throws Exception {
 		log.info(this.getClass().getName() + " .InsertBookInfo start");
 		
@@ -64,6 +69,9 @@ public class LibController {
 			
 			return "/redirect";
 		}
+		
+		String title = request.getParameter("title");
+		log.info("title : " + title);
 		
 		return "/index";
 		

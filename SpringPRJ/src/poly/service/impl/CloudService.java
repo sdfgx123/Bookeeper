@@ -51,6 +51,7 @@ public class CloudService implements ICloudService {
             bookInfo = null;
 
             // MongoDB에 저장할 List 형태의 맞는 DTO 데이터 저장하기
+            // RDBMS의 컬럼 생성과 같은 맥락이라고 보면 됨
             CloudDTO pDTO = new CloudDTO();
             pDTO.setWord(word);
 

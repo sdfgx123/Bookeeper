@@ -58,7 +58,21 @@
 	
 	<!-- 내 서재에 책 저장 함수 시작 -->
 	<script type="text/javascript">
-		insertBookInfo();
+		$.ajax({
+			url : '/search/InsertBookInfo.do',
+			type : 'post',
+			data : {
+				"title" : $('#title'),
+				"contents" : contents,
+				"thumbnail" : thumbnail,
+				"datatime" : datetime,
+				"authors" : authors,
+				"publisher" : publisher
+			},
+			contentType: "application/json; charset=UTF-8",
+			success: function(data) {
+			}
+		});
 		
 	</script>
 </head>
