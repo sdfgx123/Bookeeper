@@ -1,6 +1,7 @@
 package poly.controller;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
@@ -47,6 +48,24 @@ public class LibController {
 		model.addAttribute("uDTO", uDTO);
 		
 		return "/lib/libMain";
+	}
+	
+	// 내 서재에 책 추가하기 기능
+	@RequestMapping(value = "InsertBookInfo")
+	public String InsertBookInfo(HttpServletRequest request, HttpSession session, ModelMap model) throws Exception {
+		log.info(this.getClass().getName() + " .InsertBookInfo start");
+		
+		String id = CmmUtil.nvl((String) session.getAttribute("id"));
+		log.info("id : " + id);
+		
+		if (id.equals("")) {
+			model.addAttribute("msg", "로그인이 필요한 서비스 입니다.");
+			model.addAttribute("url", "/index.do");
+			
+			return "/redirect";
+		}
+		
+		return "/index";
 		
 	}
 

@@ -58,7 +58,32 @@ public class CloudService implements ICloudService {
             pList.add(pDTO);
 
         }
+        
+        String colNm = "BookTOP100_" + DateUtil.getDateTime("yyyyMMdd");
+        cloudMapper.createCollection(colNm);
+        cloudMapper.insertRank(pList, colNm);
+        log.info(this.getClass().getName() + ".collectBookRank end");
+        
 		
 	}
+	
+	@Override
+    public List<CloudDTO> getTitle() throws Exception {
+
+        log.info(this.getClass().getName() + ".getTitle Start!");
+
+        // 조회할 컬렉션 이름
+        String colNm = "BookTOP100_" + DateUtil.getDateTime("yyyyMMdd");
+
+        List<CloudDTO> rList = cloudMapper.getTitle(colNm);
+
+        if (rList == null) {
+            rList = new ArrayList<>();
+        }
+
+        log.info(this.getClass().getName() + ".getTitle End!");
+
+        return rList;
+    }
 	
 }
