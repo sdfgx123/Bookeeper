@@ -74,7 +74,7 @@ public class MelonService implements IMelonService {
             pList.add(pDTO);
 
         }
-
+        
         String colNm = "MelonTOP100_" + DateUtil.getDateTime("yyyyMMdd"); // 생성할 컬렉션명
 
         // MongoDB Collection 생성하기

@@ -47,7 +47,7 @@
 			console.log(msg.documents[0].title);
 			console.log(msg.documents[0].thumbnail);
 			console.log(msg.documents[0].contents);
-			$("#thumb").append("<img src='" + msg.documents[0].thumbnail + "'/>");
+			$("#thumbnail").append("<img src='" + msg.documents[0].thumbnail + "'/>");
 			$("#title").append("<strong>" + msg.documents[0].title + "</strong>");
 			$("#contents").append(msg.documents[0].contents);
 			$("#datetime").append(msg.documents[0].datetime);
@@ -55,6 +55,10 @@
 			$("#publisher").append(msg.documents[0].publisher);
 			document.getElementsByName('title')[0].value=msg.documents[0].title;
 			document.getElementsByName('contents')[0].value=msg.documents[0].contents;
+			document.getElementsByName('thumbnail')[0].value=msg.documents[0].thumbnail;
+			document.getElementsByName('datetime')[0].value=msg.documents[0].datetime;
+			document.getElementsByName('authors')[0].value=msg.documents[0].authors;
+			document.getElementsByName('publisher')[0].value=msg.documents[0].publisher;
 			/* $("input=name[title]").append("<strong>" + msg.documents[0].title + "</strong>"); */
 		});
 	</script>
@@ -111,11 +115,15 @@
 					<h3 class="mb-30" id="title"></h3>
 					<input type="text" name="title" hidden="hidden">
 					<input type="text" name="contents" hidden="hidden">
+					<input type="text" name="thumbnail" hidden="hidden">
+					<input type="text" name="datetime" hidden="hidden">
+					<input type="text" name="authors" hidden="hidden">
+					<input type="text" name="publisher" hidden="hidden">
 					<p id="datetime" style="float: right;"></p>
 					<hr>
 					<div class="row">
 						<div class="col-md-3">
-							<div id="thumb" alt="" class="img-fluid"></div>
+							<div id="thumbnail" alt="" class="img-fluid"></div>
 						</div>
 						<div class="col-md-9 mt-sm-20">
 							<p id="contents"></p>
