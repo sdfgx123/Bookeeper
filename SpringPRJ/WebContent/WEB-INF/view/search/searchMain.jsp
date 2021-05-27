@@ -11,7 +11,7 @@
 <%@ include file="../session.jsp" %>
 <meta charset="UTF-8">
 <title>책 검색 결과</title>
-<!-- header 영역 첨부 -->
+<!-- header 첨부 -->
 <%@ include file="../header.jsp"%>
 <style>
 	#container {
@@ -73,9 +73,9 @@
 	</div>
 	<!--히어로 영역 끝-->
 	
-	<!-- 검색한 책 정보 컨테이너 영역 시작-->
+	<!-- 검색한 책 정보 컨테이너 영역-->
 	<div id="container" class="row"></div>
-	<!-- 검색한 책 정보 컨테이너 영역 끝 -->
+	<!-- //검색한 책 정보 컨테이너 영역 -->
 
 	<!-- 책 검색 AJAX 세트 시작 -->
 	<script src="https://code.jquery.com/jquery-3.6.0.js"

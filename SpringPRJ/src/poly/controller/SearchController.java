@@ -31,6 +31,7 @@ public class SearchController {
 		return "/search/searchMain";
 	}
 
+	// 검색한 책 정보 상세
 	@RequestMapping(value = "SearchDetail")
 	public String SearchDetail(HttpServletRequest request, ModelMap model) {
 		log.info(this.getClass().getName() + " SearchDetail start");

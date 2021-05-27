@@ -56,7 +56,6 @@ public class LibController {
 	
 	// 내 서재에 책 추가하기 기능
 	@RequestMapping(value = "InsertBookInfo")
-	@ResponseBody
 	public String InsertBookInfo(HttpServletRequest request, HttpSession session, ModelMap model) throws Exception {
 		log.info(this.getClass().getName() + " .InsertBookInfo start");
 		
@@ -70,8 +69,13 @@ public class LibController {
 			return "/redirect";
 		}
 		
-		String title = request.getParameter("title");
+		String title = CmmUtil.nvl(request.getParameter("title"));
+		String contents = CmmUtil.nvl(request.getParameter("contents"));
 		log.info("title : " + title);
+		log.info(title);
+		log.info(contents);
+		
+		
 		
 		return "/index";
 		

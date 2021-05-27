@@ -43,6 +43,7 @@
 				Authorization : "KakaoAK d6ed1d1cbb3e2caa8769e2c3e233acca"
 			}
 		}).done(function(msg) {
+			let resHTML = "";
 			console.log(msg.documents[0].title);
 			console.log(msg.documents[0].thumbnail);
 			console.log(msg.documents[0].contents);
@@ -52,11 +53,14 @@
 			$("#datetime").append(msg.documents[0].datetime);
 			$("#authors").append(msg.documents[0].authors);
 			$("#publisher").append(msg.documents[0].publisher);
+			document.getElementsByName('title')[0].value=msg.documents[0].title;
+			document.getElementsByName('contents')[0].value=msg.documents[0].contents;
+			/* $("input=name[title]").append("<strong>" + msg.documents[0].title + "</strong>"); */
 		});
 	</script>
 	<!-- 책 검색 AJAX 세트 끝 -->
 	
-	<!-- 내 서재에 책 저장 함수 시작 -->
+	<!-- 내 서재에 책 저장 함수 시작
 	<script type="text/javascript">
 		$.ajax({
 			url : '/search/InsertBookInfo.do',
@@ -75,6 +79,7 @@
 		});
 		
 	</script>
+	-->
 </head>
 <body>
 	<!-- 메인메뉴 영역 첨부 -->
@@ -101,8 +106,11 @@
 	
 	<br>
 	<!-- 책 디테일 표시 영역 -->
+	<form action="/lib/InsertBookInfo.do" method="post">
 	<div class="section-top-border" id="detail">
 					<h3 class="mb-30" id="title"></h3>
+					<input type="text" name="title" hidden="hidden">
+					<input type="text" name="contents" hidden="hidden">
 					<p id="datetime" style="float: right;"></p>
 					<hr>
 					<div class="row">
@@ -118,16 +126,17 @@
 					<p id="authors"></p>
 					<p id="publisher"></p>
 					</div>
-					<br>
-					<br>
+					<br><br>
 	</div>
 	<!-- //책 디테일 표시 영역 -->
 	<br>
 	<br>
 	<!-- 버튼 영역 -->
 	<div class="button-container">
-	<a href="/lib/InsertBookInfo.do" class="genric-btn primary radius">내 서재에 추가</a>
+	<button type="submit" class="genric-btn primary radius">내 서재에 추가</button>
 	</div>
+	</form>
+	
 </body>
 <!-- footer 영역 첨부 -->
 <%@ include file="../footer.jsp"%>
