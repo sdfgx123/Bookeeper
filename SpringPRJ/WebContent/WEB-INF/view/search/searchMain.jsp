@@ -74,7 +74,7 @@
 	<!--히어로 영역 끝-->
 	
 	<!-- 검색한 책 정보 컨테이너 영역 시작-->
-	<div id="container"></div>
+	<div id="container" class="row"></div>
 	<!-- 검색한 책 정보 컨테이너 영역 끝 -->
 
 	<!-- 책 검색 AJAX 세트 시작 -->
@@ -87,7 +87,7 @@
 		console.log("query : " + query);
 		$.ajax({
 			method : "GET",
-			url : "https://dapi.kakao.com/v3/search/book?target=title&page=1&size=10",
+			url : "https://dapi.kakao.com/v3/search/book?target=title&page=1&size=20",
 			data : {
 				"query" : query
 			},
@@ -102,10 +102,10 @@
 				console.log(list[i]);
 				let searchTitle = list[i].title.replaceAll(" ","+");
 				
-				resHTML+='<div id="bookCont">';
+				resHTML+='<div id="bookCont" style="width: 300px; height: 430px; padding: 20px; box-shadow: 1px 1px 3px 1px #dadce0;">';
 				resHTML+='<p id="thumb"><img src=\''+list[i].thumbnail+'\'/></p>';
 				resHTML+='<hr>';
-				resHTML+='<p id=""title"">'+list[i].title+'</p>';
+				resHTML+='<p id=""title"" style="height: 70px;">'+list[i].title+'</p>';
 				resHTML+='<a href="/search/SearchDetail.do?bookName='+searchTitle+'" id="button" class="genric-btn primary radius">자세히 보기</a>' 
 				resHTML+='</div>';
 				resHTML+='<br>';

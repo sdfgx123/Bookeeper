@@ -8,6 +8,13 @@
 <!-- header 영역  -->
 <%@ include file="../header.jsp"%>
 <head>
+<style>
+	.container {
+		width: 50%
+		height: 700px;
+		margin: auto;
+	}
+</style>
 <meta charset="UTF-8">
 <title>비밀번호 초기화</title>
 </head>

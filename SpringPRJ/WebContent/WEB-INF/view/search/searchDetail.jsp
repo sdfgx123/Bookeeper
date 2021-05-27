@@ -100,7 +100,7 @@
 	<!-- 히어로 영역 끝 -->
 	
 	<br>
-	<!-- 책 디테일 표시 영역 시작 -->
+	<!-- 책 디테일 표시 영역 -->
 	<div class="section-top-border" id="detail">
 					<h3 class="mb-30" id="title"></h3>
 					<p id="datetime" style="float: right;"></p>
@@ -121,7 +121,7 @@
 					<br>
 					<br>
 	</div>
-	<!-- 책 디테일 표시 영역 끝 -->
+	<!-- //책 디테일 표시 영역 -->
 	<br>
 	<br>
 	<!-- 버튼 영역 -->
