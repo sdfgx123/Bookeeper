@@ -6,6 +6,7 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
@@ -63,24 +64,26 @@ public class LibController {
 		
 		model.addAttribute("uDTO", uDTO);
 		
+		List<LibDTO> rList = libService.getBookInfo(id);
+		log.info(rList);
+		if (rList == null) {
+			log.info("rList null");
+            rList = new ArrayList<>();
+        }
+		log.info(this.getClass().getName() + " .MyMain end");
+		
+		model.addAttribute("rList", rList);
+		
 		return "/lib/libMain";
 	}
 	
 	// 내 서재에 책 추가하기 기능
 	@RequestMapping(value = "InsertBookInfo")
-	@ResponseBody
 	public String InsertBookInfo(HttpServletRequest request, HttpSession session, ModelMap model) throws Exception {
 		log.info(this.getClass().getName() + " .InsertBookInfo start");
 		
 		String id = CmmUtil.nvl((String) session.getAttribute("id"));
 		log.info("id : " + id);
-		
-		if (id.equals("")) {
-			model.addAttribute("msg", "로그인이 필요한 서비스 입니다.");
-			model.addAttribute("url", "/index.do");
-			
-			return "/redirect";
-		}
 		
 		List<LibDTO> pList = new ArrayList<>();
 		
@@ -99,7 +102,6 @@ public class LibController {
 		log.info(publisher);
 		
 		LibDTO pDTO = new LibDTO();
-		pDTO.setId(id);
 		pDTO.setTitle(title);
 		pDTO.setContents(contents);
 		pDTO.setThumbnail(thumbnail);
@@ -110,12 +112,32 @@ public class LibController {
 		pList.add(pDTO);
 		
 		String colNm = id + "_library";
-		
-		libMapper.createCollection(colNm);
 		libMapper.insertBook(pList, colNm);
+		String url="/index.do";
+		String msg="내 서재에 추가 하였습니다.";
 		log.info(this.getClass().getName() + " .InsertBookInfo end");
-		return "success";
+		model.addAttribute("url", url);
+		model.addAttribute("msg", msg);
+		
+		return "/redirect";
 		
 	}
-
+	
+	@RequestMapping(value = "LibDetail")
+	public String LibDetail(HttpSession session, ModelMap model, HttpServletRequest request, HttpServletResponse response) throws Exception {
+		log.info(this.getClass().getName() + " .LibDetail start");
+		String id = CmmUtil.nvl((String) session.getAttribute("id"));
+		log.info("id : " + id);
+		String _id = CmmUtil.nvl(request.getParameter("_id"));
+		log.info("_id" + _id);
+		List<LibDTO> rList = libService.getBookDetail(id, _id);
+		if (rList == null) {
+			log.info("rList null");
+            rList = new ArrayList<>();
+        }
+		log.info(this.getClass().getName() + " .LibDetail end");
+		model.addAttribute("rList", rList);
+		return "/lib/libDetail";
+	}
+	
 }

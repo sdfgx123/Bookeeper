@@ -18,6 +18,7 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo.Id;
 
 import poly.dto.MailDTO;
 import poly.dto.UserDTO;
+import poly.persistance.mongo.ILibMapper;
 import poly.service.IMailService;
 import poly.service.IUserService;
 import poly.service.impl.MailService;
@@ -42,6 +43,9 @@ public class UserController {
 
 	@Resource(name = "MailService")
 	private IMailService mailService;
+	
+	@Resource(name = "LibMapper")
+	private ILibMapper libMapper;
 
 	// 비밀번호 초기화 폼
 	@RequestMapping(value = "RecoverPwForm")
@@ -397,7 +401,7 @@ public class UserController {
 
 	// 유저 회원가입 프로세스
 	@RequestMapping(value = "UserRegProc")
-	public String userRegProc(HttpServletRequest request, HttpServletResponse response, ModelMap model)
+	public String userRegProc(HttpServletRequest request, HttpServletResponse response, ModelMap model, HttpSession session)
 			throws Exception {
 
 		log.info(this.getClass().getName() + " .userRegProc start");
@@ -459,8 +463,10 @@ public class UserController {
 
 		log.info(this.getClass().getName() + " .userRegProc end");
 
+		String colNm = id + "_library";
 		model.addAttribute("msg", msg);
 		model.addAttribute("url", url);
+		libMapper.createCollection(colNm);
 
 		return "/redirect";
 	}

@@ -4,6 +4,7 @@
 <%
 	String bookName = CmmUtil.nvl((String) request.getAttribute("bookName"));
 	bookName = bookName.replaceAll("& #40;","(").replaceAll("& #41;",")");
+	
 %>
 <!DOCTYPE html>
 <html>
@@ -140,9 +141,12 @@
 	<br>
 	<br>
 	<!-- 버튼 영역 -->
+	<%if (user_type.equals("0") || user_type.equals("1")) {%>
 	<div class="button-container">
 	<button type="submit" class="genric-btn primary radius">내 서재에 추가</button>
 	</div>
+	<%} %>
+	<!-- //버튼 영역 -->
 	</form>
 	
 </body>
