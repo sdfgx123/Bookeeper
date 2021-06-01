@@ -12,8 +12,8 @@ public interface ILibService {
     public List<LibDTO> getBookInfo(String id) throws Exception;
     
     /**
-     * MongoDB _id 근거 책 데이터 호출
+     * MongoDB isbn 근거 책 데이터 호출
      */
-    public List<LibDTO> getBookDetail(String id, String _id) throws Exception;
+    public List<LibDTO> getBookDetail(String id, String isbn) throws Exception;
     
 }

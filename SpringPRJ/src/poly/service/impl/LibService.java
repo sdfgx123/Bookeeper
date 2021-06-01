@@ -31,10 +31,10 @@ public class LibService implements ILibService {
 	}
 
 	@Override
-	public List<LibDTO> getBookDetail(String id, String _id) throws Exception {
+	public List<LibDTO> getBookDetail(String id, String isbn) throws Exception {
 		log.info(this.getClass().getName() + ".getBookDetail Start!");
 		String colNm = id + "_library";
-		List<LibDTO> rList = libMapper.getBookDetail(colNm, _id);
+		List<LibDTO> rList = libMapper.getBookDetail(colNm, isbn);
 		if (rList==null) {
 			rList = new ArrayList<LibDTO>();
 		}

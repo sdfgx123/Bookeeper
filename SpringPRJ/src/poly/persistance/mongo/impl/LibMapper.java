@@ -81,7 +81,7 @@ public class LibMapper implements ILibMapper {
 			String datetime = CmmUtil.nvl((String) current.get("datetime"));
 			String authors = CmmUtil.nvl((String) current.get("authors"));
 			String publisher = CmmUtil.nvl((String) current.get("publisher"));
-			String _id = CmmUtil.nvl((String) current.get("_id").toString());
+			String isbn = CmmUtil.nvl((String) current.get("isbn"));
 			String memo = CmmUtil.nvl((String) current.get("memo"));
 			rDTO.setTitle(title);
 			rDTO.setContents(contents);
@@ -89,7 +89,7 @@ public class LibMapper implements ILibMapper {
 			rDTO.setDatetime(datetime);
 			rDTO.setAuthors(authors);
 			rDTO.setPublisher(publisher);
-			rDTO.set_id(_id);
+			rDTO.setIsbn(isbn);
 			rDTO.setMemo(memo);
 			rList.add(rDTO);
 			rDTO = null;
@@ -100,12 +100,12 @@ public class LibMapper implements ILibMapper {
 
 	// libDetail 넘어갈 때
 	@Override
-	public List<LibDTO> getBookDetail(String colNm, String _id) throws Exception {
+	public List<LibDTO> getBookDetail(String colNm, String isbn) throws Exception {
 		log.info(this.getClass().getName() + ".getBookDetail Start!");
 		DBCollection rCol = mongodb.getCollection(colNm);
 		BasicDBObject query = new BasicDBObject();
 		
-		query.put("_id", _id);
+		query.put("isbn", isbn);
 		Cursor cursor = rCol.find(query);
 		List<LibDTO> rList = new ArrayList<LibDTO>();
 		LibDTO rDTO = null;
@@ -123,11 +123,13 @@ public class LibMapper implements ILibMapper {
 			log.info("contents : " + contents);
 			log.info("datetime : " + datetime);
 			log.info("authors : " + authors);
+			log.info("isbn : " + isbn);
 			rDTO.setTitle(title);
 			rDTO.setContents(contents);
 			rDTO.setThumbnail(thumbnail);
 			rDTO.setDatetime(datetime);
 			rDTO.setAuthors(authors);
+			rDTO.setPublisher(publisher);
 			rDTO.setPublisher(publisher);
 			rDTO.setMemo(memo);
 			rList.add(rDTO);

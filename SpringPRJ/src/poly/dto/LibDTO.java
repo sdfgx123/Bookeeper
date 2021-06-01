@@ -10,15 +10,14 @@ public class LibDTO {
 	private String publisher; //출판사
 	private String memo; //메모
 	private String id; // 책 정보 저장하는 유저 아이디
+	private String isbn; //책 고유번호
 	
-	public String get_id() {
-		return _id;
+	public String getIsbn() {
+		return isbn;
 	}
-	public void set_id(String _id) {
-		this._id = _id;
+	public void setIsbn(String isbn) {
+		this.isbn = isbn;
 	}
-	private String _id; // MongoDB 고유 아이디
-	
 	public String getTitle() {
 		return title;
 	}

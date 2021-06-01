@@ -54,12 +54,14 @@
 			$("#datetime").append(msg.documents[0].datetime);
 			$("#authors").append(msg.documents[0].authors);
 			$("#publisher").append(msg.documents[0].publisher);
+			$("#isbn").append(msg.documents[0].isbn);
 			document.getElementsByName('title')[0].value=msg.documents[0].title;
 			document.getElementsByName('contents')[0].value=msg.documents[0].contents;
 			document.getElementsByName('thumbnail')[0].value=msg.documents[0].thumbnail;
 			document.getElementsByName('datetime')[0].value=msg.documents[0].datetime;
 			document.getElementsByName('authors')[0].value=msg.documents[0].authors;
 			document.getElementsByName('publisher')[0].value=msg.documents[0].publisher;
+			document.getElementsByName('isbn')[0].value=msg.documents[0].isbn;
 			/* $("input=name[title]").append("<strong>" + msg.documents[0].title + "</strong>"); */
 		});
 	</script>
@@ -120,6 +122,7 @@
 					<input type="text" name="datetime" hidden="hidden">
 					<input type="text" name="authors" hidden="hidden">
 					<input type="text" name="publisher" hidden="hidden">
+					<input type="text" name="isbn" hidden="hidden">
 					<p id="datetime" style="float: right;"></p>
 					<hr>
 					<div class="row">

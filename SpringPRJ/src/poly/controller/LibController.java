@@ -93,6 +93,7 @@ public class LibController {
 		String datetime = CmmUtil.nvl(request.getParameter("datetime"));
 		String authors = CmmUtil.nvl(request.getParameter("authors"));
 		String publisher = CmmUtil.nvl(request.getParameter("publisher"));
+		String isbn = CmmUtil.nvl(request.getParameter("isbn"));
 		
 		log.info(title);
 		log.info(contents);
@@ -100,6 +101,7 @@ public class LibController {
 		log.info(datetime);
 		log.info(authors);
 		log.info(publisher);
+		log.info(isbn);
 		
 		LibDTO pDTO = new LibDTO();
 		pDTO.setTitle(title);
@@ -108,6 +110,7 @@ public class LibController {
 		pDTO.setDatetime(datetime);
 		pDTO.setAuthors(authors);
 		pDTO.setPublisher(publisher);
+		pDTO.setIsbn(isbn);
 		
 		pList.add(pDTO);
 		
@@ -123,14 +126,15 @@ public class LibController {
 		
 	}
 	
+	//책 상세 jsp 호출
 	@RequestMapping(value = "LibDetail")
 	public String LibDetail(HttpSession session, ModelMap model, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		log.info(this.getClass().getName() + " .LibDetail start");
 		String id = CmmUtil.nvl((String) session.getAttribute("id"));
 		log.info("id : " + id);
-		String _id = CmmUtil.nvl(request.getParameter("_id"));
-		log.info("_id" + _id);
-		List<LibDTO> rList = libService.getBookDetail(id, _id);
+		String isbn = CmmUtil.nvl(request.getParameter("isbn"));
+		log.info("isbn" + isbn);
+		List<LibDTO> rList = libService.getBookDetail(id, isbn);
 		if (rList == null) {
 			log.info("rList null");
             rList = new ArrayList<>();

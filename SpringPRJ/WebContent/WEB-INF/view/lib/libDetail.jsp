@@ -47,13 +47,9 @@
 	</div>
 	<!-- //히어로 영역 -->
 	<br>
-	<div id="container">
-	
-	</div>
-	
 	<!-- 디테일 표시 영역 -->
 	<%for (LibDTO e : rList) { %>
-	<div class="section-top-border" id="detail">
+	<div class="section-top-border" style="padding: 50px;">
 					<h3 class="mb-30"><%=nvl(e.getTitle()) %></h3>
 					<p style="float: right;"><%=nvl(e.getDatetime()) %></p>
 					<hr>
@@ -67,10 +63,23 @@
 							<p><%=nvl(e.getContents()) %></p>
 						</div>
 					</div>
-					<hr>
 					<div style="float: right; text-align: right;">
 					<p><%=nvl(e.getAuthors()) %></p>
 					<p><%=nvl(e.getPublisher()) %></p>
+					</div>
+					<br><br>
+					<hr>
+					<div style="text-align: center; width: 100%; background-color: yellow; padding: 10px; box-shadow: 1px 1px 3px 1px #dadce0; margin: auto;">
+					<%String memo = nvl(e.getMemo()); %>
+					<%if (memo.equals("")) { %>
+					<p>메모를 추가해 보세요!</p>
+					<%} else {%>
+					<p><%=nvl(e.getMemo()) %></p>
+					<%} %>
+					</div>
+					<br>
+					<div style="text-align: center;">
+					<a href="#" class="genric-btn warning" style="margin: auto; color: black;">메모 추가</a>
 					</div>
 					<br><br>
 	</div>

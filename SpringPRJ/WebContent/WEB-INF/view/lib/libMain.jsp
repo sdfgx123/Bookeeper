@@ -53,7 +53,7 @@
 	<p><img src=<%=nvl(e.getThumbnail()) %>></p>
 	<hr>
 	<p style="height: 70px;"><%=nvl(e.getTitle()) %></p>
-	<a href="/lib/LibDetail.do?_id=<%=nvl(e.get_id()) %>" class="genric-btn primary radius">자세히 보기</a>
+	<a href="/lib/LibDetail.do?isbn=<%=nvl(e.getIsbn()) %>" class="genric-btn primary radius">자세히 보기</a>
 	</div>
 	</div>
 	<br>
