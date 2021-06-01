@@ -5,6 +5,7 @@
     pageEncoding="UTF-8"%>
 <%
 	List<LibDTO> rList = ((List<LibDTO>) request.getAttribute("rList"));
+	String memo = nvl((String) request.getAttribute("memo"));
 %>
 <!DOCTYPE html>
 <html>
@@ -70,16 +71,19 @@
 					<br><br>
 					<hr>
 					<div style="text-align: center; width: 100%; background-color: yellow; padding: 10px; box-shadow: 1px 1px 3px 1px #dadce0; margin: auto;">
-					<%String memo = nvl(e.getMemo()); %>
 					<%if (memo.equals("")) { %>
 					<p>메모를 추가해 보세요!</p>
 					<%} else {%>
-					<p><%=nvl(e.getMemo()) %></p>
+					<p><%=memo %></p>
 					<%} %>
 					</div>
 					<br>
 					<div style="text-align: center;">
-					<a href="#" class="genric-btn warning" style="margin: auto; color: black;">메모 추가</a>
+					<%if (memo.equals("")) { %>
+					<a href="/lib/MemoForm.do?isbn=<%=nvl(e.getIsbn()) %>" class="genric-btn warning" style="margin: auto; color: black;">메모 추가</a>
+					<%} else { %>
+					<a href="/lib/MemoForm.do?isbn=<%=nvl(e.getIsbn()) %>" class="genric-btn warning" style="margin: auto; color: black;">메모 수정</a>
+					<%} %>
 					</div>
 					<br><br>
 	</div>

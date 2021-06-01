@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="poly.persistance.mapper.IMemoMapper">
+	<insert id="initMemo" parameterType="String">
+		INSERT INTO MEMO_INFO
+		(
+			COLNM,
+			BOOK_ID
+		)
+		VALUES
+		(
+			#{0},
+			#{1}
+		)
+	</insert>
+	
+	<select id="getMemo" parameterType="String" resultType="String">
+		SELECT MEMO FROM MEMO_INFO
+		WHERE COLNM = #{0} AND BOOK_ID = #{1}
+	</select>
+</mapper>

@@ -34,4 +34,13 @@ public interface ILibMapper {
      * @param isbn 
      */
     public List<LibDTO> getBookDetail(String colNm, String isbn) throws Exception;
+    
+    /**
+     * MongoDB 메모 추가
+     *
+     * @param colNm  가져올 컬렉션 이름
+     * @param isbn 어느 책에 추가할 메모인지
+     * @param pList 메모 심은 리스트
+     */
+    public void insertMemo(String colNm, String isbn, String memo) throws Exception;
 }

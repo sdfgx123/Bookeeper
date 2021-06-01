@@ -119,11 +119,12 @@ public class LibMapper implements ILibMapper {
 			String authors = CmmUtil.nvl((String) current.get("authors"));
 			String publisher = CmmUtil.nvl((String) current.get("publisher"));
 			String memo = CmmUtil.nvl((String) current.get("memo"));
+			String isbn1 = CmmUtil.nvl((String) current.get("isbn"));
 			log.info("title : " + title);
 			log.info("contents : " + contents);
 			log.info("datetime : " + datetime);
 			log.info("authors : " + authors);
-			log.info("isbn : " + isbn);
+			log.info("isbn : " + isbn1);
 			rDTO.setTitle(title);
 			rDTO.setContents(contents);
 			rDTO.setThumbnail(thumbnail);
@@ -132,11 +133,23 @@ public class LibMapper implements ILibMapper {
 			rDTO.setPublisher(publisher);
 			rDTO.setPublisher(publisher);
 			rDTO.setMemo(memo);
+			rDTO.setIsbn(isbn1);
 			rList.add(rDTO);
 			rDTO = null;
 		}
 		log.info(this.getClass().getName() + ".getBookDetail end!");
 		return rList;
+	}
+
+	@Override
+	public void insertMemo(String colNm, String isbn, String memo) throws Exception {
+		log.info(this.getClass().getName() + ".insertMemo Start");
+		BasicDBObject searchQuery = new BasicDBObject();
+		searchQuery.append("isbn", isbn);
+		BasicDBObject updateQuery = new BasicDBObject();
+		updateQuery.append("$set", new BasicDBObject().append("memo", memo));
+		mongodb.getCollection(colNm).updateMulti(searchQuery, updateQuery);
+		log.info(this.getClass().getName() + ".insertMemo end");
 	}
 	
 	

@@ -1,6 +1,7 @@
 package poly.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -18,7 +19,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import poly.dto.LibDTO;
 import poly.dto.UserDTO;
+import poly.persistance.mapper.IMemoMapper;
 import poly.persistance.mongo.ILibMapper;
+import poly.service.IMemoService;
 import poly.service.impl.LibService;
 import poly.service.impl.UserService;
 import poly.util.CmmUtil;
@@ -38,6 +41,12 @@ public class LibController {
 	
 	@Resource(name = "LibMapper")
 	private ILibMapper libMapper;
+	
+	@Resource(name = "MemoMapper")
+	private IMemoMapper memoMapper;
+	
+	@Resource(name = "MemoService")
+	private IMemoService memoService;
 	
 	@RequestMapping(value = "LibMain")
 	public String LibMain(HttpSession session, ModelMap model) throws Exception {
@@ -116,6 +125,7 @@ public class LibController {
 		
 		String colNm = id + "_library";
 		libMapper.insertBook(pList, colNm);
+		int res = memoService.initMemo(colNm, isbn);
 		String url="/index.do";
 		String msg="내 서재에 추가 하였습니다.";
 		log.info(this.getClass().getName() + " .InsertBookInfo end");
@@ -134,6 +144,9 @@ public class LibController {
 		log.info("id : " + id);
 		String isbn = CmmUtil.nvl(request.getParameter("isbn"));
 		log.info("isbn" + isbn);
+		String colNm = id + "_library";
+		String memo = memoMapper.getMemo(colNm, isbn);
+		log.info("memo :" + memo);
 		List<LibDTO> rList = libService.getBookDetail(id, isbn);
 		if (rList == null) {
 			log.info("rList null");
@@ -141,7 +154,43 @@ public class LibController {
         }
 		log.info(this.getClass().getName() + " .LibDetail end");
 		model.addAttribute("rList", rList);
+		model.addAttribute("memo", memo);
 		return "/lib/libDetail";
+	}
+	
+	@RequestMapping(value = "MemoForm")
+	public String MemoForm(HttpServletRequest request, HttpServletResponse response, ModelMap model, HttpSession session) throws Exception {
+		log.info(this.getClass().getName() + " .MemoForm start");
+		String isbn = CmmUtil.nvl(request.getParameter("isbn"));
+		log.info("isbn : " + isbn);
+		String id = CmmUtil.nvl((String) session.getAttribute("id"));
+		log.info("id : " + id);
+		model.addAttribute("isbn", isbn);
+		return "/lib/memoForm";
+	}
+	
+	@RequestMapping(value = "DoMemoForm")
+	public String DoMemoForm(HttpServletRequest request, ModelMap model, HttpServletResponse response, HttpSession session) throws Exception {
+		log.info(this.getClass().getName() + " .DoMemoForm start");
+		List<LibDTO> pList = new ArrayList<>();
+		String isbn = CmmUtil.nvl(request.getParameter("isbn"));
+		String memo = CmmUtil.nvl(request.getParameter("memo"));
+		String id = CmmUtil.nvl((String) session.getAttribute("id"));
+		log.info("isbn : " + isbn);
+		log.info("memo : " + memo);
+		log.info("id : " + id);
+		LibDTO pDTO = new LibDTO();
+		pDTO.setMemo(memo);
+		pList.add(pDTO);
+		String colNm = id + "_library";
+		libMapper.insertMemo(colNm, isbn, memo);
+		String url="/index.do";
+		String msg="내 서재에 추가 하였습니다.";
+		log.info(this.getClass().getName() + " .InsertBookInfo end");
+		model.addAttribute("url", url);
+		model.addAttribute("msg", msg);
+		return "/redirect";
+		
 	}
 	
 }
