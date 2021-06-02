@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.http.HttpRequest;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -194,12 +195,55 @@ public class LibController {
 			return "/redirect";
 		}
 		String url="/index.do";
-		String msg="내 서재에 추가 하였습니다.";
+		String msg="메모 추가에 성공 하였습니다.";
 		log.info(this.getClass().getName() + " .InsertBookInfo end");
 		model.addAttribute("url", url);
 		model.addAttribute("msg", msg);
 		return "/redirect";
 		
+	}
+	
+	@RequestMapping(value = "EditMemoForm")
+	public String EditMemoForm(HttpServletRequest request, HttpServletResponse response, HttpSession session, ModelMap model) throws Exception {
+		log.info(this.getClass().getName() + " .EditMemoForm start");
+		String isbn = CmmUtil.nvl(request.getParameter("isbn"));
+		log.info("isbn : " + isbn);
+		String id = CmmUtil.nvl((String) session.getAttribute("id"));
+		log.info("id : " + id);
+		String colNm = id + "_library";
+		log.info("colNm : " + colNm);
+		String memo = memoService.getMemo(colNm, isbn);
+		log.info("EditMemoForm에서 getMemo 타고 와서 가져온 메모 : " + memo);
+		model.addAttribute("memo", memo);
+		model.addAttribute("isbn", isbn);
+		return "/lib/editMemoForm";
+	}
+	
+	@RequestMapping(value = "DoEditMemoForm")
+	public String DoEditMemoForm(HttpServletRequest request, HttpSession session, ModelMap model) throws Exception {
+		log.info(this.getClass().getName() + " .DoEditMemoForm start");
+		String memo = CmmUtil.nvl(request.getParameter("memo"));
+		String isbn = CmmUtil.nvl(request.getParameter("isbn"));
+		String id = CmmUtil.nvl((String) session.getAttribute("id"));
+		log.info("memo : " + memo);
+		log.info("isbn : " + isbn);
+		String colnm = id + "_library";
+		int res = 0;
+		res = memoService.insertMemo(colnm, isbn, memo);
+		if (res==0) {
+			String url="/index.do";
+			String msg="오류가 발생 하였습니다. 잠시 후 다시 시도 하십시오.";
+			log.info(this.getClass().getName() + " .InsertBookInfo end");
+			model.addAttribute("url", url);
+			model.addAttribute("msg", msg);
+			return "/redirect";
+		}
+		String url="/index.do";
+		String msg="메모 수정에 성공 하였습니다.";
+		log.info(this.getClass().getName() + " .DoEditMemoForm end");
+		model.addAttribute("url", url);
+		model.addAttribute("msg", msg);
+		return "/redirect";
 	}
 	
 }

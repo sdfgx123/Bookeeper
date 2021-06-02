@@ -82,7 +82,7 @@
 					<%if (memo.equals("")) { %>
 					<a href="/lib/MemoForm.do?isbn=<%=nvl(e.getIsbn()) %>" class="genric-btn warning" style="margin: auto; color: black;">메모 추가</a>
 					<%} else { %>
-					<a href="/lib/MemoForm.do?isbn=<%=nvl(e.getIsbn()) %>" class="genric-btn warning" style="margin: auto; color: black;">메모 수정</a>
+					<a href="/lib/EditMemoForm.do?isbn=<%=nvl(e.getIsbn()) %>" class="genric-btn warning" style="margin: auto; color: black;">메모 수정</a>
 					<%} %>
 					</div>
 					<br><br>
