@@ -47,7 +47,7 @@
 		<div id="container">
 			<p>메모를 입력해 주세요.</p>
 			<textarea name="memo" class="single-textarea" placeholder="메모 입력" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Message'" required=""></textarea>
-			<input type="text" name="isbn" hidden="hidden" value=<%=isbn %>>
+			<input type="text" id="test" name="isbn" hidden="hidden" value="<%=isbn %>">
 		</div>
 		<div style="text-align: center;">
 			<button type="submit" class="genric-btn warning" style="margin: auto; color: black;">완료</button>
@@ -56,4 +56,8 @@
 </body>
 <!-- footer 영역 -->
 <%@ include file="../footer.jsp"%>
+<script>
+let tmp= document.querySelector("#test");
+console.log(tmp);
+</script>
 </html>

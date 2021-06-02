@@ -18,4 +18,11 @@
 		SELECT MEMO FROM MEMO_INFO
 		WHERE COLNM = #{0} AND BOOK_ID = #{1}
 	</select>
+	
+	<update id="insertMemo" parameterType="String">
+		UPDATE MEMO_INFO SET
+			MEMO = #{2}
+		WHERE COLNM = #{0} AND BOOK_ID = #{1}
+	</update>
+	
 </mapper>

@@ -10,4 +10,7 @@ public interface IMemoMapper {
 	
 	//lib detail 메모 호출
 	String getMemo(String colNm, String isbn) throws Exception;
+	
+	//MYSQL 메모 저장
+	int insertMemo(String colnm, String isbn, String memo) throws Exception;
 }

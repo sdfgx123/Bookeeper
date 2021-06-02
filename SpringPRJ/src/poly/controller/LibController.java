@@ -145,7 +145,7 @@ public class LibController {
 		String isbn = CmmUtil.nvl(request.getParameter("isbn"));
 		log.info("isbn" + isbn);
 		String colNm = id + "_library";
-		String memo = memoMapper.getMemo(colNm, isbn);
+		String memo = memoService.getMemo(colNm, isbn);
 		log.info("memo :" + memo);
 		List<LibDTO> rList = libService.getBookDetail(id, isbn);
 		if (rList == null) {
@@ -162,7 +162,7 @@ public class LibController {
 	public String MemoForm(HttpServletRequest request, HttpServletResponse response, ModelMap model, HttpSession session) throws Exception {
 		log.info(this.getClass().getName() + " .MemoForm start");
 		String isbn = CmmUtil.nvl(request.getParameter("isbn"));
-		log.info("isbn : " + isbn);
+		log.info("Memo Form 실행할 때의 isbn : " + isbn);
 		String id = CmmUtil.nvl((String) session.getAttribute("id"));
 		log.info("id : " + id);
 		model.addAttribute("isbn", isbn);
@@ -173,7 +173,7 @@ public class LibController {
 	public String DoMemoForm(HttpServletRequest request, ModelMap model, HttpServletResponse response, HttpSession session) throws Exception {
 		log.info(this.getClass().getName() + " .DoMemoForm start");
 		List<LibDTO> pList = new ArrayList<>();
-		String isbn = CmmUtil.nvl(request.getParameter("isbn"));
+		String isbn = request.getParameter("isbn");
 		String memo = CmmUtil.nvl(request.getParameter("memo"));
 		String id = CmmUtil.nvl((String) session.getAttribute("id"));
 		log.info("isbn : " + isbn);
@@ -182,8 +182,17 @@ public class LibController {
 		LibDTO pDTO = new LibDTO();
 		pDTO.setMemo(memo);
 		pList.add(pDTO);
-		String colNm = id + "_library";
-		libMapper.insertMemo(colNm, isbn, memo);
+		String colnm = id + "_library";
+		int res = 0;
+		res = memoService.insertMemo(colnm, isbn, memo);
+		if (res==0) {
+			String url="/index.do";
+			String msg="오류가 발생 하였습니다. 잠시 후 다시 시도 하십시오.";
+			log.info(this.getClass().getName() + " .InsertBookInfo end");
+			model.addAttribute("url", url);
+			model.addAttribute("msg", msg);
+			return "/redirect";
+		}
 		String url="/index.do";
 		String msg="내 서재에 추가 하였습니다.";
 		log.info(this.getClass().getName() + " .InsertBookInfo end");
