@@ -9,7 +9,7 @@
           http://www.springframework.org/schema/beans
           http://www.springframework.org/schema/beans/spring-beans-4.0.xsd">
 
-	<!-- <mongo:mongo-client host="192.168.150.131"
+	<mongo:mongo-client host="192.168.150.131"
 		port="27017" credentials="myUser:1234@MyDB" id="mongo">
 	</mongo:mongo-client>
 
@@ -20,10 +20,10 @@
 		class="org.springframework.data.mongodb.core.MongoTemplate">
 		<constructor-arg name="mongoDbFactory"
 			ref="mongoDbFactory" />
-	</bean> -->
+	</bean>
 	
 	
-	<mongo:mongo-client host="3.37.9.214"
+	<!-- <mongo:mongo-client host="3.37.9.214"
 		port="27017" credentials="" id="mongo">
 	</mongo:mongo-client>
 
@@ -34,6 +34,6 @@
 		class="org.springframework.data.mongodb.core.MongoTemplate">
 		<constructor-arg name="mongoDbFactory"
 			ref="mongoDbFactory" />
-	</bean>
+	</bean> -->
 
 </beans>

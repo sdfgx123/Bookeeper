@@ -43,16 +43,20 @@
 	</div>
 	<!-- //히어로 영역 -->
 	<br>
+	
+	<!-- 메모 입력 -->
 	<form action="/lib/DoMemoForm.do" method="post">
 		<div id="container">
 			<p>메모를 입력해 주세요.</p>
 			<textarea name="memo" class="single-textarea" placeholder="메모 입력" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Message'" required=""></textarea>
 			<input type="text" id="test" name="isbn" hidden="hidden" value="<%=isbn %>">
 		</div>
+		<br>
 		<div style="text-align: center;">
 			<button type="submit" class="genric-btn warning" style="margin: auto; color: black;">완료</button>
 		</div>
 	</form>
+	<!-- //메모 입력 -->
 </body>
 <!-- footer 영역 -->
 <%@ include file="../footer.jsp"%>
