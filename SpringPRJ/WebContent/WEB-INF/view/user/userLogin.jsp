@@ -63,8 +63,7 @@
 							<form id="loginForm">
 								<br>
 								<input type="text" name="id" id="id" placeholder="아이디 입력" class="single-input">
-								<br>
-								<div id="pw-feedback" hidden=hidden>아이디와 암호를 모두 입력해 주십시오</div>
+								<div id="pw-feedback" hidden=hidden style="color: white; text-align: center;">아이디 또는 비밀번호가 일치하지 않습니다.</div>
 								<br>
 								<input type="password" name="password" id="password" placeholder="비밀번호 입력" class="single-input">
 								<br>
@@ -78,7 +77,7 @@
 								<br><br>
 								<a href="/admin/AdminLogin.do" id="admin-login">관리자 로그인</a>
 						</div>
-						<!-- 로그인 영역 끝 -->
+						<!-- //로그인 영역 -->
 
 					</div>
 				</div>
