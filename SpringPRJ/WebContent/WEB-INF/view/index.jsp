@@ -9,7 +9,6 @@
 
 <!-- header 영역 첨부 -->
 <%@ include file="./header.jsp"%>
-
 <style>
 #search_bar {
 	width: 78%;
@@ -79,7 +78,7 @@
 					<!-- Section Tittle -->
 					<div class="section-tittle text-center mb-80">
 						<h2>워드클라우드</h2>
-						<p>교보문고에서 추출한 워드클라우드를 확인해 보세요!</p>
+						<p>교보문고 신간에서 추출한 워드클라우드를 확인해 보세요!</p>
 					</div>
 					<%@ include file="./cloudTest2.jsp" %>
 				</div>

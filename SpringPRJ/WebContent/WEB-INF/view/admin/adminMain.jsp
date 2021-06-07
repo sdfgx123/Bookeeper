@@ -28,7 +28,7 @@
 				<div class="row justify-content-center">
 					<div class="col-xl-10 col-lg-10">
 						<div class="hero__caption pt-100">
-							<h1>Bookeeper 관리자 메인페이지</h1>
+							<h1>관리자 메인페이지</h1>
 							<br>
 							<a href="/admin/UserList.do" id="admin-button" class="genric-btn primary radius">회원 리스트</a>
 							<br><br>

@@ -23,6 +23,14 @@
 <link rel="stylesheet" href="../assets/css/slick.css">
 <link rel="stylesheet" href="../assets/css/nice-select.css">
 <link rel="stylesheet" href="../assets/css/style.css">
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500&display=swap" rel="stylesheet">
+
+<style>
+* {
+	font-family: 'Noto Sans KR', sans-serif;
+}
+</style>
 
 <script src="/js/jquery-3.6.0.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.js"

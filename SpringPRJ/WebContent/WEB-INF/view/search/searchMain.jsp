@@ -87,7 +87,7 @@
 		console.log("query : " + query);
 		$.ajax({
 			method : "GET",
-			url : "https://dapi.kakao.com/v3/search/book?target=title&page=1&size=20",
+			url : "https://dapi.kakao.com/v3/search/book?target=title&page=1&size=24",
 			data : {
 				"query" : query
 			},

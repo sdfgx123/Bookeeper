@@ -98,6 +98,8 @@ public class LibController {
 		List<LibDTO> pList = new ArrayList<>();
 		
 		String title = CmmUtil.nvl(request.getParameter("title"));
+		title = title.replaceAll("& #40;", "(").replaceAll("& #41;", ")");
+		log.info("수정된 title : " + title);
 		String contents = CmmUtil.nvl(request.getParameter("contents"));
 		String thumbnail = CmmUtil.nvl(request.getParameter("thumbnail"));
 		String datetime = CmmUtil.nvl(request.getParameter("datetime"));

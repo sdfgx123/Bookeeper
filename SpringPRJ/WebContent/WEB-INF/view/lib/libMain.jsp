@@ -21,6 +21,9 @@
 		text-align: center;
 		padding: 30px;
 	}
+	#bookCont {
+		width: 250px;
+	}
 </style>
 <!-- header 영역 첨부 -->
 <%@ include file="../header.jsp"%>
@@ -49,7 +52,8 @@
 	<!-- 저장한 책 불러오기 -->
 	<div class="row">
 	<%for (LibDTO e : rList) {%>
-	<div id="container" style="width: 300px; height: 430px; padding: 20px; box-shadow: 1px 1px 3px 1px #dadce0;">
+	<div id="container">
+	<div id="bookCont" style="width: 300px; height: 430px; padding: 20px; box-shadow: 1px 1px 3px 1px #dadce0;">
 	<p><img src=<%=nvl(e.getThumbnail()) %>></p>
 	<hr>
 	<p style="height: 70px;"><%=nvl(e.getTitle()) %></p>
@@ -58,6 +62,7 @@
 	</div>
 	<br>
 	<%} %>
+	</div>
 	<!-- //저장한 책 불러오기 -->
 	
 </body>
