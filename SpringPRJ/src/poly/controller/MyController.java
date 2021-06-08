@@ -74,11 +74,7 @@ public class MyController {
 	// 회원정보 수정 처리
 	@RequestMapping(value = "DoUserEdit")
 	public String DoUserEdit(HttpServletRequest request, HttpSession session, ModelMap model) throws Exception {
-		
 		log.info(this.getClass().getName() + " .DoUserEdit start");
-		
-		
-		
 		String user_name = request.getParameter("user_name");
 		String email = request.getParameter("email");
 		String id = request.getParameter("id");

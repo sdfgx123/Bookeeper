@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@page import="static poly.util.CmmUtil.nvl"%>
 <%
-	String memo = nvl(request.getParameter("memo"));
+	String content = nvl(request.getParameter("memo"));
 	String isbn = nvl(request.getParameter("isbn"));
 %>
 <!DOCTYPE html>
@@ -50,7 +50,7 @@
 	<form action="/lib/DoEditMemoForm.do" method="post">
 		<div id="container">
 			<p>메모를 입력해 주세요.</p>
-			<textarea name="memo" class="single-textarea" placeholder="메모 입력" ><%=memo %></textarea>
+			<textarea name="memo" class="single-textarea" placeholder="<%=content %>"></textarea>
 			<input type="text" id="test" name="isbn" hidden="hidden" value="<%=isbn %>">
 		</div>
 		<br>

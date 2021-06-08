@@ -68,6 +68,8 @@ function ask() {
 		</ul>
 		<br>
 		<a id="delete-button" href="/admin/DeleteUser.do?seq=<%=uDTO.getUser_seq() %>" class="visit" onclick="ask();">회원 삭제</a>
+		<br><br>
+		<a id="delete-button" href="/admin/EditUser.do?seq=<%=uDTO.getUser_seq() %>" class="visit">회원정보 수정</a>
 	</div>
 	
 	

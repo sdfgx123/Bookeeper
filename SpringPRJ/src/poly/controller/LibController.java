@@ -17,6 +17,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import poly.dto.LibDTO;
 import poly.dto.UserDTO;
@@ -27,7 +28,7 @@ import poly.service.impl.LibService;
 import poly.service.impl.UserService;
 import poly.util.CmmUtil;
 import poly.util.DateUtil;
-
+@EnableWebMvc
 @Controller
 @RequestMapping(value = "lib/")
 public class LibController {
@@ -189,14 +190,14 @@ public class LibController {
 		int res = 0;
 		res = memoService.insertMemo(colnm, isbn, memo);
 		if (res==0) {
-			String url="/index.do";
+			String url="/lib/LibMain.do";
 			String msg="오류가 발생 하였습니다. 잠시 후 다시 시도 하십시오.";
 			log.info(this.getClass().getName() + " .InsertBookInfo end");
 			model.addAttribute("url", url);
 			model.addAttribute("msg", msg);
 			return "/redirect";
 		}
-		String url="/index.do";
+		String url="/lib/LibMain.do";
 		String msg="메모 추가에 성공 하였습니다.";
 		log.info(this.getClass().getName() + " .InsertBookInfo end");
 		model.addAttribute("url", url);
@@ -233,14 +234,14 @@ public class LibController {
 		int res = 0;
 		res = memoService.insertMemo(colnm, isbn, memo);
 		if (res==0) {
-			String url="/index.do";
+			String url="/lib/LibMain.do";
 			String msg="오류가 발생 하였습니다. 잠시 후 다시 시도 하십시오.";
 			log.info(this.getClass().getName() + " .InsertBookInfo end");
 			model.addAttribute("url", url);
 			model.addAttribute("msg", msg);
 			return "/redirect";
 		}
-		String url="/index.do";
+		String url="/lib/LibMain.do";
 		String msg="메모 수정에 성공 하였습니다.";
 		log.info(this.getClass().getName() + " .DoEditMemoForm end");
 		model.addAttribute("url", url);

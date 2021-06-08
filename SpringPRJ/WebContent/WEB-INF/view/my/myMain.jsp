@@ -11,8 +11,9 @@
 .myContainer {
 	margin: auto;
 	width: 300px;
-	height: 650px;
+	height: 690px;
 	box-shadow: 1px 1px 3px 1px #dadce0;
+	padding: 10px;
 }
 
 #profile {
@@ -27,7 +28,8 @@
 }
 
 #button {
-	margin-left: 30px;
+	/* margin-left: 30px; */
+	width: 100%;
 }
 </style>
 <!-- session 첨부 -->
@@ -70,7 +72,12 @@
 			<li>가입일 : <%=uDTO.getRegdate() %></li>
 		</ul>
 		<br>
-		<a href="/my/UserEdit.do?user_seq=<%=uDTO.getUser_seq() %>" id="button" class="genric-btn primary radius">수정</a>
+		<a href="/my/UserEdit.do?user_seq=<%=uDTO.getUser_seq() %>" id="button" class="genric-btn primary radius">회원정보 수정</a>
+		<br><br>
+		<a href="/my/UserEdit.do?user_seq=<%=uDTO.getUser_seq() %>" id="button" class="genric-btn primary radius">이메일 변경</a>
+		<br><br>
+		<a href="/my/ChangePw.do?user_seq=<%=uDTO.getUser_seq() %>" id="button" class="genric-btn primary radius">비밀번호 변경</a>
+		<br><br>
 		<a href="/my/DeleteUserInfo.do" id="button" class="genric-btn danger radius">탈퇴</a>
 		
 	</div>

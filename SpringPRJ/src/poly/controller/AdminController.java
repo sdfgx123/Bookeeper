@@ -155,4 +155,55 @@ public class AdminController {
 		
 		return "/admin/userDetail";
 	}
+	
+	// 회원정보 수정
+	@RequestMapping(value = "EditUser")
+	public String EditUser(HttpServletRequest request, ModelMap model) throws Exception {
+		log.info(this.getClass().getName() + " .EditUser start");
+		String seq = request.getParameter("seq");
+		log.info("seq : " + seq);
+		int user_seq = Integer.parseInt(seq);
+		UserDTO uDTO = userService.userDetail(user_seq);
+		if(uDTO == null) {
+			model.addAttribute("msg", "존재하지 않는 회원입니다.");
+			model.addAttribute("url", "/index.do");
+			return "/redirect";
+		}
+		model.addAttribute("uDTO", uDTO);
+		return "/admin/editUser";
+	}
+	
+	// 회원정보 수정 프로세스
+	@RequestMapping(value = "DoEditUser")
+	public String DoEditUser(HttpServletRequest request, ModelMap model, HttpServletResponse response, HttpSession session) throws Exception {
+		log.info(this.getClass().getName() + " .DoEditUser start");
+		String user_name = request.getParameter("user_name");
+		String email = request.getParameter("email");
+		String id = request.getParameter("id");
+		String user_tel = request.getParameter("user_tel");
+		String regdate = request.getParameter("regdate");
+		UserDTO uDTO = new UserDTO();
+		uDTO.setUser_name(user_name);
+		uDTO.setEmail(email);
+		uDTO.setId(id);
+		uDTO.setUser_tel(user_tel);
+		uDTO.setRegdate(regdate);
+		int res = 0;
+		try {
+			res = userService.updateUser(uDTO);
+		} catch (Exception e) {
+			log.info(e.toString());
+		}
+		String msg = "";
+		String url = "/admin/UserList.do";
+		if (res == 0) {
+			msg = "회원정보 수정에 실패 하였습니다. 잠시 후 다시 시도해 주십시오.";
+		} else {
+			msg = "회원정보 수정에 성공 하였습니다. 유저 리스트로 이동합니다.";
+		}
+		model.addAttribute("msg", msg);
+		model.addAttribute("url", url);
+		log.info(this.getClass().getName() + " .DoEditUser end");
+		return "/redirect";
+	}
 }
