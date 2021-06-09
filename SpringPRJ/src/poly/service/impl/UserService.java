@@ -171,4 +171,14 @@ public class UserService implements IUserService{
 		return userMapper.userDetail(user_seq);
 	}
 
+	@Override
+	public UserDTO getPw(UserDTO uDTO) throws Exception {
+		return userMapper.getPw(uDTO);
+	}
+
+	@Override
+	public int updatePw(String id, String pw) throws Exception {
+		return userMapper.updatePw(id, pw);
+	}
+
 }

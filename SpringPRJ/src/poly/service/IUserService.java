@@ -42,4 +42,8 @@ public interface IUserService {
 	
 	UserDTO userDetail(int user_seq) throws Exception;
 	
+	UserDTO getPw(UserDTO uDTO) throws Exception;
+	
+	int updatePw(String id, String pw) throws Exception;
+	
 }

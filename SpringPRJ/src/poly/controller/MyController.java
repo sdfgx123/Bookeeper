@@ -159,4 +159,65 @@ public class MyController {
 		
 		return "/redirect";
 	}
+	
+	@RequestMapping(value = "ChangePw")
+	public String ChangePw(HttpServletRequest request, ModelMap model) throws Exception {
+		log.info(this.getClass().getName() + " .ChangePw start");
+		return "/my/changePw";
+	}
+	
+	@RequestMapping(value = "DoChangePw")
+	public String DoChangePw(HttpServletRequest request, ModelMap model, HttpSession session) throws Exception {
+		log.info(this.getClass().getName() + " .DoChangePw start");
+		String id = CmmUtil.nvl(request.getParameter("id"));
+		String pw = CmmUtil.nvl(request.getParameter("pw"));
+		pw = EncryptUtil.encHashSHA256(pw);
+		UserDTO uDTO = new UserDTO();
+		uDTO.setId(id);
+		uDTO.setPassword(pw);
+		UserDTO rDTO = userService.checkLogin(id, pw);
+		if (rDTO == null) {
+			log.info("아이디 또는 비밀번호 불일치");
+			log.info(this.getClass().getName() + " .DoChangePw end");
+			String msg = "아이디 또는 비밀번호가 일치하지 않습니다.";
+			String url = "/my/MyMain.do";
+			model.addAttribute("msg", msg);
+			model.addAttribute("url", url);
+			return "/redirect";
+		}
+		model.addAttribute("id", id);
+		rDTO = null;
+		return "/my/changePwForm";
+	}
+	
+	@RequestMapping(value = "DoChangePwForm")
+	public String DoChangePwForm(HttpServletRequest request, ModelMap model) throws Exception {
+		log.info(this.getClass().getName() + " .DoChangePwForm start");
+		String id = CmmUtil.nvl(request.getParameter("id"));
+		String pw = CmmUtil.nvl(request.getParameter("pw"));
+		pw = EncryptUtil.encHashSHA256(pw);
+		int res = 0;
+		String msg = "";
+		String url = "";
+		res = userService.updatePw(id, pw);
+		log.info("updatePw 갔다온 res : " + res);
+		if (res==0) {
+			msg = "비밀번호 변경에 실패 하였습니다. 잠시 후 다시 시도해 주십시오.";
+			url = "/my/MyMain.do";
+			model.addAttribute("msg", msg);
+			model.addAttribute("url", url);
+			return "/redirect";
+		}
+		msg = "비밀번호 변경에 성공 하였습니다.";
+		url = "/my/MyMain.do";
+		model.addAttribute("msg", msg);
+		model.addAttribute("url", url);
+		return "/redirect";
+	}
+	
+	@RequestMapping(value = "ChangeEmail")
+	public String ChangeEmail(HttpServletRequest request, ModelMap model) throws Exception {
+		log.info(this.getClass().getName() + " .ChangeEmail start");
+		return "/my/changeEmail";
+	}
 }

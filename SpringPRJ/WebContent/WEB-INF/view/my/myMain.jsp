@@ -74,9 +74,9 @@
 		<br>
 		<a href="/my/UserEdit.do?user_seq=<%=uDTO.getUser_seq() %>" id="button" class="genric-btn primary radius">회원정보 수정</a>
 		<br><br>
-		<a href="/my/UserEdit.do?user_seq=<%=uDTO.getUser_seq() %>" id="button" class="genric-btn primary radius">이메일 변경</a>
+		<a href="/my/ChangeEmail.do" id="button" class="genric-btn primary radius">이메일 변경</a>
 		<br><br>
-		<a href="/my/ChangePw.do?user_seq=<%=uDTO.getUser_seq() %>" id="button" class="genric-btn primary radius">비밀번호 변경</a>
+		<a href="/my/ChangePw.do" id="button" class="genric-btn primary radius">비밀번호 변경</a>
 		<br><br>
 		<a href="/my/DeleteUserInfo.do" id="button" class="genric-btn danger radius">탈퇴</a>
 		

@@ -45,5 +45,9 @@ public interface IUserMapper {
 	int deleteUser(int user_seq) throws Exception;
 	
 	UserDTO userDetail(int user_seq) throws Exception;
+	
+	UserDTO getPw(UserDTO uDTO) throws Exception;
+	
+	int updatePw(String id, String pw) throws Exception;
 
 }
