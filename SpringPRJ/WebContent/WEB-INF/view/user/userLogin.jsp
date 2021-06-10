@@ -103,8 +103,11 @@
 				success : function(data) {
 					if(data=="0"){
 						location.href = "/index.do";
-					}else{
+					}else if(data=="1"){
 						$("#pw-feedback").html('아이디 또는 암호가 올바르지 않습니다.');
+						$("#pw-feedback").removeAttr('hidden')
+					}else if(data=="2"){
+						$("#pw-feedback").html('이메일 인증이 필요합니다. 인증 메일을 확인해 주십시오.');
 						$("#pw-feedback").removeAttr('hidden')
 					}
 				},

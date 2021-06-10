@@ -10,7 +10,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import poly.dto.MailDTO;
 import poly.dto.UserDTO;
+import poly.service.IMailService;
 import poly.service.impl.UserService;
 import poly.util.CmmUtil;
 import poly.util.EncryptUtil;
@@ -23,6 +25,9 @@ public class MyController {
 	
 	@Resource(name = "UserService")
 	private UserService userService;
+	
+	@Resource(name = "MailService")
+	private IMailService mailService;
 	
 	// 마이페이지 메인
 	@RequestMapping(value = "MyMain")
@@ -219,5 +224,42 @@ public class MyController {
 	public String ChangeEmail(HttpServletRequest request, ModelMap model) throws Exception {
 		log.info(this.getClass().getName() + " .ChangeEmail start");
 		return "/my/changeEmail";
+	}
+	
+	@RequestMapping(value = "DoChangeEmail")
+	public String DoChangeEmail(HttpServletRequest request, ModelMap model, HttpSession session) throws Exception {
+		log.info(this.getClass().getName() + " .DoChangeEmail start");
+		String id = CmmUtil.nvl((String) session.getAttribute("id"));
+		log.info("세션 id 제대로 들어왔나 확인 : " + id);
+		String email = CmmUtil.nvl(request.getParameter("email"));
+		log.info("email : " + email);
+		int res = 0;
+		try {
+			res = userService.initEmail(id);
+		} catch (Exception e) {
+			log.info(e.toString());
+		}
+		String msg = "";
+		String url = "/index.do";
+		if (res == 0) {
+			msg = "시스템 오류입니다. 잠시 후 다시 시도하여 주십시오.";
+		} else {
+			MailDTO mDTO = new MailDTO();
+			mDTO.setTitle("Bookeeper 이메일 변경 인증 요청");
+			mDTO.setToMail(email);
+			StringBuilder content = new StringBuilder();
+			content.append("아래 링크를 클릭하시면 이메일 인증이 완료됩니다.\n");
+			content.append("http://localhost:8080/user/VerifyEmail.do?code=");
+			String code = EncryptUtil.encAES128CBC(id + ",1");
+			content.append(code);
+			mDTO.setContents(content.toString());
+			mailService.doSendMail(mDTO);
+			msg = "이메일 재인증을 위해 로그아웃 합니다. 이메일 인증 메일을 확인해 주십시오.";
+		}
+		log.info(this.getClass().getName() + " .DoChangeEmail end");
+		model.addAttribute("msg", msg);
+		model.addAttribute("url", url);
+		session.invalidate();
+		return "/redirect";
 	}
 }

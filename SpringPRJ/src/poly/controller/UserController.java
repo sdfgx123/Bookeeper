@@ -310,6 +310,10 @@ public class UserController {
 			log.info("null");
 			log.info(this.getClass().getName() + " .doLogin end");
 			return "1";
+		} else if (rDTO.getUser_state() == 0) {
+			log.info("이메일 미인증 상태");
+			log.info(this.getClass().getName() + " .doLogin end");
+			return "2";
 		}
 		log.info("user_seq : " + rDTO.getUser_seq());
 		session.setAttribute("user_seq", rDTO.getUser_seq());

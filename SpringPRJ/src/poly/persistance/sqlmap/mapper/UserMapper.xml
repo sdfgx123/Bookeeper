@@ -25,7 +25,8 @@
 		SELECT
 		USER_SEQ,
 		USER_TYPE,
-		ID
+		ID,
+		USER_STATE
 		FROM
 		USER_INFO
 		WHERE
@@ -171,4 +172,10 @@
 	WHERE ID = #{0}
 	</update>
 	
+	<!-- 이메일 초기화 : 이메일 인증 코드 초기화 -->
+	<update id="initEmail" parameterType="String">
+	UPDATE USER_INFO
+	SET USER_STATE = 0
+	WHERE ID = #{0}
+	</update>
 </mapper>

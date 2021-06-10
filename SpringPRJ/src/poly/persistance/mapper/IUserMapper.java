@@ -49,5 +49,7 @@ public interface IUserMapper {
 	UserDTO getPw(UserDTO uDTO) throws Exception;
 	
 	int updatePw(String id, String pw) throws Exception;
+	
+	int initEmail(String id) throws Exception;
 
 }

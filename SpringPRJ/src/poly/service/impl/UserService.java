@@ -181,4 +181,9 @@ public class UserService implements IUserService{
 		return userMapper.updatePw(id, pw);
 	}
 
+	@Override
+	public int initEmail(String id) throws Exception {
+		return userMapper.initEmail(id);
+	}
+
 }

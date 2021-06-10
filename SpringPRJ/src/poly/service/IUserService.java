@@ -46,4 +46,6 @@ public interface IUserService {
 	
 	int updatePw(String id, String pw) throws Exception;
 	
+	int initEmail(String id) throws Exception;
+	
 }
