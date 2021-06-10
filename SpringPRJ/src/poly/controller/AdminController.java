@@ -68,7 +68,12 @@ public class AdminController {
 			log.info("null");
 			log.info(this.getClass().getName() + " .DoAdminLogin end");
 			return "1";
+		} else if ((String) rDTO.getUser_type() == "0") {
+			log.info("관리자 아님");
+			log.info(this.getClass().getName() + " .DoAdminLogin end");
+			return "2";
 		}
+		log.info("유저 타입 코드 : " + rDTO.getUser_type());
 		
 		log.info("user_seq : " + rDTO.getUser_seq());
 		session.setAttribute("user_seq", rDTO.getUser_seq());

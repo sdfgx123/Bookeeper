@@ -95,8 +95,11 @@
 				success : function(data) {
 					if(data=="0"){
 						location.href = "/admin/AdminMain.do";
-					}else{
+					}else if(data=="1"){
 						$("#pw-feedback").html('아이디 또는 암호가 올바르지 않습니다.');
+						$("#pw-feedback").removeAttr('hidden')
+					}else if(data=="2"){
+						$("#pw-feedback").html('관리자 등급이 아닙니다. 사용자 로그인을 통해 로그인을 시도 하십시오.');
 						$("#pw-feedback").removeAttr('hidden')
 					}
 				},
