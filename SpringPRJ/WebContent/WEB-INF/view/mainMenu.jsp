@@ -12,7 +12,7 @@
 
 					<!-- 로고 영역 -->
 					<div class="logo">
-						<a href="/index.do"><img src="../assets/img/logo/logo.png"
+						<a href="/index.do"><img src="../assets/img/logo/logo.PNG"
 							alt=""></a>
 					</div>
 					
