@@ -22,8 +22,8 @@ public class MailService implements IMailService {
 
 	private Logger log = Logger.getLogger(this.getClass());
 	
-	final String host = "smtp.naver.com";
-	final String user = "sdfgx123@naver.com";
+	final String host = "smtp.google.com";
+	final String user = "sdfgx123@gmail.com";
 	final String password = "";
 	
 	@Override
@@ -39,9 +39,21 @@ public class MailService implements IMailService {
 		
 		String toMail = CmmUtil.nvl(pDTO.getToMail());
 		
-		Properties props = new Properties();
+		/*Properties props = new Properties();
 		props.put("mail.smtp.host", host);
-		props.put("mail.smtp.auth", "true");
+		props.put("mail.smtp.auth", "true");*/
+		
+		Properties props = new Properties();
+		props.put("mail.smtp.host", "smtp.gmail.com"); 
+        props.put("mail.smtp.port", "25"); 
+        props.put("mail.debug", "true"); 
+        props.put("mail.smtp.auth", "true"); 
+        props.put("mail.smtp.starttls.enable","true"); 
+        props.put("mail.smtp.EnableSSL.enable","true");
+        props.setProperty("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");   
+        props.setProperty("mail.smtp.socketFactory.fallback", "false");   
+        props.setProperty("mail.smtp.port", "465");   
+        props.setProperty("mail.smtp.socketFactory.port", "465"); 
 		
 		Session session = Session.getDefaultInstance(props, new javax.mail.Authenticator() {
 			protected PasswordAuthentication getPasswordAuthentication() {

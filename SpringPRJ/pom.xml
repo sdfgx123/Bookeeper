@@ -15,9 +15,24 @@
 		<slf4j.version>1.7.25</slf4j.version>
 		<log4j.version>1.2.17</log4j.version>
 	</properties>
-
+	
+	<repositories>
+		<!-- 자연어처리-형태소분석기(Komoran 다운로드를 위한 레파지토리 등록) -->
+		<repository>
+			<id>jitpack.io</id>
+			<url>https://jitpack.io</url>
+		</repository>
+	</repositories>
+	
 	<dependencies>
 
+		<!-- Komoran 3.3.4 -->
+		<dependency>
+			<groupId>com.github.shin285</groupId>
+			<artifactId>KOMORAN</artifactId>
+			<version>3.3.4</version>
+		</dependency>
+		
 		<!-- MyBatis, DBCP -->
 		<dependency>
 			<groupId>org.mybatis</groupId>

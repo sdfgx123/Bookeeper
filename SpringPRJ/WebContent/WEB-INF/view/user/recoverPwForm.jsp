@@ -57,7 +57,7 @@
 						<div class="hero-cap2 pt-20 text-center">
 							<h2>Bookeeper 비밀번호 초기화</h2>
 							<hr>
-							<p id="msg">새 비밀번호를 입력해 주세요.</p>
+							<p id="msg" style="color: white;">새 비밀번호를 입력해 주세요.</p>
 							<form name="recoverForm" action="/user/RecoverPwFormProc.do"
 								method="post">
 								<br> <input type="password" id="password" name="password"
@@ -70,6 +70,7 @@
 									초기화</button>
 								<br>
 							</form>
+							<br>
 							<a href="/user/userLogin.do" id="button"
 									class="genric-btn primary radius">돌아기기</a> <br>
 						</div>
