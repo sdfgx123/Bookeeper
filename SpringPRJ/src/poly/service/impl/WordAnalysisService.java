@@ -18,7 +18,7 @@ import kr.co.shineware.nlp.komoran.model.KomoranResult;
 import poly.service.IWordAnalysisService;
 import poly.util.CmmUtil;
 
-@Service("WordAnalysisService")
+@Service("WordAnalysisService") 
 public class WordAnalysisService implements IWordAnalysisService {
 
 	private Logger log = Logger.getLogger(this.getClass());
