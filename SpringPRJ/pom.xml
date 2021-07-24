@@ -25,6 +25,13 @@
 	</repositories>
 	
 	<dependencies>
+	
+		<!-- OCR 구현을 위한 Tesseract4 라이브러리 다운로드 -->
+		<dependency>
+			<groupId>net.sourceforge.tess4j</groupId>
+			<artifactId>tess4j</artifactId>
+			<version>4.4.1</version>
+		</dependency>
 
 		<!-- Komoran 3.3.4 -->
 		<dependency>
