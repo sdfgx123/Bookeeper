@@ -26,6 +26,18 @@
 	
 	<dependencies>
 	
+		<!-- 몽고디비 로깅 차단을 위한 -->
+		<dependency>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-api</artifactId>
+			<version>2.9.0</version>
+		</dependency>
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-classic</artifactId>
+			<version>1.2.3</version>
+		</dependency>
+	
 		<!-- OCR 구현을 위한 Tesseract4 라이브러리 다운로드 -->
 		<dependency>
 			<groupId>net.sourceforge.tess4j</groupId>
