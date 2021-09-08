@@ -89,4 +89,11 @@ public class CloudController {
     	log.info(this.getClass().getName() + ".noun end!");
     	return rList;
     }
-}
+    
+    @RequestMapping(value = "insd")
+    @ResponseBody
+    public List<String> insd() throws Exception {
+    	log.info(this.getClass().getName() + ".insd start");
+    	
+    	
+    }
