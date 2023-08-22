@@ -7,15 +7,15 @@
 
 ## 기술 스택
 * Java 8, Spring Framework, Tomcat, Maven
-* HTML, CSS, JS, BootStrap
-* MySQL
+* HTML, CSS, JS, BootStrap, Chart.js, JQuery, AJAX
+* MySQL, MongoDB
 * Kakao Book Search API
 * AWS EC2, AWS RDS
 
 ## 산출물
 
 ### 프로젝트 구조도
-
+<img width="1104" alt="image" src="https://github.com/sdfgx123/Bookeeper/assets/64997246/cc7b0f6d-e067-4aa0-8261-64b1da736da5">
 
 ### 기능 구성도
 <img width="856" alt="image" src="https://github.com/sdfgx123/Bookeeper/assets/64997246/e5f57e98-a83f-469b-9cb5-1312081a3fe5">
