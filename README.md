@@ -2,8 +2,11 @@
 
 # Bookeeper
 * 카카오 책 검색 API를 활용한 스프링 기반 웹애플리케이션
-* 개인프로젝트 / 팀장
+* 개인프로젝트 | 팀장
 * 개발 기간 : 2021.04 ~ 2021.06
+
+## 시연 동영상
+[![Video Label](http://img.youtube.com/vi/-e5sn9RXHW0/0.jpg)](https://youtu.be/-e5sn9RXHW0=0s)
 
 ## 기술 스택
 * Java 8, Spring Framework, Tomcat, Maven
