@@ -15,7 +15,7 @@
 ## 산출물
 
 ### 프로젝트 구조도
-<img width="1032" alt="image" src="https://github.com/sdfgx123/Bookeeper/assets/64997246/03c830cc-4691-4d65-94b3-e95ea65093db">
+<img width="1048" alt="image" src="https://github.com/sdfgx123/Bookeeper/assets/64997246/91010537-3cd8-4c6b-8d3c-f1f14096a738">
 
 ### 기능 구성도
 <img width="856" alt="image" src="https://github.com/sdfgx123/Bookeeper/assets/64997246/e5f57e98-a83f-469b-9cb5-1312081a3fe5">
